@@ -11,6 +11,12 @@ class Municipio extends Model {
      */
     protected $table = 'municipios';
 
+    /**
+     * The attributes that aren't mass assignable.
+     *
+     * @var string
+     */
+    protected $guarded = [];
 
     /**
      * The attributes that  should be hidden for arrays
@@ -30,4 +36,18 @@ class Municipio extends Model {
 
 
     ];
+
+    // Getters e Setters
+    public function getCidadeAttribute(){
+        return $this->cidadeRelationShip();
+    }
+
+    public function setCidadeAttribute($value){
+        $this->attributes['cidade_id'] = Cidade::where('id', $value)->first()->id;
+    }
+
+    // Relacionamentos
+    public function cidadeRelationShip(){
+        return $this->belongsTo(Cidade::class, 'cidade_id');
+    }
 }

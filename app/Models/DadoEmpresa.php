@@ -10,6 +10,13 @@ class DadoEmpresa extends Model{
      * @var string
      */
     protected $table = 'dados_empresa';
+    
+    /**
+     * The attributes that aren't mass assignable.
+     *
+     * @var string
+     */
+    protected $guarded = [];
 
     /**
      * The attributes that  should be hidden for arrays

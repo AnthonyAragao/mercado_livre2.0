@@ -11,6 +11,12 @@ class Cidade extends Model{
      */
     protected $table = 'cidades';
 
+    /**
+     * The attributes that aren't mass assignable.
+     *
+     * @var string
+     */
+    protected $guarded = [];
 
     /**
      * The attributes that  should be hidden for arrays

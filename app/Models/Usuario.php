@@ -11,6 +11,13 @@ class Usuario extends Model {
     protected $table = 'usuarios';
 
     /**
+     * The attributes that aren't mass assignable.
+     *
+     * @var string
+     */
+    protected $guarded = [];
+
+    /**
      * The attributes that  should be hidden for arrays
     * @var array
     */
@@ -28,4 +35,18 @@ class Usuario extends Model {
 
 
     ];
+
+    // Getters e Setters
+    public function getDadoAcessoAttribute(){
+        return $this->dadoAcessoRelationship();
+    }
+
+    public function setDadoAcessoAttribute($value){
+        $this->attributes['dados_acesso_id'] = DadoAcesso::where('id', $value)->first()->id;
+    }
+
+    // Relacionamentos
+    public function dadoAcessoRelationship(){
+        return $this->belongsTo(DadoAcesso::class, 'dados_acesso_id');
+    }
 }

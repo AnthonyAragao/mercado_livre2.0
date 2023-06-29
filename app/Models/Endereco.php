@@ -9,6 +9,14 @@ class Endereco extends Model{
      * @var string
      */
     protected $table = 'enderecos';
+
+    /**
+     * The attributes that aren't mass assignable.
+     *
+     * @var string
+     */
+    protected $guarded = [];
+
     /**
      * The attributes that  should be hidden for arrays
     * @var array
@@ -27,4 +35,18 @@ class Endereco extends Model{
 
 
     ];
+
+    // Getters e Setters
+    public function getCidadeAttribute(){
+        return $this->cidadeRelationShip();
+    }
+
+    public function setCidadeAttribute($value){
+        $this->attributes['cidade_id'] = Cidade::where('id', $value)->first()->id;
+    }
+
+    // relacionamentos
+    public function cidadeRelationShip(){
+        return $this->belongsTo(Cidade::class, 'cidade_id');
+    }
 }
