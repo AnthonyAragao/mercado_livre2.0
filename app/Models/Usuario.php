@@ -38,7 +38,7 @@ class Usuario extends Model {
 
     // Getters e Setters
     public function getDadoAcessoAttribute(){
-        return $this->dadoAcessoRelationship();
+        return $this->dadoAcessoRelationship;
     }
 
     public function setDadoAcessoAttribute($value){

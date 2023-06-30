@@ -41,7 +41,7 @@ class DadoAcesso extends Model{
 
     // Getters e Setters
     public function getEnderecoAttribute(){
-        return $this->enderecoRelationship();
+        return $this->enderecoRelationship;
     }
 
     public function setEnderecoAttribute($value){

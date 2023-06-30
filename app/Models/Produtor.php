@@ -38,11 +38,11 @@ class Produtor extends Model{
     ];
      // Getters e Setters
      public function getDadoAcessoAttribute(){
-        return $this->dadoAcessoRelationship();
+        return $this->dadoAcessoRelationship;
     }
 
     public function getDadosEmpresaAttribute(){
-        return $this->dadoEmpresaRelationship();
+        return $this->dadoEmpresaRelationship;
     }
 
     public function setDadoAcessoAttribute($value){

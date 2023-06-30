@@ -38,7 +38,7 @@ class Endereco extends Model{
 
     // Getters e Setters
     public function getCidadeAttribute(){
-        return $this->cidadeRelationShip();
+        return $this->cidadeRelationShip;
     }
 
     public function setCidadeAttribute($value){
