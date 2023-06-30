@@ -22,8 +22,9 @@ class Usuario extends Model {
     * @var array
     */
     protected $hidden = [
-
-
+        'created_at',
+        'updated_at',
+        'dadoAcessoRelationship',
     ];
 
 
@@ -32,8 +33,7 @@ class Usuario extends Model {
     * @var array
     */
     protected $appends = [
-
-
+        'dado_acesso',
     ];
 
     // Getters e Setters

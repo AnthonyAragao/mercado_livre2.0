@@ -17,7 +17,7 @@ class DadoAcesso extends Model{
      * @var array
      */
     protected $fillable = [
-        'nome', 'email', 'cpf', 'password',
+        'nome', 'email', 'cpf', 'password', 'endereco_id'
     ];
 
     /**

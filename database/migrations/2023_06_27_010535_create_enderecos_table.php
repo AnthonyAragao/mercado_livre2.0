@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('bairro');
             $table->string('numero');
             $table->text('complemento');
-            $table->foreignId('cidade_id')->constrained('cidades');
+            $table->foreignId('municipio_id')->constrained('municipios');
             $table->timestamps();
         });
     }
