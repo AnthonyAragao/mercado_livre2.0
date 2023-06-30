@@ -39,7 +39,7 @@ class UsuarioController extends Controller {
     public function create(){
         $cidades = $this->cidades;
         $municipios = $this->municipios;
-        return view('auth.register', compact('cidades', 'municipios'));
+        return view('usuario.cadastro_usuario', compact('cidades', 'municipios'));
     }
 
     /**
@@ -55,7 +55,7 @@ class UsuarioController extends Controller {
                     'nome' => $request->nome,
                     'email' => $request->email,
                     'cpf' => $request->cpf,
-                    'password' => $request->password,
+                    'password' => bcrypt($request->password),
 
                     'endereco_id' => $this->enderecos->create([
                         'logradouro' => $request->logradouro,
@@ -65,12 +65,10 @@ class UsuarioController extends Controller {
                         'complemento' => $request->complemento,
                         'municipio_id' => $request->municipio,
                     ])->id,
-
                 ])->id,
-
-
             ]);
 
+            return redirect()->route('login');
         }catch(Exception $e){
 
         }
@@ -79,9 +77,17 @@ class UsuarioController extends Controller {
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
-    {
-        //
+    public function show(string $id){
+        $municipios = $this->municipios;
+        $cidades = $this->cidades;
+        $usuario = $this->usuarios->find($id);
+        $form = 'disabled';
+        return view('usuario.form_usuario', compact(
+            'municipios',
+            'cidades',
+            'usuario',
+            'form'
+        ));
     }
 
     /**
