@@ -106,3 +106,36 @@ a{
     color: #2968c8;
     text-decoration: none;
 }
+
+
+/* Estilos para telas com largura até  */
+@media screen and (max-width: 1090px) {
+    .main-container{
+        display: block;
+        justify-content: center;
+    }
+
+    .text-primary{
+        margin-bottom: 15px;
+    }
+
+    .text-primary h1{
+        width: 100%;
+    }
+
+    .container-card{
+        margin-top: 0;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 40px;
+        width: 80vh;
+    }
+
+    .btns{
+        display: block;
+    }
+
+    button{
+        width: 100%;
+    }
+  }
