@@ -109,9 +109,13 @@
                     </select>
                 </div>
 
-                <a href="{{route('usuarios.edit', $usuario->id)}}">
-                    <button type="submit">Modificar</button>
-                </a>
+                @if (Route::currentRouteName() == 'usuarios.show')
+                    <a href="{{route('usuarios.edit', $usuario->id)}}">
+                        <button type="button">Modificar</button>
+                    </a>
+                @else
+                    <button type="submit">Salvar</button>
+                @endif
         </form>
     </div>
 </main>

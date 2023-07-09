@@ -95,9 +95,17 @@ class UsuarioController extends Controller {
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
-    {
-        //
+    public function edit(string $id){
+        $usuario = $this->usuarios->find($id);
+        $municipios = $this->municipios;
+        $cidades = $this->cidades;
+        $enderecos = $this->enderecos;
+        return view('usuario.form_usuario', compact(
+            'usuario',
+            'municipios',
+            'cidades',
+            'enderecos',
+        ));
     }
 
     /**
