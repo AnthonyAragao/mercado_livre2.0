@@ -78,14 +78,16 @@ class UsuarioController extends Controller {
      * Display the specified resource.
      */
     public function show(string $id){
+        $usuario = $this->usuarios->find($id);
         $municipios = $this->municipios;
         $cidades = $this->cidades;
-        $usuario = $this->usuarios->find($id);
+        $enderecos = $this->enderecos;
         $form = 'disabled';
         return view('usuario.form_usuario', compact(
+            'usuario',
             'municipios',
             'cidades',
-            'usuario',
+            'enderecos',
             'form'
         ));
     }
