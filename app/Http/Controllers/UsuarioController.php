@@ -111,9 +111,32 @@ class UsuarioController extends Controller {
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
-    {
-        //
+    public function update(Request $request, string $id){
+        $usuario = $this->usuarios->find($id);
+        tap($this->usuarios->find($usuario->id))->update([
+            'nascimento' => $request->nascimento,
+            'telefone' => $request->telefone,
+
+            'dados_acesso_id' => tap($this->dados_acesso->find($usuario->dados_acesso_id))->update([
+                'nome' => $request->nome,
+                'email' => $request->email,
+                'cpf' => $request->cpf,
+                'password' => isset($request->password) ? bcrypt($request->password) : $usuario->dado_acesso->password,
+
+                'endereco_id' => tap($this->enderecos->find($usuario->dado_acesso->endereco_id))->update([
+                    'logradouro' => $request->logradouro,
+                    'cep' => $request->cep,
+                    'bairro' => $request->bairro,
+                    'numero' => $request->numero,
+                    'complemento' => $request->complemento,
+                    'municipio_id' => isset($request->municipio) ? $request->municipio : $usuario->dado_acesso->endereco->municipio_id,
+                ])->id,
+            ])->id,
+        ]);
+
+
+        return redirect()->route('usuarios.show', $usuario->id);
+
     }
 
     /**
