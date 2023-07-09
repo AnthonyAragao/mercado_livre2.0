@@ -15,8 +15,8 @@ class LoginController extends Controller{
             'password' => ['required'],
         ],[
             'email.required' => 'O campo email é obrigatorio!',
-            'email.email' => 'O email nao é valido',
-            'password.required' => 'o campo senha é obrigatorio!'
+            'email.email' => 'O email não é valido',
+            'password.required' => 'O campo senha é obrigatorio!'
         ]);
         // dados do login
         $email = trim($request->email);
@@ -26,12 +26,12 @@ class LoginController extends Controller{
 
         // Verifica se existe usuario
         if(!$usuario){
-            return redirect()->back()->with('erro', 'usuario não encontrado na nossa base de dados');
+            return redirect()->back()->with('erro', 'Usuário não encontrado na nossa base de dados');
         }
 
         // Verifica se a senha do usuario esta correta
         if(!Hash::check($password, $usuario->password)){
-            return redirect()->back()->with('erro', 'usuario ou senha invalido');
+            return redirect()->back()->with('erro', 'Usuário ou senha invalido');
         }
 
         // Autentica o usuário
