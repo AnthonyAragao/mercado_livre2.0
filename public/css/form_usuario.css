@@ -114,6 +114,10 @@ button:hover{
 
 /* Para outros dispositos */
 @media screen and (max-width: 940px) {
+    .container-card{
+        width: 80%;
+    }
+
     .input-group{
         display: block;
     }
@@ -130,5 +134,11 @@ button:hover{
 
     button{
         margin-top: 4px;
+    }
+}
+@media screen and (max-width: 700px){
+    .container-card{
+        margin: 0;
+        width: 100%;
     }
 }
