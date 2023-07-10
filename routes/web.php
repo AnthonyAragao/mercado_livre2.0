@@ -36,6 +36,9 @@ Route::middleware('auth')->group(function () {
 Route::get('/usuarios/create', [UsuarioController::class, 'create'])->name('usuarios.create');
 Route::post('/usuarios', [UsuarioController::class, 'store'])->name('usuarios.store');
 
+Route::get('/registration', function () {
+    return view('login.registration');
+})->name('registration');
 
 
 require __DIR__.'/auth.php';

@@ -48,7 +48,7 @@
                         <button type="submit" class="btn btn-primary mt-2">Entrar</button>
 
                         <button type="button" class="btn btn-primary mt-2" id="create">
-                            <a href="{{route('usuarios.create')}}">Criar conta</a>
+                            <a href="{{route('registration')}}">Criar conta</a>
                         </button>
                     </div>
                 </form>
