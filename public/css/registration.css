@@ -52,24 +52,29 @@ main{
     margin-bottom: 30px;
 }
 
-
 .checkbox-label {
     display: inline-block;
     vertical-align: middle;
     width: 90%;
     margin-top: 60px;
     color: rgba(0,0,0,.55);
-  }
+}
+.checkbox-label a{
+    text-decoration: none;
+    color: #2968c8;
+}
 
 .checkbox-input {
     margin-right: 10px;
     transform: scale(1.1);
 }
 
-.checkbox-label a{
-    text-decoration: none;
-    color: #2968c8;
-}
+/* Erros */
+.checkbox-label-error{
+    background-color: rgba(242,61,79,.4);
+    border-radius: 6px;
+    padding: 10px;
+  }
 
 
 .btns{
