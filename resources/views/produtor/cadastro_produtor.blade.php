@@ -18,8 +18,10 @@
 
     <main>
         <div class="container-card">
-            <form method="POST" action="{{ route('usuarios.store') }}">
+            <form method="POST" action="{{ route('produtor.store') }}">
                 @csrf
+                <h2 class="">Dados do Produtor</h2>
+
                 <div class="input-box">
                     <label for="nome">Nome:</label>
                     <input type="text" id="nome" name="nome" required>
@@ -53,7 +55,6 @@
                         <input type="text" id="telefone" name="telefone" required>
                     </div>
                 </div>
-
 
                 <div class="input-group">
                     <div class="input-box">
@@ -104,6 +105,41 @@
                         @endforeach
                     </select>
                 </div>
+
+
+
+
+                <h2 class="">Dados da Empresa</h2>
+
+                <div class="input-box">
+                    <label for="nome_empresa">Nome da empresa:</label>
+                    <input type="text" id="nome_empresa" name="nome_empresa" required>
+                </div>
+
+                <div class="input-box">
+                    <label for="razao_empresa">Razão da Empresa:</label>
+                    <input type="text" id="razao_empresa" name="razao_empresa" required>
+                </div>
+
+
+                <div class="input-box">
+                    <label for="email_empresa">Email da Empresa:</label>
+                    <input type="email" id="email_empresa" name="email_empresa" required>
+                </div>
+
+                <div class="input-group">
+                    <div class="input-box">
+                        <label for="cnpj">CNPJ:</label>
+                        <input type="text" id="cnpj" name="cnpj" required>
+                    </div>
+
+                    <div class="input-box">
+                        <label for="telefone_empresa">Telefone da Empresa:</label>
+                        <input type="text" id="telefone_empresa" name="telefone_empresa" required>
+                    </div>
+                </div>
+
+
 
                 <a href="{{ route('login') }}" class="call-login">
                     Already registered?

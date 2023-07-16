@@ -34,7 +34,7 @@
                 </button>
 
                 <button type="button" id="create" onclick="checkboxMarcado()">
-                    <a href="{{route('registration')}}">Criar conta empresa</a>
+                    <a href="{{route('produtor.create')}}">Criar conta empresa</a>
                 </button>
             </div>
         </div>
