@@ -21,7 +21,7 @@
         <div class="container-card">
             <form method="POST" action="{{ route('produtor.store') }}">
                 @csrf
-                <h2 class="">Dados do Produtor</h2>
+                <h2>Dados do Produtor</h2>
 
                 <div class="input-box">
                     <label for="nome">Nome:</label>
@@ -107,10 +107,7 @@
                     </select>
                 </div>
 
-
-
-
-                <h2 class="">Dados da Empresa</h2>
+                <h2>Dados da Empresa</h2>
 
                 <div class="input-box">
                     <label for="nome_empresa">Nome da empresa:</label>
@@ -139,8 +136,6 @@
                         <input type="text" id="telefone_empresa" name="telefone_empresa" required>
                     </div>
                 </div>
-
-
 
                 <a href="{{ route('login') }}" class="call-login">
                     Already registered?

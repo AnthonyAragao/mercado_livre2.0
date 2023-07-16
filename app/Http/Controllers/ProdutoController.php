@@ -78,7 +78,7 @@ class ProdutoController extends Controller{
                     'cnpj' => $request->cnpj,
                     'telefone' => $request->telefone_empresa,
                 ])->id,
-                
+
             ]);
 
             return redirect()->route('login');
@@ -90,25 +90,42 @@ class ProdutoController extends Controller{
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
-    {
-        //
+    public function show(string $id){
+        $produtor = $this->produtores->find($id);
+        $municipios = $this->municipios;
+        $cidades = $this->cidades;
+        $enderecos = $this->enderecos;
+        $form = 'disabled';
+        return view('produtor.form_produtor', compact(
+            'produtor',
+            'municipios',
+            'cidades',
+            'enderecos',
+            'form'
+        ));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
-    {
-        //
+    public function edit(string $id){
+        $produtor = $this->produtores->find($id);
+        $municipios = $this->municipios;
+        $cidades = $this->cidades;
+        $enderecos = $this->enderecos;
+        return view('produtor.form_produtor', compact(
+            'produtor',
+            'municipios',
+            'cidades',
+            'enderecos',
+        ));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
-    {
-        //
+    public function update(Request $request, string $id){
+
     }
 
     /**

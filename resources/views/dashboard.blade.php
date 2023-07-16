@@ -1,8 +1,10 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            <a href="{{route('usuarios.show', Auth::user()->id)}}">perfik</a>
-            {{ __('Dashboard') }}
+            <a href="{{route('usuarios.show', Auth::user()->id)}}">usuario</a>
+        </h2>
+        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+            <a href="{{route('produtor.show', Auth::user()->id)}}">produtor</a>
         </h2>
     </x-slot>
 
