@@ -36,7 +36,7 @@
                 {{ isset($form) ? $form : null }}>
 
                 <label for="telefone">Telefone:</label>
-                <input type="text" id="telefone" name="telefone" value="{{$usuario->telefone ?? old('telefone')}}"
+                <input type="text" id="telefone" name="telefone" value="{{$usuario->dadoAcesso->telefone ?? old('telefone')}}"
                 {{ isset($form) ? $form : null }}>
 
                 {{-- <label for="password">Senha:</label>
@@ -45,7 +45,7 @@
                 <div class="input-group">
                     <div class="input-box">
                         <label for="nascimento">Nascimento:</label>
-                        <input type="date" id="nascimento" name="nascimento" value="{{$usuario->nascimento ?? old('nascimento')}}"
+                        <input type="date" id="nascimento" name="nascimento" value="{{$usuario->dadoAcesso->nascimento ?? old('nascimento')}}"
                         {{ isset($form) ? $form : null }} data-format="dd/mm/yyyy">
                     </div>
 

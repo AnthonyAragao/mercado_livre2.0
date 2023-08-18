@@ -41,7 +41,7 @@
 
                     <div class="input-box">
                         <label for="telefone">Telefone:</label>
-                        <input type="text" id="telefone" name="telefone" value="{{$produtor->telefone ?? old('telefone')}}"
+                        <input type="text" id="telefone" name="telefone" value="{{$produtor->dadoAcesso->telefone ?? old('telefone')}}"
                         {{ isset($form) ? $form : null }}>
                     </div>
                 </div>
@@ -52,7 +52,7 @@
                 <div class="input-group">
                     <div class="input-box">
                         <label for="nascimento">Nascimento:</label>
-                        <input type="date" id="nascimento" name="nascimento" value="{{$produtor->nascimento ?? old('nascimento')}}"
+                        <input type="date" id="nascimento" name="nascimento" value="{{$produtor->dadoAcesso->nascimento ?? old('nascimento')}}"
                         {{ isset($form) ? $form : null }} data-format="dd/mm/yyyy">
                     </div>
 

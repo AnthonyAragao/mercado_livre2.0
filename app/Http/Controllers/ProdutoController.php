@@ -52,15 +52,13 @@ class ProdutoController extends Controller{
     public function store(Request $request){
         try{
             $produtor = $this->produtores->create([
-                'nascimento' => $request->nascimento,
-                'telefone' => $request->telefone,
-
                 'dados_acesso_id' => $this->dados_acesso->create([
                     'nome' => $request->nome,
                     'email' => $request->email,
                     'cpf' => $request->cpf,
                     'password' => bcrypt($request->password),
-
+                    'nascimento' => $request->nascimento,
+                    'telefone' => $request->telefone,
                     'endereco_id' => $this->enderecos->create([
                         'logradouro' => $request->logradouro,
                         'cep' => $request->cep,
@@ -127,15 +125,13 @@ class ProdutoController extends Controller{
     public function update(Request $request, string $id){
         $produtor = $this->produtores->find($id);
         tap($this->produtores->find($produtor->id))->update([
-            'nascimento' => $request->nascimento,
-            'telefone' => $request->telefone,
-
             'dados_acesso_id' => tap($this->dados_acesso->find($produtor->dados_acesso_id))->update([
                 'nome' => $request->nome,
                 'email' => $request->email,
                 'cpf' => $request->cpf,
                 'password' => isset($request->password) ? bcrypt($request->password) : $produtor->dado_acesso->password,
-
+                'nascimento' => $request->nascimento,
+                'telefone' => $request->telefone,
                 'endereco_id' => tap($this->enderecos->find($produtor->dado_acesso->endereco_id))->update([
                     'logradouro' => $request->logradouro,
                     'cep' => $request->cep,

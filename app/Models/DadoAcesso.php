@@ -18,7 +18,7 @@ class DadoAcesso extends Authenticatable{
      * @var array
      */
     protected $fillable = [
-        'nome', 'email', 'cpf', 'password', 'endereco_id'
+        'nome', 'email', 'cpf', 'password', 'telefone', 'nascimento', 'endereco_id'
     ];
 
     /**

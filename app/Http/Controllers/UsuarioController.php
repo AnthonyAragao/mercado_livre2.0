@@ -48,15 +48,13 @@ class UsuarioController extends Controller {
     public function store(Request $request){
         try{
             $usuario = $this->usuarios->create([
-                'nascimento' => $request->nascimento,
-                'telefone' => $request->telefone,
-
                 'dados_acesso_id' => $this->dados_acesso->create([
                     'nome' => $request->nome,
                     'email' => $request->email,
                     'cpf' => $request->cpf,
                     'password' => bcrypt($request->password),
-
+                    'nascimento' => $request->nascimento,
+                    'telefone' => $request->telefone,
                     'endereco_id' => $this->enderecos->create([
                         'logradouro' => $request->logradouro,
                         'cep' => $request->cep,
@@ -114,15 +112,13 @@ class UsuarioController extends Controller {
     public function update(Request $request, string $id){
         $usuario = $this->usuarios->find($id);
         tap($this->usuarios->find($usuario->id))->update([
-            'nascimento' => $request->nascimento,
-            'telefone' => $request->telefone,
-
             'dados_acesso_id' => tap($this->dados_acesso->find($usuario->dados_acesso_id))->update([
                 'nome' => $request->nome,
                 'email' => $request->email,
                 'cpf' => $request->cpf,
                 'password' => isset($request->password) ? bcrypt($request->password) : $usuario->dado_acesso->password,
-
+                'nascimento' => $request->nascimento,
+                'telefone' => $request->telefone,
                 'endereco_id' => tap($this->enderecos->find($usuario->dado_acesso->endereco_id))->update([
                     'logradouro' => $request->logradouro,
                     'cep' => $request->cep,
