@@ -45,12 +45,49 @@ class DadoAcesso extends Authenticatable{
         return $this->enderecoRelationship;
     }
 
+    public function getProdutorAttribute(){
+        return $this->produtorRelationship;
+    }
+
+    public function getUsuarioAttribute(){
+        return $this->UsuarioRelationship;
+    }
+
     public function setEnderecoAttribute($value){
         $this->attributes['endereco_id'] = Endereco::where('id', $value)->first()->id;
+    }
+
+
+    public function setUsuarioAttribute($value)
+    {
+        if (isset($value)) {
+            $this->attributes['dados_acesso_id'] = Usuario::where(
+                'id',
+                $value
+            )->first()->id;
+        }
+    }
+
+    public function setProdutorAttribute($value)
+    {
+        if (isset($value)) {
+            $this->attributes['dados_acesso_id'] = Produtor::where(
+                'id',
+                $value
+            )->first()->id;
+        }
     }
 
     // Relacionamentos
     public function enderecoRelationship(){
         return $this->belongsTo(Endereco::class, 'endereco_id');
+    }
+
+    public function produtorRelationship(){
+        return $this->hasMany(Produtor::class, 'dados_acesso_id');
+    }
+
+    public function usuarioRelationship(){
+        return $this->hasMany(Usuario::class, 'dados_acesso_id');
     }
 }

@@ -1,11 +1,15 @@
 <x-app-layout>
     <x-slot name="header">
+        @if (Auth::user()->usuario->first() !== null)
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            <a href="{{route('usuarios.show', Auth::user()->id)}}">usuario</a>
+            <a href="{{route('usuarios.show', Auth::user()->usuario->first()->id)}}">usuario</a>
         </h2>
+        @else
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            <a href="{{route('produtor.show', Auth::user()->id)}}">produtor</a>
+            <a href="{{route('produtor.show', Auth::user()->produtor->first()->id)}}">produtor</a>
         </h2>
+        @endif
+
     </x-slot>
 
     <div class="py-12">
