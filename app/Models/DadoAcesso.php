@@ -18,7 +18,7 @@ class DadoAcesso extends Authenticatable{
      * @var array
      */
     protected $fillable = [
-        'nome', 'email', 'cpf', 'password', 'telefone', 'nascimento', 'endereco_id'
+        'nome', 'email', 'cpf', 'password', 'telefone', 'nascimento', 'mora_id'
     ];
 
     /**
@@ -41,9 +41,9 @@ class DadoAcesso extends Authenticatable{
     ];
 
     // Getters e Setters
-    public function getEnderecoAttribute(){
-        return $this->enderecoRelationship;
-    }
+    // public function getEnderecoAttribute(){
+    //     return $this->enderecoRelationship;
+    // }
 
     public function getProdutorAttribute(){
         return $this->produtorRelationship;
@@ -53,8 +53,8 @@ class DadoAcesso extends Authenticatable{
         return $this->UsuarioRelationship;
     }
 
-    public function setEnderecoAttribute($value){
-        $this->attributes['endereco_id'] = Endereco::where('id', $value)->first()->id;
+    public function getMoraAttribute(){
+        return $this->MoraRelationship;
     }
 
 
@@ -78,9 +78,13 @@ class DadoAcesso extends Authenticatable{
         }
     }
 
+    public function setEnderecoAttribute($value){
+        $this->attributes['mora_id'] = Mora::where('id', $value)->first()->id;
+    }
+
     // Relacionamentos
-    public function enderecoRelationship(){
-        return $this->belongsTo(Endereco::class, 'endereco_id');
+    public function moraRelationship(){
+        return $this->belongsTo(Mora::class, 'mora_id');
     }
 
     public function produtorRelationship(){

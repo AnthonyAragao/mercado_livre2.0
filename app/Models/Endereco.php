@@ -49,4 +49,8 @@ class Endereco extends Model{
     public function municipioRelationShip(){
         return $this->belongsTo(Municipio::class, 'municipio_id');
     }
+
+    public function moraRelationship(){
+        return $this->hasMany(Mora::class, 'endereco_id');
+    }
 }
