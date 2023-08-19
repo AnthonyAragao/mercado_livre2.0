@@ -59,7 +59,7 @@
                     <div class="input-box">
                         <label for="logradouro">logradouro:</label>
                         <input type="text" id="logradouro" name="logradouro" {{ isset($form) ? $form : null }}
-                        value="{{$produtor->dadoAcesso->endereco->logradouro ?? old('logradouro')}}">
+                        value="{{$produtor->dadoAcesso->mora->endereco->logradouro ?? old('logradouro')}}">
                     </div>
                 </div>
 
@@ -68,13 +68,13 @@
                     <div class="input-box">
                         <label for="cep">CEP:</label>
                         <input type="text" id="cep" name="cep" {{ isset($form) ? $form : null }}
-                        value="{{$produtor->dadoAcesso->endereco->cep ?? old('cep')}}">
+                        value="{{$produtor->dadoAcesso->mora->endereco->cep ?? old('cep')}}">
                     </div>
 
                     <div class="input-box">
                         <label for="bairro">Bairro:</label>
                         <input type="text" id="bairro" name="bairro" {{ isset($form) ? $form : null }}
-                        value="{{$produtor->dadoAcesso->endereco->bairro ?? old('bairro')}}">
+                        value="{{$produtor->dadoAcesso->mora->endereco->bairro ?? old('bairro')}}">
                     </div>
                 </div>
 
@@ -82,21 +82,21 @@
                     <div class="input-box">
                         <label for="numero">Número:</label>
                         <input type="text" id="numero" name="numero" {{ isset($form) ? $form : null }}
-                        value="{{$produtor->dadoAcesso->endereco->numero ?? old('numero')}}">
+                        value="{{$produtor->dadoAcesso->mora->numero ?? old('numero')}}">
                     </div>
 
                     <div class="input-box">
                         <label for="complemento">complemento:</label>
                         <input type="text" id="complemento" name="complemento" {{ isset($form) ? $form : null }}
-                        value="{{$produtor->dadoAcesso->endereco->complemento ?? old('complemento')}}">
+                        value="{{$produtor->dadoAcesso->mora->complemento ?? old('complemento')}}">
                     </div>
                 </div>
 
                 <div class="input-group">
                     <select class="form-select" aria-label="Cidade" aria-describedby="basic-addon1" name="cidade" id="cidade"
                     {{ isset($form) ? $form : null }}>
-                        <option value="{{isset($produtor) ? $produtor->dadoAcesso->endereco->municipio->cidade->id : '' }}" disabled selected>
-                            {{isset($produtor) ? $produtor->dadoAcesso->endereco->municipio->cidade->nome : 'Selecione um Estado'}}
+                        <option value="{{isset($produtor) ? $produtor->dadoAcesso->mora->endereco->municipio->cidade->id : '' }}" disabled selected>
+                            {{isset($produtor) ? $produtor->dadoAcesso->mora->endereco->municipio->cidade->nome : 'Selecione um Estado'}}
                         </option>
                         @foreach ($cidades as $cidade)
                             <option value="{{ $cidade->id }}">
@@ -107,8 +107,8 @@
 
                     <select class="form-select" aria-label="Municipio" aria-describedby="basic-addon1" name="municipio"
                         id="municipio"   {{ isset($form) ? $form : null }}>
-                        <option value="{{isset($produtor) ? $produtor->dadoAcesso->endereco->municipio->id:''}}" disabled selected>
-                            {{isset($produtor) ? $produtor->dadoAcesso->endereco->municipio->nome:'Selecione um Municipio'}}
+                        <option value="{{isset($produtor) ? $produtor->dadoAcesso->mora->endereco->municipio->id:''}}" disabled selected>
+                            {{isset($produtor) ? $produtor->dadoAcesso->mora->endereco->municipio->nome:'Selecione um Municipio'}}
                         </option>
                         @foreach ($municipios as $municipio)
                             <option value="{{ $municipio->id }}">

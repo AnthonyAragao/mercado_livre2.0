@@ -6,6 +6,7 @@ use App\Models\Cidade;
 use App\Models\DadoAcesso;
 use App\Models\DadoEmpresa;
 use App\Models\Endereco;
+use App\Models\Mora;
 use App\Models\Municipio;
 use App\Models\Produtor;
 use Illuminate\Http\Request;
@@ -16,12 +17,13 @@ class ProdutoController extends Controller{
      *
      * @return void
      */
-    private $dados_acesso, $produtores, $enderecos, $dados_empresa;
-    public function __construct(DadoAcesso $dados_acesso, DadoEmpresa $dados_empresa, Produtor $produtores, Endereco $enderecos){
+    private $dados_acesso, $produtores, $enderecos, $dados_empresa, $mora;
+    public function __construct(DadoAcesso $dados_acesso, DadoEmpresa $dados_empresa, Produtor $produtores, Endereco $enderecos, Mora $mora){
         $this->dados_acesso = $dados_acesso;
         $this->dados_empresa = $dados_empresa;
         $this->produtores = $produtores;
         $this->enderecos = $enderecos;
+        $this->mora = $mora;
 
         $this->cidades = Cidade::all();
         $this->municipios = Municipio::all();
@@ -59,13 +61,15 @@ class ProdutoController extends Controller{
                     'password' => bcrypt($request->password),
                     'nascimento' => $request->nascimento,
                     'telefone' => $request->telefone,
-                    'endereco_id' => $this->enderecos->create([
-                        'logradouro' => $request->logradouro,
-                        'cep' => $request->cep,
-                        'bairro' => $request->bairro,
+                    'mora_id' => $this->mora->create([
                         'numero' => $request->numero,
                         'complemento' => $request->complemento,
-                        'municipio_id' => $request->municipio,
+                        'endereco_id' => $this->enderecos->create([
+                            'logradouro' => $request->logradouro,
+                            'cep' => $request->cep,
+                            'bairro' => $request->bairro,
+                            'municipio_id' => $request->municipio,
+                        ])->id,
                     ])->id,
                 ])->id,
 
@@ -81,7 +85,6 @@ class ProdutoController extends Controller{
 
             return redirect()->route('login');
         }catch(Exception $e){
-
         }
     }
 
@@ -132,13 +135,15 @@ class ProdutoController extends Controller{
                 'password' => isset($request->password) ? bcrypt($request->password) : $produtor->dado_acesso->password,
                 'nascimento' => $request->nascimento,
                 'telefone' => $request->telefone,
-                'endereco_id' => tap($this->enderecos->find($produtor->dado_acesso->endereco_id))->update([
-                    'logradouro' => $request->logradouro,
-                    'cep' => $request->cep,
-                    'bairro' => $request->bairro,
+                'mora_id' => tap($this->mora->find($produtor->dado_acesso->mora_id))->update([
                     'numero' => $request->numero,
                     'complemento' => $request->complemento,
-                    'municipio_id' => isset($request->municipio) ? $request->municipio : $produtor->dado_acesso->endereco->municipio_id,
+                    'endereco_id' => tap($this->enderecos->find($produtor->dado_acesso->mora->endereco_id))->update([
+                        'logradouro' => $request->logradouro,
+                        'cep' => $request->cep,
+                        'bairro' => $request->bairro,
+                        'municipio_id' => isset($request->municipio) ? $request->municipio : $produtor->dado_acesso->mora->endereco->municipio_id,
+                    ])->id,
                 ])->id,
             ])->id,
 

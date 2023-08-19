@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Cidade;
 use App\Models\DadoAcesso;
 use App\Models\Endereco;
+use App\Models\Mora;
 use App\Models\Municipio;
 use App\Models\Usuario;
 use Illuminate\Http\Request;
@@ -15,11 +16,12 @@ class UsuarioController extends Controller {
      *
      * @return void
      */
-    private $dados_acesso, $usuarios, $enderecos;
-    public function __construct(DadoAcesso $dados_acesso, Usuario $usuarios, Endereco $enderecos ){
+    private $dados_acesso, $usuarios, $enderecos, $mora;
+    public function __construct(DadoAcesso $dados_acesso, Usuario $usuarios, Endereco $enderecos, Mora $mora ){
         $this->dados_acesso = $dados_acesso;
         $this->usuarios = $usuarios;
         $this->enderecos = $enderecos;
+        $this->mora = $mora;
 
         $this->cidades = Cidade::all();
         $this->municipios = Municipio::all();
@@ -55,13 +57,15 @@ class UsuarioController extends Controller {
                     'password' => bcrypt($request->password),
                     'nascimento' => $request->nascimento,
                     'telefone' => $request->telefone,
-                    'endereco_id' => $this->enderecos->create([
-                        'logradouro' => $request->logradouro,
-                        'cep' => $request->cep,
-                        'bairro' => $request->bairro,
+                    'mora_id' => $this->mora->create([
                         'numero' => $request->numero,
                         'complemento' => $request->complemento,
-                        'municipio_id' => $request->municipio,
+                        'endereco_id' => $this->enderecos->create([
+                            'logradouro' => $request->logradouro,
+                            'cep' => $request->cep,
+                            'bairro' => $request->bairro,
+                            'municipio_id' => $request->municipio,
+                        ])->id,
                     ])->id,
                 ])->id,
             ]);
@@ -119,20 +123,20 @@ class UsuarioController extends Controller {
                 'password' => isset($request->password) ? bcrypt($request->password) : $usuario->dado_acesso->password,
                 'nascimento' => $request->nascimento,
                 'telefone' => $request->telefone,
-                'endereco_id' => tap($this->enderecos->find($usuario->dado_acesso->endereco_id))->update([
-                    'logradouro' => $request->logradouro,
-                    'cep' => $request->cep,
-                    'bairro' => $request->bairro,
+                'mora_id' => tap($this->mora->find($usuario->dado_acesso->mora_id))->update([
                     'numero' => $request->numero,
                     'complemento' => $request->complemento,
-                    'municipio_id' => isset($request->municipio) ? $request->municipio : $usuario->dado_acesso->endereco->municipio_id,
+                    'endereco_id' => tap($this->enderecos->find($usuario->dado_acesso->mora->endereco_id))->update([
+                        'logradouro' => $request->logradouro,
+                        'cep' => $request->cep,
+                        'bairro' => $request->bairro,
+                        'municipio_id' => isset($request->municipio) ? $request->municipio : $usuario->dado_acesso->mora->endereco->municipio_id,
+                    ])->id,
                 ])->id,
             ])->id,
         ]);
 
-
         return redirect()->route('usuarios.show', $usuario->id);
-
     }
 
     /**
