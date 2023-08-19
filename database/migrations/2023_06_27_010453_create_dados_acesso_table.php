@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('password');
             $table->date('nascimento');
             $table->string('telefone');
-            $table->foreignId('endereco_id')->constrained('enderecos');
+            $table->foreignId('mora_id')->constrained('mora');
             $table->timestamps();
         });
     }
