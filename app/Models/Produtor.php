@@ -23,8 +23,8 @@ class Produtor extends Model{
     * @var array
     */
     protected $hidden = [
-
-
+        'dadoEmpresaRelationship',
+        'dadoAcessoRelationship'
     ];
 
 
@@ -34,7 +34,6 @@ class Produtor extends Model{
     */
     protected $appends = [
 
-
     ];
      // Getters e Setters
      public function getDadoAcessoAttribute(){
@@ -43,6 +42,14 @@ class Produtor extends Model{
 
     public function getDadosEmpresaAttribute(){
         return $this->dadoEmpresaRelationship;
+    }
+
+    public function getProdutoAttribute(){
+        return $this->produtoRelationship;
+    }
+
+    public function setProdutoAttribute($value){
+        $this->produtoRelationship()->sync($value);
     }
 
     public function setDadoAcessoAttribute($value){
@@ -61,5 +68,9 @@ class Produtor extends Model{
 
     public function dadoEmpresaRelationship(){
         return $this->belongsTo(DadoEmpresa::class, 'dados_empresa_id');
+    }
+
+    public function produtoRelationship(){
+        return $this->belongsToMany(Produto::class, 'produtor_has_produto', 'produto_id', 'produtor_id');
     }
 }
