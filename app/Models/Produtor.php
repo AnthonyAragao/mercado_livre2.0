@@ -12,27 +12,23 @@ class Produtor extends Model{
     protected $table = 'produtores';
 
     /**
-     * The attributes that aren't mass assignable.
-     *
-     * @var string
-     */
-    protected $guarded = [];
-
-    /**
      * The attributes that  should be hidden for arrays
     * @var array
     */
     protected $hidden = [
         'dadoEmpresaRelationship',
-        'dadoAcessoRelationship'
+        'dadoAcessoRelationship',
+        'produtor_has_produtoRelationship'
     ];
-
 
     /**
      * The accessors to append to the model's arrays form
     * @var array
     */
     protected $appends = [
+        'DadoAcesso',
+        'DadoEmpresa',
+        'Produtor_has_produto'
 
     ];
      // Getters e Setters
@@ -44,21 +40,22 @@ class Produtor extends Model{
         return $this->dadoEmpresaRelationship;
     }
 
-    public function getProdutoAttribute(){
-        return $this->produtoRelationship;
-    }
-
-    public function setProdutoAttribute($value){
-        $this->produtoRelationship()->sync($value);
+    public function getProdutorHasProdutoAttribute(){
+        return $this->produtor_has_produtoRelationship;
     }
 
     public function setDadoAcessoAttribute($value){
         $this->attributes['dados_acesso_id'] = DadoAcesso::where('id', $value)->first()->id;
     }
 
-
     public function setDadoEmpresaAttribute($value){
         $this->attributes['dados_empresa_id'] = DadoEmpresa::where('id', $value)->first()->id;
+    }
+
+    public function setProdutorHasProdutoAttribute($value){
+        if(isset($value)){
+            $this->attributes['produtor_id'] = Produtor_has_produto::where('id', $value)->first()->id;
+        }
     }
 
     // Relacionamentos
@@ -70,7 +67,7 @@ class Produtor extends Model{
         return $this->belongsTo(DadoEmpresa::class, 'dados_empresa_id');
     }
 
-    public function produtoRelationship(){
-        return $this->belongsToMany(Produto::class, 'produtor_has_produto', 'produto_id', 'produtor_id');
+    public function produtor_has_produtoRelationship(){
+        return $this->hasMany(Produtor_has_produto::class, 'produtor_id');
     }
 }

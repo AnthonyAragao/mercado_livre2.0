@@ -13,32 +13,30 @@ class Produto extends Model
     protected $table = 'produtos';
 
     /**
-     * The attributes that aren't mass assignable.
-     *
-     * @var string
-     */
-    protected $guarded = [];
-
-    /**
      * The attributes that  should be hidden for arrays
     * @var array
     */
     protected $hidden = [
-        'categoriaRelationship'
+        'categoriaRelationship',
+        'produtor_has_produtoRelationship'
     ];
-
 
     /**
      * The accessors to append to the model's arrays form
     * @var array
     */
     protected $appends = [
-        'categorias'
+        'categorias',
+        'produtor_has_produto'
     ];
 
     // Getters e Setters
     public function getCategoriaAttribute(){
         return $this->categoriaRelationship;
+    }
+
+    public function getProdutorHasProdutoAttribute(){
+        return $this->produtor_has_produtoRelationship;
     }
 
     public function setCategoriaAttribute($value){
@@ -50,5 +48,9 @@ class Produto extends Model
     // Relacionamentos
     public function categoriaRelationship(){
         return $this->belongsTo(Categoria::class, 'categoria_id');
+    }
+
+    public function produtor_has_produtoRelationship(){
+        return $this->hasMany(Produtor_has_produto::class, 'produto_id');
     }
 }

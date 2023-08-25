@@ -25,4 +25,19 @@ class Categoria extends Model{
     */
     protected $appends = [];
 
+    // Getters e Setters
+    public function getProdutoAttribute(){
+        return $this->produtoRelationship;
+    }
+
+    public function setProdutoAttribute($value){
+        if(isset($value)){
+            $this->attributes['produto_id'] = Produto::where('id', $value)->first()->id;
+        }
+    }
+
+    // Relacionamentos
+    public function produtoRelationship(){
+        return $this->hasMany(Produto::class, 'categoria_id');
+    }
 }

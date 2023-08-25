@@ -1,4 +1,5 @@
 <x-app-layout>
+    {{-- {{dd(Auth::user()->produtor[0]->produtor_has_produto[0])}} --}}
     <x-slot name="header">
         @if (Auth::user()->usuario->first() !== null)
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
