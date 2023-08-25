@@ -11,7 +11,7 @@ use App\Models\Municipio;
 use App\Models\Produtor;
 use Illuminate\Http\Request;
 
-class ProdutoController extends Controller{
+class ProdutorController extends Controller{
     /**
      * Instantiate a new controller instance.
      *
