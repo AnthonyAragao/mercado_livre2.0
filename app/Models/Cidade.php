@@ -22,18 +22,12 @@ class Cidade extends Model{
      * The attributes that  should be hidden for arrays
     * @var array
     */
-    protected $hidden = [
-
-
-    ];
+    protected $hidden = [];
 
 
     /**
      * The accessors to append to the model's arrays form
     * @var array
     */
-    protected $appends = [
-
-
-    ];
+    protected $appends = [];
 }

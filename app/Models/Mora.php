@@ -25,8 +25,7 @@ class Mora extends Model
     * @var array
     */
     protected $hidden = [
-
-
+        'enderecoRelationship'
     ];
 
 
@@ -35,8 +34,7 @@ class Mora extends Model
     * @var array
     */
     protected $appends = [
-
-
+        'endereco'
     ];
 
     // Getters e Setters

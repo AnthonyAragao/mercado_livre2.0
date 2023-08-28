@@ -23,8 +23,7 @@ class Municipio extends Model {
     * @var array
     */
     protected $hidden = [
-
-
+        'cidadeRelationShip'
     ];
 
 
@@ -33,8 +32,7 @@ class Municipio extends Model {
     * @var array
     */
     protected $appends = [
-
-
+        'cidades'
     ];
 
     // Getters e Setters

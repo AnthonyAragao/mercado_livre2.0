@@ -11,19 +11,21 @@ class Categoria extends Model{
      */
     protected $table = 'categorias';
 
-
     /**
      * The attributes that  should be hidden for arrays
     * @var array
     */
-    protected $hidden = [];
-
+    protected $hidden = [
+        'produtoRelationship'
+    ];
 
     /**
      * The accessors to append to the model's arrays form
     * @var array
     */
-    protected $appends = [];
+    protected $appends = [
+        'produto'
+    ];
 
     // Getters e Setters
     public function getProdutoAttribute(){

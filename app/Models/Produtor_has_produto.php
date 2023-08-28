@@ -11,6 +11,8 @@ class Produtor_has_produto extends Model{
      */
     protected $table = 'produtor_has_produto';
 
+    protected $guarded = [];
+
     /**
      * The attributes that  should be hidden for arrays
     * @var array
