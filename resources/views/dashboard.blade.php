@@ -9,6 +9,10 @@
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
             <a href="{{route('produtor.show', Auth::user()->produtor->first()->id)}}">produtor</a>
         </h2>
+
+        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+            <a href="{{route('produto.create')}}">criar produto</a>
+        </h2>
         @endif
 
     </x-slot>
