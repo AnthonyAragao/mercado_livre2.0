@@ -19,9 +19,7 @@ use Illuminate\Support\Facades\Route;
 
 
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [ProdutoController::class, 'index']);
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -42,7 +40,7 @@ Route::post('/usuarios', [UsuarioController::class, 'store'])->name('usuarios.st
 
 Route::get('/produtor/create', [ProdutorController::class, 'create'])->name('produtor.create');
 Route::post('/produtor', [ProdutorController::class, 'store'])->name('produtor.store');
-    
+
 
 
 Route::get('/registration', function () {

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\Helper;
 use App\Models\Categoria;
 use App\Models\Produto;
 use App\Models\Produtor_has_produto;
@@ -19,9 +20,10 @@ class ProdutoController extends Controller{
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-        //
+    public function index(){
+        $produtos = $this->produtos->all();
+
+        return view('welcome', compact('produtos'));
     }
 
     /**
@@ -44,10 +46,12 @@ class ProdutoController extends Controller{
             'produtor_id' => Auth::user()->produtor->first()->id,
 
             'produto_id' => $this->produtos->create([
+                'foto_01' => Helper::armazenarArquivo($request->foto_01, 'files/produtos'),
                 'nome' => $request->nome,
                 'preco' => $request->preco,
                 'descricao' => $request->descricao,
                 'estoque' => $request->estoque,
+                'desconto' => $request->desconto,
                 'categoria_id' => $request->categoria,
             ])->id,
         ]);

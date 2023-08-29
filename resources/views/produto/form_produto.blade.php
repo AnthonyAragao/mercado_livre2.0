@@ -19,7 +19,7 @@
 
     <main>
         <div class="container-card">
-            <form method="POST" action="{{ route('produto.store') }}">
+            <form method="POST" action="{{ route('produto.store') }}" enctype="multipart/form-data" >
                 @csrf
                 <div class="input-box">
                     <label for="nome">Nome:</label>
@@ -46,8 +46,7 @@
                     <input type="number" id="desconto" name="desconto">
                 </div>
 
-
-                <select class="form-select" aria-label="Categoria" aria-describedby="basic-addon1" name="categoria" id="categoria">
+                <select class="form-select" aria-label="Categoria" aria-describedby="basic-addon1" name="categoria" id="categoria" style="width: 100%">
                     <option value="" disabled selected>Selecione uma Categoria</option>
                     @foreach ($categorias as $categoria)
                         <option value="{{ $categoria->id }}">
@@ -55,6 +54,11 @@
                         </option>
                     @endforeach
                 </select>
+
+                <div class="input-box">
+                    <label for="foto_01">Foto 01:</label>
+                    <input type="file" id="foto_01" name="foto_01" required>
+                </div>
 
                 <button type="submit">Cadastrar Produto</button>
             </form>
