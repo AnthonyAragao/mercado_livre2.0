@@ -55,9 +55,9 @@
                     @endforeach
                 </select>
 
-                <div class="input-box">
+                <div class="">
                     <label for="foto_01">Foto 01:</label>
-                    <input type="file" id="foto_01" name="foto_01" required>
+                    <input type="file" id="foto_01" name="foto_01[]" multiple="multiple" required>
                 </div>
 
                 <button type="submit">Cadastrar Produto</button>

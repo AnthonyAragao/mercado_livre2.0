@@ -46,7 +46,7 @@ class ProdutoController extends Controller{
             'produtor_id' => Auth::user()->produtor->first()->id,
 
             'produto_id' => $this->produtos->create([
-                'foto_01' => Helper::armazenarArquivo($request->foto_01, 'files/produtos'),
+                'foto_01' => Helper::armazenarArquivo($request->foto_01[0], 'files/produtos'),
                 'nome' => $request->nome,
                 'preco' => $request->preco,
                 'descricao' => $request->descricao,
