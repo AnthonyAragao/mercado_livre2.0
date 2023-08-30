@@ -14,11 +14,15 @@ return new class extends Migration
         Schema::create('produtos', function (Blueprint $table) {
             $table->id();
             $table->string('nome');
-            $table->string('foto_01');
+            $table->string('imagem_01');
+            $table->string('imagem_02')->nullable();
+            $table->string('imagem_03')->nullable();
+            $table->string('imagem_04')->nullable();
+            $table->string('imagem_05')->nullable();
             $table->float('preco');
             $table->string('descricao');
             $table->integer('estoque');
-            $table->float('desconto')->nullable();
+            $table->integer('desconto')->nullable();
             $table->foreignId('categoria_id')->constrained('categorias');
             $table->timestamps();
         });

@@ -56,8 +56,8 @@
                 </select>
 
                 <div class="">
-                    <label for="foto_01">Foto 01:</label>
-                    <input type="file" id="foto_01" name="foto_01[]" multiple="multiple" required>
+                    <label for="imagens">Insira as imagens:</label>
+                    <input type="file" id="imagens" name="imagens[]" multiple="multiple" required>
                 </div>
 
                 <button type="submit">Cadastrar Produto</button>

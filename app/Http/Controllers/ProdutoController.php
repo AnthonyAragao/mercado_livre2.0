@@ -41,12 +41,14 @@ class ProdutoController extends Controller{
     public function store(Request $request)
     {
         // dd($request->all());
-
         $pivo = $this->pivo->create([
             'produtor_id' => Auth::user()->produtor->first()->id,
-
             'produto_id' => $this->produtos->create([
-                'foto_01' => Helper::armazenarArquivo($request->foto_01[0], 'files/produtos'),
+                'imagem_01' => Helper::armazenarArquivo($request->imagens[0], 'files/produtos'),
+                'imagem_02' => isset($request->imagens[1]) ? Helper::armazenarArquivo($request->imagens[1], 'files/produtos') : null,
+                'imagem_03' => isset($request->imagens[2]) ? Helper::armazenarArquivo($request->imagens[2], 'files/produtos') : null,
+                'imagem_04' => isset($request->imagens[3]) ? Helper::armazenarArquivo($request->imagens[3], 'files/produtos') : null,
+                'imagem_05' => isset($request->imagens[4]) ? Helper::armazenarArquivo($request->imagens[4], 'files/produtos') : null,
                 'nome' => $request->nome,
                 'preco' => $request->preco,
                 'descricao' => $request->descricao,
