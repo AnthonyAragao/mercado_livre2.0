@@ -28,7 +28,7 @@
 
                 <div class="input-box">
                     <label for="preco">Preço:</label>
-                    <input type="number" id="preco" name="preco" required>
+                    <input type="number" step="any" id="preco" name="preco" required>
                 </div>
 
                 <div class="input-box">
