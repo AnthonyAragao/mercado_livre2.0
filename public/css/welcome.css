@@ -67,6 +67,7 @@ main{
 }
 
 .description-product p{
+    min-height: 49px;
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
