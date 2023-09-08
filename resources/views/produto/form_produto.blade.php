@@ -59,7 +59,7 @@
                     </select>
                 </div>
 
-                <div class="input-box   ">
+                <div class="input-box">
                     <label for="imagens">Insira as imagens:(Insira no máximo 5 imagens)</label>
                     <input type="file" class="form-control" id="imagens" name="imagens[]" multiple="multiple" required>
                 </div>
