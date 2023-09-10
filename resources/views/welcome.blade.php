@@ -38,17 +38,17 @@
                             </div>
 
                             <div class="description-product">
-                                <p>{{$produto->descricao}}</p>
 
-                                <div class="price-product" style="margin-bottom: 12px">
+                                <div class="price-product" style="margin-bottom: 5px">
                                     <div>
-                                        <span style="font-size: 22px">R$ {{ number_format($produto->preco,2,',','.')}}</span>
-                                        <span class="color-green" style="font-size:12px; font-weight: 600;">41% OFF</span>
+                                        <span style="font-size: 22px">R$ {{ number_format($produto->preco)}}</span>
+                                        <span class="color-green" style="font-size:14px; font-weight: 600;">41% OFF</span>
                                     </div>
-                                    <span class="color-green" style="font-weight: 600;">em 10x RS 10,00 sem juros</span>
+                                    <span class="color-green" style="font-size:14px; font-weight: 600;">10x R$ {{ number_format(($produto->preco/10),2,',','.')}} sem juros</span>
                                 </div>
+                                <span class="color-green" style="font-size:16px; font-weight: 600; margin-bottom: 5px">Frete grátis</span>
 
-                                <span class="color-green" style="font-size:17px; font-weight: 600; ">Frete grátis</span>
+                                <p>{{$produto->descricao}}</p>
                             </div>
                         </a>
                     </div>

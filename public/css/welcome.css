@@ -45,7 +45,7 @@ main{
 }
 
 .card-product {
-    width: 284px;
+    width: 220px;
 }
 
 .card-product a{
@@ -54,15 +54,15 @@ main{
 }
 
 .img-product img{
-    height: 284px;
+    height: 220px;
     width: 100%;
     background-color: rgb(255, 255, 255);
-    border-bottom: 3px solid #ededed;
+    border-bottom: 2px solid #ededed;
 }
 
 .description-product{
-    padding: 20px;
-    height: 220px;
+    padding: 15px;
+    height: 180px;
     background-color: rgb(255, 255, 255);
 }
 
