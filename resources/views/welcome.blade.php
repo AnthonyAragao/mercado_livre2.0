@@ -4,6 +4,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
         <link rel="stylesheet" href="{{ asset('css/welcome.css') }}">
         <link rel="icon" href="{{asset('images/icon-mercado-libre.png')}}">
@@ -38,17 +39,19 @@
                             </div>
 
                             <div class="description-product">
-
                                 <div class="price-product" style="margin-bottom: 5px">
                                     <div>
                                         <span style="font-size: 22px">R$ {{ number_format($produto->preco)}}</span>
-                                        <span class="color-green" style="font-size:14px; font-weight: 600;">41% OFF</span>
+                                        <span class="color-green" style="font-size:14px; font-weight: 500;">41% OFF</span>
                                     </div>
-                                    <span class="color-green" style="font-size:14px; font-weight: 600;">10x R$ {{ number_format(($produto->preco/10),2,',','.')}} sem juros</span>
+                                    <span class="color-green" style="font-size:14px; font-weight: 500;">10x R$ {{ number_format(($produto->preco/10),2,',','.')}} sem juros</span>
                                 </div>
-                                <span class="color-green" style="font-size:16px; font-weight: 600; margin-bottom: 5px">Frete grátis</span>
 
-                                <p>{{$produto->descricao}}</p>
+                                <span class="color-green" style="font-size:14px; font-weight: 600; margin-bottom: 5px">
+                                    Frete grátis  <span style="font-size:12px; font-weight: 900; font-style:italic"><i class="fa-solid fa-bolt-lightning"></i> FULL</span>
+                                </span>
+
+                                <p style="font-size: 14px">{{$produto->descricao}}</p>
                             </div>
                         </a>
                     </div>
