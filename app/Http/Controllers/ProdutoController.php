@@ -8,6 +8,7 @@ use App\Models\Produto;
 use App\Models\Produtor_has_produto;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
 
 class ProdutoController extends Controller{
     private $produtos, $pivo;
@@ -58,14 +59,18 @@ class ProdutoController extends Controller{
             ])->id,
         ]);
 
+        $check = 'Produto cadastro com sucesso!';
+        return redirect()->route('listagem_produtos')->with('check',$check);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
-    {
-        //
+    public function show(string $id){
+        $produto = $this->produtos->find(Crypt::decrypt($id));
+        $produtor = $produto->produtor_has_produto[0]->produtor;
+
+        dd($produtor->DadoAcesso);
     }
 
     /**

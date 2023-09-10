@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Route;
 
 
 
-Route::get('/', [ProdutoController::class, 'index']);
+Route::get('/', [ProdutoController::class, 'index'])->name('listagem_produtos');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
