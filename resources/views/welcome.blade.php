@@ -17,12 +17,17 @@
             <div class="logo">
                 <img src="{{ asset('images/mercado-libre.png') }}" alt="">
                 @if (Route::has('login'))
-                    <div class="">
-                        @auth
-                            <a href="{{ url('/dashboard') }}">Dashboard</a>
-                        @else
-                            <a href="{{ route('login') }}">Log in</a>
-                        @endauth
+                    <div>
+                        <nav style="">
+                            @auth
+                                <a href="{{ url('/dashboard') }}">Dashboard</a>
+                            @else
+                                <a href="{{ route('registration') }}">Crie a sua conta</a>
+                                <a href="{{ route('login') }}">Entre</a>
+                            @endauth
+                            <a href="">Compras</a>
+                            <a href=""><i class="fa-solid fa-cart-shopping"></i></a>
+                        </nav>
                     </div>
                 @endif
             </div>
