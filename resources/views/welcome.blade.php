@@ -40,11 +40,24 @@
                 @foreach ( $produtos as $produto )
                     <div class="card-product">
                         <a href="{{route('produto.show', [Crypt::encrypt($produto->id)] )}}">
-                            <div class="img-product">
+
+                            <div class="img-product" style="position: relative">
+                                <a href="">
+                                    <i class="fa-regular fa-heart"
+                                        style="position: absolute;
+                                        color: #004fd6;
+                                        background-color: #f9fafb;
+                                        padding: 6px;
+                                        border-radius: 50%;
+                                        top: 5px;
+                                        left: 180px;">
+                                    </i>
+                                </a>
                                 <img src="{{ asset('files/produtos')}}/{{$produto->imagem_01}}">
                             </div>
 
                             <div class="description-product">
+                                {{-- <span class="teste" style="display: none">3999</span> --}}
                                 <div class="price-product" style="margin-bottom: 5px">
                                     <div>
                                         <span style="font-size: 22px">R$ {{ number_format($produto->preco)}}</span>

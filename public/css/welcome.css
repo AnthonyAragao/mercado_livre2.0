@@ -60,16 +60,17 @@ main{
     border-radius: 6px;
 }
 
-.card-product {
+.card-product{
     border: 1px solid #f5f5f5;
     border-radius: 4px;
     width: 220px;
 }
 
-.card-product:hover {
+.card-product:hover{
     /* box-shadow: 1px 1px 1px 1px rgba(0,0,0,.1); */
     transition: all 0.3s ease;
     box-shadow: 1px 0 10px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
 }
 
 .card-product a{
