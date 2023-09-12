@@ -42,23 +42,15 @@
                         <a href="{{route('produto.show', [Crypt::encrypt($produto->id)] )}}">
 
                             <div class="img-product" style="position: relative">
-                                <a href="">
-                                    <i class="fa-regular fa-heart"
-                                        style="position: absolute;
-                                        color: #004fd6;
-                                        background-color: #f9fafb;
-                                        padding: 6px;
-                                        border-radius: 50%;
-                                        top: 5px;
-                                        left: 180px;">
-                                    </i>
+                                <a href="" class="d-none">
+                                    <i class="fa-regular fa-heart"></i>
                                 </a>
                                 <img src="{{ asset('files/produtos')}}/{{$produto->imagem_01}}">
                             </div>
 
                             <div class="description-product">
-                                {{-- <span class="teste" style="display: none">3999</span> --}}
-                                <div class="price-product" style="margin-bottom: 5px">
+                                <span class="previous-price d-none">R$ 3999</span>
+                                <div class="price-product" style="">
                                     <div>
                                         <span style="font-size: 22px">R$ {{ number_format($produto->preco)}}</span>
                                         <span class="color-green" style="font-size:14px; font-weight: 500;">{{$produto->desconto}}% OFF</span>
@@ -66,7 +58,7 @@
                                     <span class="color-green" style="font-size:14px; font-weight: 500;">10x R$ {{ number_format(($produto->preco/10),2,',','.')}} sem juros</span>
                                 </div>
 
-                                <span class="color-green" style="font-size:14px; font-weight: 600; margin-bottom: 5px">
+                                <span class="color-green" style="font-size:14px; font-weight: 600;">
                                     Frete grátis  <span style="font-size:12px; font-weight: 900; font-style:italic"><i class="fa-solid fa-bolt-lightning"></i> FULL</span>
                                 </span>
 
