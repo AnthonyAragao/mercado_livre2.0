@@ -52,9 +52,11 @@ class ProdutoController extends Controller{
                 'imagem_05' => isset($request->imagens[4]) ? Helper::armazenarArquivo($request->imagens[4], 'files/produtos') : null,
                 'nome' => $request->nome,
                 'preco' => $request->preco,
+                'desconto' => $request->desconto,
+                'preco_desconto' => $request->preco - (($request->preco * $request->desconto)/100),
+
                 'descricao' => $request->descricao,
                 'estoque' => $request->estoque,
-                'desconto' => $request->desconto,
                 'categoria_id' => $request->categoria,
             ])->id,
         ]);

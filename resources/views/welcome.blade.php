@@ -49,13 +49,13 @@
                             </div>
 
                             <div class="description-product">
-                                <span class="previous-price d-none">R$ 3999</span>
+                                <span class="previous-price d-none">R$ {{$produto->preco}}</span>
                                 <div class="price-product" style="">
                                     <div>
-                                        <span style="font-size: 22px">R$ {{ number_format($produto->preco)}}</span>
+                                        <span style="font-size: 22px">R$ {{ number_format(($produto->preco_desconto),0,',','.')}}</span>
                                         <span class="color-green" style="font-size:14px; font-weight: 500;">{{$produto->desconto}}% OFF</span>
                                     </div>
-                                    <span class="color-green" style="font-size:14px; font-weight: 500;">10x R$ {{ number_format(($produto->preco/10),2,',','.')}} sem juros</span>
+                                    <span class="color-green" style="font-size:14px; font-weight: 500;">10x R$ {{ number_format(($produto->preco_desconto/10),2,',','.')}} sem juros</span>
                                 </div>
 
                                 <span class="color-green" style="font-size:14px; font-weight: 600;">

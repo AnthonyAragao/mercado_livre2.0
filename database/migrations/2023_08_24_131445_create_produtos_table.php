@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('descricao');
             $table->integer('estoque');
             $table->integer('desconto')->nullable();
+            $table->float('preco_desconto')->nullable();
             $table->foreignId('categoria_id')->constrained('categorias');
             $table->timestamps();
         });
