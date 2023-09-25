@@ -72,7 +72,7 @@ class ProdutoController extends Controller{
         $produto = $this->produtos->find(Crypt::decrypt($id));
         $produtor = $produto->produtor_has_produto[0]->produtor;
 
-        dd($produtor->DadoAcesso);
+        return view('produto.show_produto', compact('produto', 'produtor'));
     }
 
     /**
