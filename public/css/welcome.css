@@ -75,8 +75,7 @@ main{
 }
 
 .card-product:hover .previous-price,
-.card-product:hover .img-product a
-{
+.card-product:hover .img-product .heart{
     display: block !important;
 }
 
@@ -97,7 +96,7 @@ main{
     border-bottom: 2px solid #ededed;
 }
 
-.img-product a{
+.img-product div{
     position: absolute;
     color: #004fd6;
     background-color: #f9fafb;

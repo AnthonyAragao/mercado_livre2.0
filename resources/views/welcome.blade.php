@@ -42,9 +42,9 @@
                         <a href="{{route('produto.show', [Crypt::encrypt($produto->id)] )}}">
 
                             <div class="img-product" style="position: relative">
-                                <a href="" class="d-none">
+                                <div class="heart d-none">
                                     <i class="fa-regular fa-heart"></i>
-                                </a>
+                                </div>
                                 <img src="{{ asset('files/produtos')}}/{{$produto->imagem_01}}">
                             </div>
 
