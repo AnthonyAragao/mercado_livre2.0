@@ -1,17 +1,11 @@
+@extends('templates.template_view')
 
-<!DOCTYPE html>
-<html lang="pt-br">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+@section('insert_head')
     <link rel="stylesheet" href="{{ asset('css/login.css') }}">
-    <link rel="icon" href="{{asset('images/icon-mercado-libre.png')}}">
     <title>Digite seu e-mail, telefone ou usuário do Mercado Libre</title>
-</head>
+@endsection
 
-<body>
+@section('insert_body')
     <header>
         <div class="logo">
             <img src="{{ asset('images/mercado-libre.png') }}" alt="">
@@ -48,7 +42,7 @@
                     <div class="btns">
                         <button type="submit" class="btn btn-primary mt-2">Entrar</button>
 
-                        <button type="button" class="btn btn-primary mt-2" id="create">
+                        <button type="button" class="mt-2" id="create">
                             <a href="{{route('registration')}}">Criar conta</a>
                         </button>
                     </div>
@@ -56,5 +50,4 @@
             </div>
         </div>
     </main>
-</body>
-</html>
+@endsection

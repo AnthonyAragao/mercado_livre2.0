@@ -1,17 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('templates.template_view')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+@section('insert_head')
     <link rel="stylesheet" href="{{ asset('css/form.css') }}">
-    <link rel="icon" href="{{asset('images/icon-mercado-libre.png')}}">
     <title>Cadastrar produto</title>
-</head>
+@endsection
 
-<body>
+@section('insert_body')
     <header>
         <div class="logo">
             <img src="{{ asset('images/mercado-libre.png') }}" alt="">
@@ -69,5 +63,4 @@
         </div>
 
     </main>
-</body>
-</html>
+@endsection

@@ -1,16 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('templates.template_view')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+@section('insert_head')
     <link rel="stylesheet" href="{{ asset('css/form.css') }}">
-    <link rel="icon" href="{{asset('images/icon-mercado-libre.png')}}">
     <title>Mercado Libre</title>
-</head>
+@endsection
 
-<body>
+@section('insert_body')
     <header>
         <div class="logo">
             <img src="{{ asset('images/mercado-libre.png') }}" alt="">
@@ -19,10 +14,10 @@
 
     <main>
         <div class="container-card">
-        <form method="POST" enctype="multipart/form-data"
-        action="{{ route('usuarios.update', $usuario->id) }}">
-        @method('PUT')
-            @csrf
+            <form method="POST" enctype="multipart/form-data"
+                action="{{ route('usuarios.update', $usuario->id) }}">
+                @method('PUT')
+                @csrf
                 <label for="nome">Nome:</label>
                 <input type="text" id="nome" name="nome" value="{{$usuario->dadoAcesso->nome ?? old('nome')}}"
                 {{ isset($form) ? $form : null }}>
@@ -120,7 +115,4 @@
                 @endif
         </form>
     </div>
-</main>
-
-</body>
-</html>
+@endsection

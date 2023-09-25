@@ -1,17 +1,11 @@
+@extends('templates.template_view')
 
-<!DOCTYPE html>
-<html lang="pt-br">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+@section('insert_head')
     <link rel="stylesheet" href="{{ asset('css/registration.css') }}">
-    <link rel="icon" href="{{asset('images/icon-mercado-libre.png')}}">
     <title>Vamos te pedir alguns dados para criar sua conta</title>
-</head>
+@endsection
 
-<body>
+@section('insert_body')
     <header>
         <div class="logo">
             <img src="{{ asset('images/mercado-libre.png') }}" alt="">
@@ -40,8 +34,9 @@
             </div>
         </div>
     </main>
+@endsection
 
-
+@section('insert_script')
     <script>
         function checkboxMarcado(e){
             const containerCheckbox = document.querySelector('.checkbox-label');
@@ -53,5 +48,4 @@
             }
         }
     </script>
-</body>
-</html>
+@endsection
