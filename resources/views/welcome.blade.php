@@ -16,6 +16,8 @@
                     <nav style="">
                         @auth
                             <a href="{{ url('/dashboard') }}">Dashboard</a>
+                            
+                            <a href="{{route('produto.indexAuth')}}">Meus produtos</a>
                         @else
                             <a href="{{ route('registration') }}">Crie a sua conta</a>
                             <a href="{{ route('login') }}">Entre</a>

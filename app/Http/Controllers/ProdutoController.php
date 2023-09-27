@@ -27,6 +27,17 @@ class ProdutoController extends Controller{
         return view('welcome', compact('produtos'));
     }
 
+
+    public function indexAuth(){
+        $produtor = Auth::user()->produtor[0];
+        $produtos = $produtor->produtor_has_produto;
+
+
+        return view('produtor.meus_produtos', compact('produtor', 'produtos'));
+    }
+
+
+
     /**
      * Show the form for creating a new resource.
      */

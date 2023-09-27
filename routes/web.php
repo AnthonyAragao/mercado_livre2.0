@@ -30,6 +30,8 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::resource('usuarios', UsuarioController::class);
+    Route::get('/produto/meus-produtos', [ProdutoController::class, 'indexAuth'])->name('produto.indexAuth');
+
     Route::resource('produtor', ProdutorController::class);
     Route::resource('produto', ProdutoController::class);
 });
