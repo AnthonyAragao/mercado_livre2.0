@@ -15,7 +15,7 @@
     <main>
         <div class="container-card">
         <form method="POST" enctype="multipart/form-data"
-        action="{{ route('produtor.update', $produtor->id) }}">
+        action="{{ route('produtor.update', [Crypt::encrypt($produtor->id)]) }}">
         @method('PUT')
             @csrf
                 <h2>Dados do Produtor</h2>
@@ -144,7 +144,7 @@
 
 
                 @if (Route::currentRouteName() == 'produtor.show')
-                    <a href="{{route('produtor.edit', $produtor->id)}}">
+                    <a href="{{route('produtor.edit', [Crypt::encrypt($produtor->id)] )}}">
                         <button type="button">Modificar</button>
                     </a>
                 @else

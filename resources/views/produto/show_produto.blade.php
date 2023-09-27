@@ -23,25 +23,35 @@
 
             <div style="width: 35%; margin-top:40px; display: flex;"> {{-- <img src="{{ asset('files/produtos')}}/{{$produto->imagem_01}}"> --}}
                 <div style="padding-left: 12px; display:flex; flex-direction:column; gap:15px;">
-                    <div style="border: 1px solid rgba(0,0,0,.4); border-radius: 4px;width: 44px; cursor:pointer;">
-                        <img src="{{ asset('files/produtos')}}/{{$produto->imagem_01}}" style="width: 100%">
-                    </div>
+                    @if (isset($produto->imagem_01))
+                        <div style="border: 1px solid rgba(0,0,0,.4); border-radius: 3px;width: 54px; cursor:pointer;">
+                            <img src="{{ asset('files/produtos')}}/{{$produto->imagem_01}}" style="width: 100%">
+                        </div>
+                    @endif
 
-                    <div style="border: 1px solid rgba(0,0,0,.4); border-radius: 4px;width: 44px; cursor:pointer;">
-                        <img src="{{ asset('files/produtos')}}/{{$produto->imagem_01}}" style="width: 100%">
-                    </div>
+                    @if (isset($produto->imagem_02))
+                        <div style="border: 1px solid rgba(0,0,0,.4); border-radius: 3px;width: 54px; cursor:pointer;">
+                            <img src="{{ asset('files/produtos')}}/{{$produto->imagem_02}}" style="width: 100%">
+                        </div>
+                    @endif
 
-                    <div style="border: 1px solid rgba(0,0,0,.4); border-radius: 4px;width: 44px; cursor:pointer;">
-                        <img src="{{ asset('files/produtos')}}/{{$produto->imagem_01}}" style="width: 100%">
-                    </div>
+                    @if (isset($produto->imagem_03))
+                        <div style="border: 1px solid rgba(0,0,0,.4); border-radius: 3px;width: 54px; cursor:pointer;">
+                            <img src="{{ asset('files/produtos')}}/{{$produto->imagem_03}}" style="width: 100%">
+                        </div>
+                    @endif
 
-                    <div style="border: 1px solid rgba(0,0,0,.4); border-radius: 4px;width: 44px; cursor:pointer;">
-                        <img src="{{ asset('files/produtos')}}/{{$produto->imagem_01}}" style="width: 100%">
-                    </div>
+                    @if (isset($produto->imagem_04))
+                        <div style="border: 1px solid rgba(0,0,0,.4); border-radius: 3px;width: 54px; cursor:pointer;">
+                            <img src="{{ asset('files/produtos')}}/{{$produto->imagem_04}}" style="width: 100%">
+                        </div>
+                    @endif
 
-                    <div style="border: 1px solid rgba(0,0,0,.4); border-radius: 4px;width: 44px; cursor:pointer;">
-                        <img src="{{ asset('files/produtos')}}/{{$produto->imagem_01}}" style="width: 100%">
-                    </div>
+                    @if (isset($produto->imagem_05))
+                        <div style="border: 1px solid rgba(0,0,0,.4); border-radius: 3px;width: 54px; cursor:pointer;">
+                            <img src="{{ asset('files/produtos')}}/{{$produto->imagem_05}}" style="width: 100%">
+                        </div>
+                    @endif
                 </div>
 
 
@@ -49,7 +59,6 @@
                     <img src="{{ asset('files/produtos')}}/{{$produto->imagem_01}}" style="width: 100%">
                 </div>
             </div>
-
 
 
 

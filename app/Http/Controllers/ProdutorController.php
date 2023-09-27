@@ -10,6 +10,7 @@ use App\Models\Mora;
 use App\Models\Municipio;
 use App\Models\Produtor;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
 
 class ProdutorController extends Controller{
     /**
@@ -92,7 +93,7 @@ class ProdutorController extends Controller{
      * Display the specified resource.
      */
     public function show(string $id){
-        $produtor = $this->produtores->find($id);
+        $produtor = $this->produtores->find(Crypt::decrypt($id));
         $municipios = $this->municipios;
         $cidades = $this->cidades;
         $enderecos = $this->enderecos;
@@ -110,7 +111,7 @@ class ProdutorController extends Controller{
      * Show the form for editing the specified resource.
      */
     public function edit(string $id){
-        $produtor = $this->produtores->find($id);
+        $produtor = $this->produtores->find(Crypt::decrypt($id));
         $municipios = $this->municipios;
         $cidades = $this->cidades;
         $enderecos = $this->enderecos;
@@ -126,7 +127,7 @@ class ProdutorController extends Controller{
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id){
-        $produtor = $this->produtores->find($id);
+        $produtor = $this->produtores->find(Crypt::decrypt($id));
         tap($this->produtores->find($produtor->id))->update([
             'dados_acesso_id' => tap($this->dados_acesso->find($produtor->dados_acesso_id))->update([
                 'nome' => $request->nome,
@@ -156,7 +157,7 @@ class ProdutorController extends Controller{
             ])->id,
         ]);
 
-        return redirect()->route('produtor.show', $produtor->id);
+        return redirect()->route('produtor.show', [Crypt::encrypt($produtor->id)]);
     }
 
     /**
