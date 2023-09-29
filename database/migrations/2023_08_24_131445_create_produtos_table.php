@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('imagem_04')->nullable();
             $table->string('imagem_05')->nullable();
             $table->float('preco');
-            $table->string('descricao');
+            $table->longText('descricao');
             $table->integer('estoque');
             $table->integer('desconto')->nullable();
             $table->float('preco_desconto')->nullable();
