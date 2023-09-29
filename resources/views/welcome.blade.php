@@ -16,7 +16,7 @@
                     <nav style="">
                         @auth
                             <a href="{{ url('/dashboard') }}">Dashboard</a>
-                            
+
                             <a href="{{route('produto.indexAuth')}}">Meus produtos</a>
                         @else
                             <a href="{{ route('registration') }}">Crie a sua conta</a>
@@ -36,7 +36,7 @@
         <div class="container-card">
             @foreach ( $produtos as $produto )
                 <div class="card-product">
-                    <a href="{{route('produto.show', [Crypt::encrypt($produto->id)] )}}">
+                    <a href="{{route('exibir_produto.show', [Crypt::encrypt($produto->id)] )}}">
 
                         <div class="img-product" style="position: relative">
                             <div class="heart d-none">

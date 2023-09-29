@@ -6,9 +6,9 @@
 
 @section('insert_body')
     <header>
-        <div class="logo">
+        <a href="{{route('listagem_produtos')}}" class="logo">
             <img src="{{ asset('images/mercado-libre.png') }}" alt="">
-        </div>
+        </a>
     </header>
 
     <main>
@@ -76,7 +76,7 @@
                     {{-- <p style="font-size: 16px; color: #00a650; font-weight: 600;">Frete grátis</p> --}}
                     <p class="stock">Estoque disponível</p>
                     <p class="description-stored">
-                        Armazenado e enviado pelo<span><i class="fa-solid fa-bolt-lightning"></i> FULL</span>
+                        Armazenado e enviado pelo <span><i class="fa-solid fa-bolt-lightning"></i> FULL</span>
                     </p>
 
                     <div class="available-stock">Quantidade: 1 unidade
