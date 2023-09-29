@@ -55,10 +55,14 @@ main{
 }
 
 .img-small{
-    border: 1px solid rgba(0,0,0,.4);
+    border: 2px solid rgba(0,0,0,.2);
     border-radius: 3px;
     width: 54px;
     cursor:pointer;
+}
+
+.border-blue {
+    border-color: #3483fa;
 }
 
 .img-small img{
@@ -67,6 +71,7 @@ main{
 
 .img-product{
     margin-top: 16px;
+    padding: 5px;
 }
 
 

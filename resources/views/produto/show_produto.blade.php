@@ -16,7 +16,7 @@
             <div class="card-img-product">
                 <div class="container-imgs-small">
                     @if (isset($produto->imagem_01))
-                        <div class="img-small">
+                        <div class="img-small border-blue">
                             <img src="{{ asset('files/produtos')}}/{{$produto->imagem_01}}">
                         </div>
                     @endif
@@ -51,7 +51,6 @@
                 </div>
             </div>
 
-
             <div class="container-description-product">
                 <h1>{{$produto->nome}}</h1>
 
@@ -71,7 +70,6 @@
                     OFERTA DO DIA
                 </div>
             </div>
-
 
             <div class="container-details">
                 <div class="card-details">
@@ -121,4 +119,27 @@
 
         </div>
     </main>
+@endsection
+
+
+@section('insert_script')
+    <script>
+        const imgContainers = document.querySelectorAll('.img-small');
+        const imgProduct = document.querySelector('.img-product');
+
+        imgContainers.forEach((container) => {
+            container.addEventListener("mouseover", () => {
+                // Remove a classe "border-blue" de todos os elementos
+                imgContainers.forEach((otherContainer) => {
+                    otherContainer.classList.remove('border-blue');
+                });
+
+                // Adiciona a classe "border-blue" ao elemento pai do evento de mouseover
+                container.classList.add('border-blue');
+
+                const imgSrc = container.querySelector('img').src;
+                imgProduct.querySelector('img').src = imgSrc; // Atualiza a imagem na .img-product
+            });
+        });
+    </script>
 @endsection
