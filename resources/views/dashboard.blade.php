@@ -1,8 +1,20 @@
 <x-app-layout>
+    {{-- {{dd(Auth::user()->produtor[0]->produtor_has_produto[0])}} --}}
     <x-slot name="header">
+        @if (Auth::user()->usuario->first() !== null)
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Dashboard') }}
+            <a href="{{route('usuarios.show', Auth::user()->usuario->first()->id)}}">usuario</a>
         </h2>
+        @else
+        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+            <a href="{{route('produtor.show', [Crypt::encrypt(Auth::user()->produtor->first()->id)]) }}  ">produtor</a>
+        </h2>
+
+        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+            <a href="{{route('produto.create')}}">criar produto</a>
+        </h2>
+        @endif
+
     </x-slot>
 
     <div class="py-12">

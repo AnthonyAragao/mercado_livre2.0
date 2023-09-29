@@ -37,16 +37,20 @@ class Endereco extends Model{
     ];
 
     // Getters e Setters
-    public function getCidadeAttribute(){
-        return $this->cidadeRelationShip();
+    public function getMunicipioAttribute(){
+        return $this->municipioRelationShip;
     }
 
-    public function setCidadeAttribute($value){
-        $this->attributes['cidade_id'] = Cidade::where('id', $value)->first()->id;
+    public function setMunicipioAttribute($value){
+        $this->attributes['municipio_id'] = Municipio::where('id', $value)->first()->id;
     }
 
     // relacionamentos
-    public function cidadeRelationShip(){
-        return $this->belongsTo(Cidade::class, 'cidade_id');
+    public function municipioRelationShip(){
+        return $this->belongsTo(Municipio::class, 'municipio_id');
+    }
+
+    public function moraRelationship(){
+        return $this->hasMany(Mora::class, 'endereco_id');
     }
 }

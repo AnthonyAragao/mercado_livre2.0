@@ -3,8 +3,9 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class DadoAcesso extends Model{
+class DadoAcesso extends Authenticatable{
     /**
      * The table associated with the model
      * @var string
@@ -17,7 +18,7 @@ class DadoAcesso extends Model{
      * @var array
      */
     protected $fillable = [
-        'nome', 'email', 'cpf', 'password',
+        'nome', 'email', 'cpf', 'password', 'telefone', 'nascimento', 'mora_id'
     ];
 
     /**
@@ -40,16 +41,57 @@ class DadoAcesso extends Model{
     ];
 
     // Getters e Setters
-    public function getEnderecoAttribute(){
-        return $this->enderecoRelationship();
+    // public function getEnderecoAttribute(){
+    //     return $this->enderecoRelationship;
+    // }
+
+    public function getProdutorAttribute(){
+        return $this->produtorRelationship;
+    }
+
+    public function getUsuarioAttribute(){
+        return $this->UsuarioRelationship;
+    }
+
+    public function getMoraAttribute(){
+        return $this->MoraRelationship;
+    }
+
+
+    public function setUsuarioAttribute($value)
+    {
+        if (isset($value)) {
+            $this->attributes['dados_acesso_id'] = Usuario::where(
+                'id',
+                $value
+            )->first()->id;
+        }
+    }
+
+    public function setProdutorAttribute($value)
+    {
+        if (isset($value)) {
+            $this->attributes['dados_acesso_id'] = Produtor::where(
+                'id',
+                $value
+            )->first()->id;
+        }
     }
 
     public function setEnderecoAttribute($value){
-        $this->attributes['endereco_id'] = Endereco::where('id', $value)->first()->id;
+        $this->attributes['mora_id'] = Mora::where('id', $value)->first()->id;
     }
 
     // Relacionamentos
-    public function enderecoRelationship(){
-        return $this->belongsTo(Endereco::class, 'endereco_id');
+    public function moraRelationship(){
+        return $this->belongsTo(Mora::class, 'mora_id');
+    }
+
+    public function produtorRelationship(){
+        return $this->hasMany(Produtor::class, 'dados_acesso_id');
+    }
+
+    public function usuarioRelationship(){
+        return $this->hasMany(Usuario::class, 'dados_acesso_id');
     }
 }

@@ -1,0 +1,225 @@
+@import url('https://fonts.googleapis.com/css2?family=Courgette&family=Indie+Flower&family=Inter&family=Patrick+Hand&family=Poppins&family=Ubuntu&display=swap');
+/* configuracoes gerais */
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+
+/* header */
+.logo{
+    width: 100%;
+    height: 56px;
+    background-color: #fcd709;
+    display: flex;
+    align-items: center;
+}
+
+.logo img{
+    height: 100%;
+    padding: 10px;
+}
+
+/* Configuracoes container */
+body{
+    background-color: #ededed;
+}
+
+main{
+    display: flex;
+    justify-content: center;
+}
+
+/* Card imagem do produto */
+.container-product{
+    display: flex;
+    margin: 20px;
+    width: 1180px;
+    background-color: white;
+    border-radius: 4px;
+}
+
+.card-img-product{
+    display: flex;
+    width: 35%;
+    margin-top:40px;
+}
+
+.container-imgs-small{
+    display:flex;
+    flex-direction:column;
+    padding-left: 12px;
+    gap:15px;
+}
+
+.img-small{
+    border: 2px solid rgba(0,0,0,.2);
+    border-radius: 3px;
+    width: 54px;
+    cursor:pointer;
+}
+
+.border-blue {
+    border-color: #3483fa;
+}
+
+.img-small img{
+    width: 100%
+}
+
+.img-product{
+    margin-top: 16px;
+    padding: 5px;
+}
+
+
+.img-product img{
+    width: 100%
+}
+
+
+/* Container descrição do produto */
+.container-description-product{
+    width: 33%;
+    padding-left: 30px;
+    margin-top: 84px
+}
+
+.container-description-product h1{
+    color: rgba(0,0,0,.9);
+    font-size:22px;
+}
+
+
+.card-information-product{
+    margin: 36px 0 6px 0;
+}
+
+.price-product{
+    color: rgba(0,0,0,.55);
+    text-decoration-line: line-through;
+}
+
+.discount-price{
+    font-size: 32px
+}
+
+.discount{
+    font-size:18px;
+    font-weight: 500;
+    color: #00a650;
+}
+
+.installment{
+    font-size:18px;
+    font-weight: 500;
+    color: #00a650;
+}
+
+.container-description-product a{
+    text-decoration: none;
+    color: #2968c8;
+    font-size: 14px;
+}
+
+.offer-day{
+    font-size: 12px;
+    background-color: #3483fa;
+    margin-top: 8px;
+    width: 100px;
+    text-align: center;
+    border-radius: 3px;
+    color: #FFF;
+    padding: 2px;
+}
+
+
+
+/* Container detelhes sobre a compra */
+.container-details{
+    width: 32%;
+    padding: 16px;
+}
+
+
+.card-details{
+    border: 1px solid rgba(0,0,0,.1);
+    border-radius: 10px;
+    width: 100%;
+    padding: 44px 14px;
+}
+
+.stock{
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.description-stored{
+    color: rgba(0,0,0,.55);
+    font-size: 14px;
+}
+
+.description-stored span{
+    font-size:12px;
+    color: #00a650;
+    font-weight: 900;
+    font-style:italic
+}
+
+.available-stock{
+    margin: 14px 0;
+    font-size: 16px;
+}
+
+.available-stock span{
+    font-size: 12px;
+    color: rgba(0,0,0,.55);
+}
+
+.card-information-buy{
+    display:flex;
+    gap:7px;
+    margin-top: 10px
+}
+
+.information-about{
+    display: flex;
+    flex-direction:column
+}
+
+.information-about a{
+    font-size: 14px;
+    color: #3483fa;
+    text-decoration: none
+}
+
+.information-about span{
+    color: rgba(0,0,0,.55);
+    font-size: 14px;
+}
+/* Estilização botões */
+button{
+    width: 100%;
+    height: 48px;
+    cursor: pointer;
+    border: none;
+    background-color: #3783f7;
+    transition: .5s;
+    color: white;
+    font-size: 1rem;
+    margin-top: 10px;
+    border-radius: 8px;
+    font-weight: 600;
+}
+
+.call-action:hover{
+    background-color: #2968c8;
+}
+
+.add-cart{
+    background-color:rgba(65,137,230,.15);
+    color: #3483fa;
+}
+

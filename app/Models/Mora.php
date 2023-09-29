@@ -1,14 +1,17 @@
 <?php
 
 namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Usuario extends Model {
-    /**
+class Mora extends Model
+{
+     /**
      * The table associated with the model
      * @var string
      */
-    protected $table = 'usuarios';
+    protected $table = 'mora';
 
     /**
      * The attributes that aren't mass assignable.
@@ -22,9 +25,7 @@ class Usuario extends Model {
     * @var array
     */
     protected $hidden = [
-        'created_at',
-        'updated_at',
-        'dadoAcessoRelationship',
+        'enderecoRelationship'
     ];
 
 
@@ -33,10 +34,14 @@ class Usuario extends Model {
     * @var array
     */
     protected $appends = [
-        'dado_acesso',
+        'endereco'
     ];
 
     // Getters e Setters
+    public function getEnderecoAttribute(){
+        return $this->enderecoRelationship;
+    }
+
     public function getDadoAcessoAttribute(){
         return $this->dadoAcessoRelationship;
     }
@@ -45,8 +50,17 @@ class Usuario extends Model {
         $this->attributes['dados_acesso_id'] = DadoAcesso::where('id', $value)->first()->id;
     }
 
+    public function setEnderecoAttribute($value){
+        $this->attributes['endereco_id'] = Endereco::where('id', $value)->first()->id;
+    }
+
+
     // Relacionamentos
+    public function enderecoRelationship(){
+        return $this->belongsTo(Endereco::class, 'endereco_id');
+    }
+
     public function dadoAcessoRelationship(){
-        return $this->belongsTo(DadoAcesso::class, 'dados_acesso_id');
+        return $this->belongsTo(DadoAcesso::class, 'mora_id');
     }
 }

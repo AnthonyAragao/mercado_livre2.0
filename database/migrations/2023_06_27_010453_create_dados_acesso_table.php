@@ -17,7 +17,9 @@ return new class extends Migration
             $table->string('email');
             $table->string('cpf')->unique();
             $table->string('password');
-            $table->foreignId('endereco_id')->constrained('enderecos');
+            $table->date('nascimento');
+            $table->string('telefone');
+            $table->foreignId('mora_id')->constrained('mora');
             $table->timestamps();
         });
     }

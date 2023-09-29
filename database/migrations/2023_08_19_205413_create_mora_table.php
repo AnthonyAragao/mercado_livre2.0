@@ -11,10 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('produtores', function (Blueprint $table) {
+        Schema::create('mora', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('dados_acesso_id')->constrained('dados_acesso');
-            $table->foreignId('dados_empresa_id')->constrained('dados_empresa');
+            $table->string('numero');
+            $table->text('complemento');
+            $table->foreignId('endereco_id')->constrained('enderecos');
             $table->timestamps();
         });
     }
@@ -24,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('produtores');
+        Schema::dropIfExists('mora');
     }
 };

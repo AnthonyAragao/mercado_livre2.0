@@ -11,10 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('produtores', function (Blueprint $table) {
+        Schema::create('categorias', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('dados_acesso_id')->constrained('dados_acesso');
-            $table->foreignId('dados_empresa_id')->constrained('dados_empresa');
+            $table->string('nome');
             $table->timestamps();
         });
     }
@@ -24,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('produtores');
+        Schema::dropIfExists('categorias');
     }
 };
