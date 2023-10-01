@@ -16,6 +16,7 @@
                     <nav style="">
                         @auth
                             <a href="{{ url('/dashboard') }}">Dashboard</a>
+
                             <a href="{{route('produto.indexAuth')}}">Meus produtos</a>
                         @else
                             <a href="{{ route('registration') }}">Crie a sua conta</a>
@@ -29,7 +30,59 @@
         </div>
     </header>
 
+    <a href="{{route('produto.create')}}"> 
+        <button class="btn btn-success" style="margin: 30px 0 0 92px">Cadastrar Produto</button>
+    </a>
+
     <main>
-        {{-- {{dd($produtos[1]->produto->nome)}} --}}
+        {{-- {{dd($produtos[3]-)}} --}}
+        <div style="width: 1180px; background-color:#fff; margin:30px; border-radius:8px; display:flex; flex-direction:column">
+            <div style="display: flex; background-color: rgb(77, 77, 77); color: #fff; border-radius: 4px 4px 0 0" >
+                <div style="width: 420px; display:flex; justify-content: center; align-items: center;">
+                    <p style=" margin-top: 11px;">Nome</p>
+                </div>
+
+                <div style="width: 253px; display:flex; justify-content: center; align-items: center;">
+                    <p style=" margin-top: 11px;">Preço</p>
+                </div>
+
+                <div style="width: 253px; display:flex; justify-content: center; align-items: center;">
+                    <p style=" margin-top: 11px;">Unidades</p>
+                </div>
+
+                <div style="width: 253px; display:flex; justify-content: center; align-items: center;">
+                    <p style=" margin-top: 11px;">Ações</p>
+                </div>
+            </div>
+
+            @foreach ($produtos as $produtoDaLista)
+                <div style="display:flex; border-bottom: 1px solid #ededed;">
+                    <div style="width: 420px; height:100%; display:flex; border-right: 1px solid #ededed">
+                        <div style="padding:10px">
+                            <img src="{{ asset('files/produtos')}}/{{$produtoDaLista->produto->imagem_01}}" style="width: 80px">
+                        </div>
+
+                        <div style="display:flex; justify-content: center; align-items: center;">
+                            <p>{{$produtoDaLista->produto->nome}}</p>
+                        </div>
+                    </div>
+
+                    <div style="width: 253px; display:flex; justify-content: center; align-items: center; border-right: 1px solid #ededed">
+                        <span class="discount-price">R$ {{ number_format(($produtoDaLista->produto->preco_desconto),2,',','.')}}</span>
+                    </div>
+
+                    <div style="width: 253px; height:100%; display:flex; justify-content: center; align-items: center; border-right: 1px solid #ededed">
+                        <span>{{$produtoDaLista->produto->estoque}} unidades</span>
+                    </div>
+
+
+                    <div style="width: 253px; height:100%; display:flex; justify-content: center; align-items: center; flex-direction: column;">
+                        <a href="" style="text-decoration: none">Editar</a>
+                        <a href="" style="text-decoration: none">Excluir</a>
+                    </div>
+
+                </div>
+            @endforeach
+        </div>
     </main>
 @endsection
