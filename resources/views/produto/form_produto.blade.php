@@ -91,11 +91,14 @@
     <script>
         const inputImgs = document.getElementById('imagens');
         const labelInput = document.getElementById('labelInput');
-        const selectedFilesDisplay = document.getElementById('selected-files');
 
         inputImgs.addEventListener('change', function() {
             const selectedFiles = inputImgs.files;
             let selectedFilesText = '';
+
+            if(selectedFiles.length == 0){
+                selectedFilesText = 'Nenhum arquivo selecionado'
+            }
 
             for (let i = 0; i < selectedFiles.length; i++) {
                 selectedFilesText += selectedFiles[i].name;
