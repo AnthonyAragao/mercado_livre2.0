@@ -30,13 +30,16 @@
         </div>
     </header>
 
-    <a href="{{route('produto.create')}}"> 
-        <button class="btn btn-success" style="margin: 30px 0 0 92px">Cadastrar Produto</button>
-    </a>
 
     <main>
         {{-- {{dd($produtos[3]-)}} --}}
-        <div style="width: 1180px; background-color:#fff; margin:30px; border-radius:8px; display:flex; flex-direction:column">
+        <div style="width: 1180px; background-color:#fff; margin:60px; border-radius:8px; display:flex; flex-direction:column; position: relative;">
+
+            <a href="{{route('produto.create')}}" style="position: absolute; top:-50px">
+                <button class="btn btn-success" style="">Cadastrar Produto</button>
+            </a>
+
+
             <div style="display: flex; background-color: rgb(77, 77, 77); color: #fff; border-radius: 4px 4px 0 0" >
                 <div style="width: 420px; display:flex; justify-content: center; align-items: center;">
                     <p style=" margin-top: 11px;">Nome</p>

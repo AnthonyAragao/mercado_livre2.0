@@ -67,6 +67,10 @@ form{
 
 }
 
+label{
+    margin-bottom: 3px;
+}
+
 input[type="text"],
 input[type="email"],
 input[type="password"],
