@@ -55,7 +55,7 @@
                 <h1>{{$produto->nome}}</h1>
 
                 <div class="card-information-product">
-                    <span class="price-product">R$ {{$produto->preco}}</span>
+                    <span class="price-product">R$ {{ number_format(($produto->preco),2,',','.')}} </span>
                     <div>
                         <span class="discount-price">R$ {{ number_format(($produto->preco_desconto),0,',','.')}}</span>
                         <span  class="discount">{{$produto->desconto}}% OFF</span>
