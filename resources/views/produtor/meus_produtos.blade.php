@@ -78,14 +78,53 @@
                         <span>{{$produtoDaLista->produto->estoque}} unidades</span>
                     </div>
 
-
                     <div style="width: 253px; height:100%; display:flex; justify-content: center; align-items: center; flex-direction: column;">
                         <a href="" style="text-decoration: none">Editar</a>
-                        <a href="" style="text-decoration: none">Excluir</a>
+                        <a href="{{route('produto.destroy',[Crypt::encrypt($produtoDaLista->produto->id)] )}}"
+                            onclick="excluirProduto()" id="deleteLink"  style="text-decoration: none">Excluir</a>
                     </div>
 
                 </div>
             @endforeach
         </div>
     </main>
+@endsection
+
+
+@section('insert_script')
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.5/dist/sweetalert2.all.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.5/dist/sweetalert2.min.css" rel="stylesheet">
+
+    <script>
+        function excluirProduto(){
+            event.preventDefault();
+
+            Swal.fire({
+                title: 'Tem certeza?',
+                text: "Você não poderá reverter isso!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Sim, desejo excluir',
+                cancelButtonText: 'Não desejo excluir',
+
+                }).then((result) => {
+                if (result.isConfirmed) {
+                    const deleteLink = document.getElementById('deleteLink');
+                    const link = deleteLink.getAttribute('href');
+
+                    window.location.href = link;
+
+                    // Swal.fire(
+                    //     'Deletado',
+                    //     'Produto excluído',
+                    //     'success'
+                    // )
+                }
+            })
+        }
+
+
+    </script>
 @endsection

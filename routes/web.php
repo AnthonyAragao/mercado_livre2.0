@@ -32,10 +32,17 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::resource('usuarios', UsuarioController::class);
-    Route::get('/produto/meus-produtos', [ProdutoController::class, 'indexAuth'])->name('produto.indexAuth');
 
     Route::resource('produtor', ProdutorController::class);
-    Route::resource('produto', ProdutoController::class);
+
+    Route::get('/produto/meus-produtos', [ProdutoController::class, 'indexAuth'])->name('produto.indexAuth');
+    // Route::resource('produto', ProdutoController::class);
+    Route::get('/produto/create', [ProdutorController::class, 'create'])->name('produto.create');
+    Route::post('/produto/store', [ProdutorController::class, 'store'])->name('produto.store');
+    Route::get('/produto/edit/{id}', [ProdutorController::class, 'edit'])->name('produto.edit');
+    Route::put('/produto/update/{id}', [ProdutorController::class, 'update'])->name('produto.update');
+
+    Route::delete('/produto/destroy/{id}', [ProdutorController::class, 'destroy'])->name('produto.destroy');
 });
 
 

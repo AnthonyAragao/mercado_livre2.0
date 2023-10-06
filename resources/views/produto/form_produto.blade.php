@@ -87,7 +87,7 @@
     </main>
 @endsection
 
-@section('insert_script'),
+@section('insert_script')
     <script>
         const inputImgs = document.getElementById('imagens');
         const labelInput = document.getElementById('labelInput');
