@@ -107,10 +107,13 @@ class ProdutoController extends Controller{
      */
     public function destroy(string $id)
     {
-        
-        dd('entrou');
+        $produto = $this->produtos->find(Crypt::decrypt($id));
+        $pivo = $produto->produtor_has_produto[0];
 
+        $pivo->delete();
+        $produto->delete();
 
-
+        $check = 'Produto deletado com sucesso!';
+        return redirect()->route('produto.indexAuth')->with('check',$check);
     }
 }

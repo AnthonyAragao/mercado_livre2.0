@@ -80,8 +80,11 @@
 
                     <div style="width: 253px; height:100%; display:flex; justify-content: center; align-items: center; flex-direction: column;">
                         <a href="" style="text-decoration: none">Editar</a>
-                        <a href="{{route('produto.destroy',[Crypt::encrypt($produtoDaLista->produto->id)] )}}"
-                            onclick="excluirProduto()" id="deleteLink"  style="text-decoration: none">Excluir</a>
+                        <form action="{{ route('produto.destroy', [Crypt::encrypt($produtoDaLista->produto->id)]) }}" id="form" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <a href="" onclick="excluirProduto(event)" style="text-decoration: none">Excluir</a>
+                        </form>
                     </div>
 
                 </div>
@@ -96,7 +99,7 @@
     <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.5/dist/sweetalert2.min.css" rel="stylesheet">
 
     <script>
-        function excluirProduto(){
+        function excluirProduto(event){
             event.preventDefault();
 
             Swal.fire({
@@ -110,21 +113,24 @@
                 cancelButtonText: 'Não desejo excluir',
 
                 }).then((result) => {
-                if (result.isConfirmed) {
-                    const deleteLink = document.getElementById('deleteLink');
-                    const link = deleteLink.getAttribute('href');
-
-                    window.location.href = link;
-
-                    // Swal.fire(
-                    //     'Deletado',
-                    //     'Produto excluído',
-                    //     'success'
-                    // )
-                }
+                    if (result.isConfirmed) {
+                        const form = document.getElementById('form');
+                        form.submit();
+                    }
             })
         }
-
-
     </script>
+
+    @if (session('check'))
+        <script>
+            Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: 'Produto excluído.',
+                text: 'Produto deletado com sucesso.',
+                showConfirmButton: false,
+                timer: 2000
+            })
+        </script>
+    @endif
 @endsection
