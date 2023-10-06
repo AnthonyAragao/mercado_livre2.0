@@ -7,9 +7,9 @@
 
 @section('insert_body')
     <header>
-        <div class="logo">
+        <a href="{{route('listagem_produtos')}}" class="logo" style="top: 0px">
             <img src="{{ asset('images/mercado-libre.png') }}" alt="">
-        </div>
+        </a>
     </header>
 
     <main>
