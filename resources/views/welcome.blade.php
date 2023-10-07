@@ -10,11 +10,13 @@
 @section('insert_body')
     <header>
         <div class="logo">
-            <img src="{{ asset('images/mercado-libre.png') }}" alt="">
+            <a href="{{route("listagem_produtos")}}" style="height: 100%">
+                <img src="{{ asset('images/mercado-libre.png') }}" alt="">
+            </a>
 
-            <form action="" method="GET">
+            <form action="{{route('produto.search')}}" method="GET">
                 <div style="display: flex">
-                    <input type="text" name="query" placeholder="Buscar produtos, marcas e muito mais...">
+                    <input type="text" class="search" name="query" placeholder="Buscar produtos, marcas e muito mais...">
                     <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
                 </div>
             </form>

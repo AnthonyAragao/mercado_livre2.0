@@ -21,7 +21,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [ProdutoController::class, 'index'])->name('listagem_produtos');
 
+
 Route::get('/produto/show/{id}', [ProdutoController::class, 'show'])->name('exibir_produto.show');
+Route::get('/search', [ProdutoController::class, 'search'])->name('produto.search');
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -35,7 +38,7 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('produtor', ProdutorController::class);
 
-    Route::get('/produto/meus-produtos', [ProdutoController::class, 'indexAuth'])->name('produto.indexAuth');
+    Route::get('/meus-produtos', [ProdutoController::class, 'indexAuth'])->name('produto.indexAuth');
     // Route::resource('produto', ProdutoController::class);
     Route::get('/produto/create', [ProdutoController::class, 'create'])->name('produto.create');
     Route::post('/produto/store', [ProdutoController::class, 'store'])->name('produto.store');

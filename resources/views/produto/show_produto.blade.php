@@ -6,9 +6,35 @@
 
 @section('insert_body')
     <header>
-        <a href="{{route('listagem_produtos')}}" class="logo">
-            <img src="{{ asset('images/mercado-libre.png') }}" alt="">
-        </a>
+        <div class="logo">
+            <a href="{{route('listagem_produtos')}}" style="height: 100%">
+                <img src="{{ asset('images/mercado-libre.png') }}" alt="">
+            </a>
+
+            <form action="{{route('produto.search')}}" method="GET">
+                <div style="display: flex">
+                    <input type="text" class="search" name="query" placeholder="Buscar produtos, marcas e muito mais...">
+                    <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+                </div>
+            </form>
+
+            @if (Route::has('login'))
+                <div>
+                    <nav style="">
+                        @auth
+                            <a href="{{ url('/dashboard') }}">Dashboard</a>
+
+                            <a href="{{route('produto.indexAuth')}}">Meus produtos</a>
+                        @else
+                            <a href="{{ route('registration') }}">Crie a sua conta</a>
+                            <a href="{{ route('login') }}">Entre</a>
+                        @endauth
+                        <a href="">Compras</a>
+                        <a href=""><i class="fa-solid fa-cart-shopping"></i></a>
+                    </nav>
+                </div>
+            @endif
+        </div>
     </header>
 
     <main>
@@ -85,10 +111,10 @@
 
                     <div>
                         <a href="">
-                            <button class="call-action">Comprar</button>
+                            <button class="btn call-action">Comprar</button>
                         </a>
 
-                        <button class="add-cart">
+                        <button class="btn add-cart">
                             Adicionar ao carrinho
                         </button>
                     </div>

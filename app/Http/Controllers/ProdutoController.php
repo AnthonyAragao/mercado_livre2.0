@@ -24,10 +24,22 @@ class ProdutoController extends Controller{
     public function index(){
         $produtos = $this->produtos->all();
 
+
         return view('welcome', compact('produtos'));
     }
 
+    public function search(Request $request){
+        $search = $request->input('query');
 
+        $produtos = $this->produtos
+                ->where('nome', 'like' ,'%'.$search.'%')
+                ->orWhere('descricao', 'like', '%'. $search . '%')
+                ->get();
+
+        return view('welcome', compact('produtos'));
+    }
+
+    
     public function indexAuth(){
         $produtor = Auth::user()->produtor[0];
         $produtos = $produtor->produtor_has_produto;
@@ -35,8 +47,6 @@ class ProdutoController extends Controller{
 
         return view('produtor.meus_produtos', compact('produtor', 'produtos'));
     }
-
-
 
     /**
      * Show the form for creating a new resource.

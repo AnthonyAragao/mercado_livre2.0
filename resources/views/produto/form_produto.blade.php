@@ -19,25 +19,25 @@
 
                 <div class="input-box">
                     <label for="nome">Nome:</label>
-                    <input type="text" id="nome" name="nome" required>
+                    <input type="text" id="nome" name="nome" required placeholder="Insira o nome do produto">
                 </div>
 
                 <div class="input-group">
                     <div class="input-box">
                         <label for="preco">Preço:</label>
-                        <input type="number" step="any" id="preco" name="preco" min="0" required>
+                        <input type="number" step="any" id="preco" name="preco" min="0" required placeholder="Insira o preço do produto">
                     </div>
 
                     <div class="input-box">
                         <label for="estoque">Estoque:</label>
-                        <input type="number" id="estoque" name="estoque" min="0" required>
+                        <input type="number" id="estoque" name="estoque" min="0" required placeholder="Insira o estoque disponível">
                     </div>
                 </div>
 
                 <div class="input-group">
                     <div class="input-box">
                         <label for="desconto">Desconto:</label>
-                        <input type="number" id="desconto" name="desconto" min="0">
+                        <input type="number" id="desconto" name="desconto" min="0" placeholder="Insira o desconto(em porcetagem)">
                     </div>
                 </div>
 
@@ -55,7 +55,7 @@
 
                 <div class="input-box">
                     <label for="descricao">Descrição do Produto:</label>
-                    <input type="text" id="descricao" name="descricao" required
+                    <input type="text" id="descricao" name="descricao" required placeholder="Insira a descrição do produto"
                     style="heigth:100px">
                 </div>
 
