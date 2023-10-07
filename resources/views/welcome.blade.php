@@ -11,6 +11,14 @@
     <header>
         <div class="logo">
             <img src="{{ asset('images/mercado-libre.png') }}" alt="">
+
+            <form action="" method="GET">
+                <div style="display: flex">
+                    <input type="text" name="query" placeholder="Buscar produtos, marcas e muito mais...">
+                    <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+                </div>
+            </form>
+
             @if (Route::has('login'))
                 <div>
                     <nav style="">
