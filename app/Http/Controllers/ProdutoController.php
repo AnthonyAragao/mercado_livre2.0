@@ -39,7 +39,7 @@ class ProdutoController extends Controller{
         return view('welcome', compact('produtos'));
     }
 
-    
+
     public function indexAuth(){
         $produtor = Auth::user()->produtor[0];
         $produtos = $produtor->produtor_has_produto;
@@ -101,7 +101,11 @@ class ProdutoController extends Controller{
      */
     public function edit(string $id)
     {
-        //
+        $produto = $this->produtos->find(Crypt::decrypt($id));
+        $categorias = $this->categorias;
+
+        return view('produto.form_produto', compact('categorias','produto'));
+
     }
 
     /**
@@ -109,7 +113,30 @@ class ProdutoController extends Controller{
      */
     public function update(Request $request, string $id)
     {
-        //
+        $produto = $this->produtos->find(Crypt::decrypt($id));
+
+        tap($this->produtos->find($produto->id))->update([
+            'nome' => $request->nome,
+            'preco' => $request->preco,
+            'desconto' => $request->desconto,
+            'preco_desconto' => $request->preco - (($request->preco * $request->desconto)/100),
+
+            'descricao' => $request->descricao,
+            'estoque' => $request->estoque,
+            'categoria_id' => $request->categoria,
+
+            // 'imagem_01' => isset($request->imagens[0]) ? Helper::armazenarArquivo($request->imagens[0], 'files/produtos') : null,
+            // 'imagem_02' => isset($request->imagens[1]) ? Helper::armazenarArquivo($request->imagens[1], 'files/produtos') : null,
+            // 'imagem_03' => isset($request->imagens[2]) ? Helper::armazenarArquivo($request->imagens[2], 'files/produtos') : null,
+            // 'imagem_04' => isset($request->imagens[3]) ? Helper::armazenarArquivo($request->imagens[3], 'files/produtos') : null,
+            // 'imagem_05' => isset($request->imagens[4]) ? Helper::armazenarArquivo($request->imagens[4], 'files/produtos') : null,
+
+        ]);
+
+
+        $check = 'Produto atualizado com sucesso!';
+        return redirect()->route('listagem_produtos')->with('check',$check);
+
     }
 
     /**

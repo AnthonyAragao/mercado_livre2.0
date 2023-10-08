@@ -89,7 +89,7 @@
                     </div>
 
                     <div style="width: 253px; height:100%; display:flex; justify-content: center; align-items: center; flex-direction: column;">
-                        <a href="" style="text-decoration: none">Editar</a>
+                        <a href="{{route('produto.edit', [Crypt::encrypt($produtoDaLista->produto->id)])}}" style="text-decoration: none">Editar</a>
                         <form action="{{ route('produto.destroy', [Crypt::encrypt($produtoDaLista->produto->id)]) }}" id="form" method="POST">
                             @csrf
                             @method('DELETE')
