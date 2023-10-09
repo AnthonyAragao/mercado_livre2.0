@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CompraController;
 use App\Http\Controllers\ProdutoController;
 use App\Http\Controllers\ProdutorController;
 use App\Http\Controllers\ProfileController;
@@ -46,6 +47,8 @@ Route::middleware('auth')->group(function () {
     Route::put('/produto/update/{id}', [ProdutoController::class, 'update'])->name('produto.update');
 
     Route::delete('/produto/destroy/{id}', [ProdutoController::class, 'destroy'])->name('produto.destroy');
+
+    Route::resource('pedido', CompraController::class);
 });
 
 

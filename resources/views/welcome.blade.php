@@ -8,7 +8,7 @@
 @endsection
 
 @section('insert_body')
-    {{dd(Auth::user()->usuario[0]->compra[1]->exemplar[0]->pivo->produto  )}}
+    {{-- {{dd(Auth::user()->usuario[0]->compra[1]->exemplar[0]->pivo->produto  )}} --}}
     <header>
         <div class="logo">
             <a href="{{route("listagem_produtos")}}" style="height: 100%">
@@ -33,7 +33,7 @@
                             <a href="{{ route('registration') }}">Crie a sua conta</a>
                             <a href="{{ route('login') }}">Entre</a>
                         @endauth
-                        <a href="">Compras</a>
+                        <a href="{{route('pedido.index')}}">Compras</a>
                         <a href=""><i class="fa-solid fa-cart-shopping"></i></a>
                     </nav>
                 </div>

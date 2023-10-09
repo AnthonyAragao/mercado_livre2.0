@@ -41,6 +41,10 @@ class Compra extends Model{
         return $this->exemplarRelationShip;
     }
 
+    public function getAvaliacaoAttribute(){
+        return $this->avaliacaoRelationShip;
+    }
+
 
     public function setUsuarioAttribute($value){
         $this->attributes['usuario_id'] = Usuario::where('id', $value)->first()->id;
@@ -56,6 +60,16 @@ class Compra extends Model{
         }
     }
 
+    public function setAvaliacaoAttribute($value)
+    {
+        if (isset($value)) {
+            $this->attributes['compra_id'] = Avaliacao::where(
+                'id',
+                $value
+            )->first()->id;
+        }
+    }
+
     // relacionamentos
     public function usuarioRelationShip(){
         return $this->belongsTo(Usuario::class, 'usuario_id');
@@ -63,5 +77,9 @@ class Compra extends Model{
 
     public function exemplarRelationShip(){
         return $this->hasMany(Exemplar::class, 'compra_id');
+    }
+
+    public function avaliacaoRelationShip(){
+        return $this->hasMany(Avaliacao::class, 'compra_id');
     }
 }

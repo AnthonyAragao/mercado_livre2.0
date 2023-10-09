@@ -20,7 +20,8 @@ class Produto extends Model
     */
     protected $hidden = [
         'categoriaRelationship',
-        'produtor_has_produtoRelationship'
+        'produtor_has_produtoRelationship',
+        'avaliacaoRelantionShip'
     ];
 
     /**
@@ -29,7 +30,8 @@ class Produto extends Model
     */
     protected $appends = [
         'categorias',
-        'produtor_has_produto'
+        'produtor_has_produto',
+        'avaliacao'
     ];
 
     // Getters e Setters
@@ -41,9 +43,23 @@ class Produto extends Model
         return $this->produtor_has_produtoRelationship;
     }
 
+    public function getAvaliacaoAttribute(){
+        return $this->avaliacaoRelantionShip;
+    }
+
+
     public function setCategoriaAttribute($value){
         if(isset($value)){
             $this->attributes['categoria_id'] = Categoria::where('id', $value)->first()->id;
+        }
+    }
+
+    public function setAvaliacaoAttribute($value){
+        if (isset($value)) {
+            $this->attributes['produto_id'] = Avaliacao::where(
+                'id',
+                $value
+            )->first()->id;
         }
     }
 
@@ -54,5 +70,9 @@ class Produto extends Model
 
     public function produtor_has_produtoRelationship(){
         return $this->hasMany(Produtor_has_produto::class, 'produto_id');
+    }
+
+    public function avaliacaoRelantionShip(){
+        return $this->hasMany(Avaliacao::class, 'produto_id');
     }
 }

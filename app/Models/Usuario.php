@@ -25,6 +25,8 @@ class Usuario extends Model {
         'created_at',
         'updated_at',
         'dadoAcessoRelationship',
+        'avaliacaoRelationShip',
+        'compraRelationShip'
     ];
 
 
@@ -34,6 +36,8 @@ class Usuario extends Model {
     */
     protected $appends = [
         'dado_acesso',
+        'compras',
+        'avaliacoes'
     ];
 
     // Getters e Setters
@@ -43,6 +47,10 @@ class Usuario extends Model {
 
     public function getCompraAttribute(){
         return $this->compraRelationShip;
+    }
+
+    public function getAvaliacaoAttribute(){
+        return $this->avaliacaoRelationShip;
     }
 
     public function setDadoAcessoAttribute($value){
@@ -59,6 +67,15 @@ class Usuario extends Model {
         }
     }
 
+    public function setAvaliacaoAttribute($value)
+    {
+        if (isset($value)) {
+            $this->attributes['usuario_id'] = Avaliacao::where(
+                'id',
+                $value
+            )->first()->id;
+        }
+    }
     // Relacionamentos
     public function dadoAcessoRelationship(){
         return $this->belongsTo(DadoAcesso::class, 'dados_acesso_id');
@@ -66,5 +83,9 @@ class Usuario extends Model {
 
     public function compraRelationShip(){
         return $this->hasMany(Compra::class, 'usuario_id');
+    }
+
+    public function avaliacaoRelationShip(){
+        return $this->hasMany(Avaliacao::class, 'usuario_id');
     }
 }
