@@ -134,8 +134,8 @@ class ProdutoController extends Controller{
         ]);
 
 
-        $check = 'Produto atualizado com sucesso!';
-        return redirect()->route('listagem_produtos')->with('check',$check);
+        $checkAtt = 'Produto atualizado com sucesso!';
+        return redirect()->route('listagem_produtos')->with('checkAtt', $checkAtt);
 
     }
 

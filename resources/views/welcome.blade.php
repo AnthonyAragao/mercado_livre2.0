@@ -92,4 +92,17 @@
             })
         </script>
     @endif
+
+    @if (session('checkAtt'))
+        <script>
+            Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: 'Produto atualizado.',
+                text: 'Produto atualizado com sucesso.',
+                showConfirmButton: false,
+                timer: 2000
+            })
+        </script>
+    @endif
 @endsection
