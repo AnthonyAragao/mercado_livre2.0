@@ -55,15 +55,19 @@
                     <p style=" margin-top: 11px;">Nome</p>
                 </div>
 
-                <div style="width: 253px; display:flex; justify-content: center; align-items: center;">
+                <div style="width: 240px; display:flex; justify-content: center; align-items: center;">
                     <p style=" margin-top: 11px;">Preço</p>
                 </div>
 
-                <div style="width: 253px; display:flex; justify-content: center; align-items: center;">
+                <div style="width: 240px; display:flex; justify-content: center; align-items: center;">
                     <p style=" margin-top: 11px;">Unidades</p>
                 </div>
 
-                <div style="width: 253px; display:flex; justify-content: center; align-items: center;">
+                <div style="width: 240px; display:flex; justify-content: center; align-items: center;">
+                    <p style=" margin-top: 11px;">Vendas</p>
+                </div>
+
+                <div style="width: 240px; display:flex; justify-content: center; align-items: center;">
                     <p style=" margin-top: 11px;">Ações</p>
                 </div>
             </div>
@@ -80,15 +84,19 @@
                         </div>
                     </div>
 
-                    <div style="width: 253px; display:flex; justify-content: center; align-items: center; border-right: 1px solid #ededed">
+                    <div style="width: 240px; display:flex; justify-content: center; align-items: center; border-right: 1px solid #ededed">
                         <span class="discount-price">R$ {{ number_format(($produtoDaLista->produto->preco_desconto),2,',','.')}}</span>
                     </div>
 
-                    <div style="width: 253px; height:100%; display:flex; justify-content: center; align-items: center; border-right: 1px solid #ededed">
+                    <div style="width: 240px; height:100%; display:flex; justify-content: center; align-items: center; border-right: 1px solid #ededed">
                         <span>{{$produtoDaLista->produto->estoque}} unidades</span>
                     </div>
 
-                    <div style="width: 253px; height:100%; display:flex; justify-content: center; align-items: center; flex-direction: column;">
+                    <div style="width: 240px; height:100%; display:flex; justify-content: center; align-items: center; border-right: 1px solid #ededed">
+                        <span>0 Vendas</span>
+                    </div>
+
+                    <div style="width: 240px; height:100%; display:flex; justify-content: center; align-items: center; flex-direction: column;">
                         <a href="{{route('produto.edit', [Crypt::encrypt($produtoDaLista->produto->id)])}}" style="text-decoration: none">Editar</a>
                         <form action="{{ route('produto.destroy', [Crypt::encrypt($produtoDaLista->produto->id)]) }}" id="form" method="POST">
                             @csrf
