@@ -40,6 +40,10 @@ class Produtor_has_produto extends Model{
         return $this->produtorRelationship;
     }
 
+    public function getExemplarAttribute(){
+        return $this->exemplarRelationShip;
+    }
+
     public function setProdutorAttribute($value){
         if(isset($value)){
             $this->attributes['produtor_id'] = Produtor::where('id', $value)->first()->id;
@@ -52,6 +56,16 @@ class Produtor_has_produto extends Model{
         }
     }
 
+    public function setExemplaAttribute($value)
+    {
+        if (isset($value)) {
+            $this->attributes['pivo_id'] = Exemplar::where(
+                'id',
+                $value
+            )->first()->id;
+        }
+    }
+
     // Relacionamentos
     public function produtoRelationship(){
         return $this->belongsTo(Produto::class, 'produto_id');
@@ -59,5 +73,9 @@ class Produtor_has_produto extends Model{
 
     public function produtorRelationship(){
         return $this->belongsTo(Produtor::class, 'produtor_id');
+    }
+
+    public function exemplarRelationShip(){
+        return $this->hasMany(Exemplar::class, 'pivo_id');
     }
 }

@@ -41,12 +41,30 @@ class Usuario extends Model {
         return $this->dadoAcessoRelationship;
     }
 
+    public function getCompraAttribute(){
+        return $this->compraRelationShip;
+    }
+
     public function setDadoAcessoAttribute($value){
         $this->attributes['dados_acesso_id'] = DadoAcesso::where('id', $value)->first()->id;
+    }
+
+    public function setCompraAttribute($value)
+    {
+        if (isset($value)) {
+            $this->attributes['usuario_id'] = Compra::where(
+                'id',
+                $value
+            )->first()->id;
+        }
     }
 
     // Relacionamentos
     public function dadoAcessoRelationship(){
         return $this->belongsTo(DadoAcesso::class, 'dados_acesso_id');
+    }
+
+    public function compraRelationShip(){
+        return $this->hasMany(Compra::class, 'usuario_id');
     }
 }

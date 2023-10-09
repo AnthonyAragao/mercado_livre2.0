@@ -8,6 +8,7 @@
 @endsection
 
 @section('insert_body')
+    {{dd(Auth::user()->usuario[0]->compra[1]->exemplar[0]->pivo->produto  )}}
     <header>
         <div class="logo">
             <a href="{{route("listagem_produtos")}}" style="height: 100%">
