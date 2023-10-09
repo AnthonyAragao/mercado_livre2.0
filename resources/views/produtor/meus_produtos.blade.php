@@ -93,7 +93,7 @@
                     </div>
 
                     <div style="width: 240px; height:100%; display:flex; justify-content: center; align-items: center; border-right: 1px solid #ededed">
-                        <span>0 Vendas</span>
+                        <span>{{$produtoDaLista->produto->vendas}} Vendas</span>
                     </div>
 
                     <div style="width: 240px; height:100%; display:flex; justify-content: center; align-items: center; flex-direction: column;">
