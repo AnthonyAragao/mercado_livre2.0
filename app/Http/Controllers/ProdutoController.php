@@ -91,9 +91,10 @@ class ProdutoController extends Controller{
      */
     public function show(string $id){
         $produto = $this->produtos->find(Crypt::decrypt($id));
+        $avaliacoes = $produto->avaliacao;
         $produtor = $produto->produtor_has_produto[0]->produtor;
 
-        return view('produto.show_produto', compact('produto', 'produtor'));
+        return view('produto.show_produto', compact('produto', 'produtor', 'avaliacoes'));
     }
 
     /**
