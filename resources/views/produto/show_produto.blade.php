@@ -141,11 +141,9 @@
 
                                 <div class="container-stars">
                                     <div>
-                                        <i class="fa-solid fa-star fa-xs" style="color: rgb(52, 131, 250);"></i>
-                                        <i class="fa-solid fa-star fa-xs" style="color: rgb(52, 131, 250);"></i>
-                                        <i class="fa-solid fa-star fa-xs" style="color: rgb(52, 131, 250);"></i>
-                                        <i class="fa-solid fa-star fa-xs" style="color: rgb(52, 131, 250);"></i>
-                                        <i class="fa-solid fa-star fa-xs" style="color: rgb(52, 131, 250);"></i>
+                                        @for ($i = 0; $i<5; $i++)
+                                            <i class="fa-solid fa-star fa-xs" style="color: rgb(52, 131, 250);"></i>
+                                        @endfor
                                     </div>
 
                                     <div>
