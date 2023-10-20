@@ -42,35 +42,18 @@
             <div style="display: flex">
                 <div class="card-img-product">
                     <div class="container-imgs-small">
-                        @if (isset($produto->imagem_01))
-                            <div class="img-small border-blue">
-                                <img src="{{ asset('files/produtos')}}/{{$produto->imagem_01}}">
-                            </div>
-                        @endif
+                        @for ($i = 1; $i <= 5; $i++)
+                            @php
+                                $imageProperty = "imagem_0" . $i;
+                                $imageSrc = data_get($produto, $imageProperty);
+                            @endphp
 
-                        @if (isset($produto->imagem_02))
-                            <div class="img-small">
-                                <img src="{{ asset('files/produtos')}}/{{$produto->imagem_02}}">
-                            </div>
-                        @endif
-
-                        @if (isset($produto->imagem_03))
-                            <div class="img-small">
-                                <img src="{{ asset('files/produtos')}}/{{$produto->imagem_03}}">
-                            </div>
-                        @endif
-
-                        @if (isset($produto->imagem_04))
-                            <div class="img-small">
-                                <img src="{{ asset('files/produtos')}}/{{$produto->imagem_04}}">
-                            </div>
-                        @endif
-
-                        @if (isset($produto->imagem_05))
-                            <div class="img-small">
-                                <img src="{{ asset('files/produtos')}}/{{$produto->imagem_05}}">
-                            </div>
-                        @endif
+                            @if (isset($imageSrc))
+                                <div class="img-small @if ($i == 1) border-blue @endif">
+                                    <img src="{{ asset('files/produtos/' . $imageSrc) }}">
+                                </div>
+                            @endif
+                        @endfor
                     </div>
 
                     <div class="img-product">
