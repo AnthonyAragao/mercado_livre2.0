@@ -119,7 +119,7 @@ main{
 /* Container descrição do produto */
 .container-description-product{
     width: 33%;
-    padding-left: 30px;
+    padding-left: 20px;
     margin-top: 84px
 }
 
@@ -234,6 +234,19 @@ main{
 .information-about span{
     color: rgba(0,0,0,.55);
     font-size: 14px;
+}
+
+a{
+    text-decoration: none;
+}
+
+.send{
+    display: flex;
+    gap: 4px;
+}
+
+.send span{
+    font-size: 13px;
 }
 /* Estilização botões */
 .btn{

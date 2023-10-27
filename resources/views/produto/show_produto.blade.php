@@ -93,6 +93,19 @@
                             <span>({{$produto->estoque}} disponíveis)</span>
                         </div>
 
+                        @auth
+                            <a href="" style="color:#176def">
+                                <div class="send">
+                                    <i class="fa-solid fa-location-dot"></i>
+                                    <span>
+                                        Enviar para {{ explode(' ', Auth::user()->nome)[0] }} -
+                                        {{Auth::user()->mora->endereco->municipio->nome}} -
+                                        {{Auth::user()->mora->endereco->cep}}
+                                    </span>
+                                </div>
+                            </a>
+                        @endauth
+
                         <div>
                             <a href="">
                                 <button class="btn call-action">Comprar</button>
