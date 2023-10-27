@@ -94,7 +94,7 @@
                         </div>
 
                         @auth
-                            <a href="" style="color:#176def">
+                            <a href="" style="color:#013b93">
                                 <div class="send">
                                     <i class="fa-solid fa-location-dot"></i>
                                     <span>
@@ -142,7 +142,7 @@
             </div>
 
             @if (count($avaliacoes) !== 0)
-                <div class="line" style="margin:70px 0"></div>
+                <div class="line" ></div>
 
                 <div class="container-assessment-external">
                     <div class="container-assessment-internal">
@@ -151,6 +151,21 @@
 
                             @foreach ($avaliacoes->take(5) as $avaliacao)
                                 <div class="line"></div>
+
+                                <div style="display: flex; gap:8px; margin-bottom: 3px;">
+                                    <div style="
+                                        background-color: rgba(0,0,0,.55);
+                                        padding: 6px;
+                                        border-radius: 50%;
+                                        display: flex;
+                                        justify-content: center;">
+                                        <i class="fa-regular fa-user"></i>
+                                    </div>
+
+                                    <span style="margin-top: 3px">
+                                        {{ $avaliacao->compra->usuario->dado_acesso->nome }}
+                                    </span>
+                                </div>
 
                                 <div class="container-stars">
                                     <div>
