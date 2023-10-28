@@ -91,10 +91,20 @@ class ProdutoController extends Controller{
      */
     public function show(string $id){
         $produto = $this->produtos->find(Crypt::decrypt($id));
+        $categorias = $this->categorias->all();
+        $categoriaProduto = $categorias[$produto->categoria->id - 1];
+        $produtosCategoriaAll = $categoriaProduto->produto;
+
+        // Filtrar os produtos para excluir o produto definido na primeira linha
+        $produtosCategoria = $produtosCategoriaAll->filter(function($item) use ($produto) {
+            return $item->id !== $produto->id;
+        });
+
+
         $avaliacoes = $produto->avaliacao;
         $produtor = $produto->produtor_has_produto[0]->produtor;
 
-        return view('produto.show_produto', compact('produto', 'produtor', 'avaliacoes'));
+        return view('produto.show_produto', compact('produto', 'produtor', 'avaliacoes', 'produtosCategoria'));
     }
 
     /**

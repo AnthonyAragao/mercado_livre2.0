@@ -1,6 +1,7 @@
 @extends('templates.template_view')
 
 @section('insert_head')
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ asset('css/show_produto.css') }}">
 @endsection
 
@@ -150,8 +151,6 @@
                             <h2 class="assessment-product">Opiniões do produto</h2>
 
                             @foreach ($avaliacoes->take(5) as $avaliacao)
-                                <div class="line"></div>
-
                                 <div style="display: flex; gap:8px; margin-bottom: 3px;">
                                     <div style="
                                         background-color: rgba(0,0,0,.55);
@@ -179,9 +178,7 @@
                                     </div>
                                 </div>
 
-                                <p class="comment">
-                                    {{ $avaliacao->comentario }}
-                                </p>
+                                <p class="comment">{{ $avaliacao->comentario }}</p>
 
                                 <div class="container-btns-feedback">
                                     <div class="feedback-like">
@@ -192,15 +189,51 @@
                                         <i class="fa-regular fa-thumbs-up fa-flip-vertical"></i>
                                     </div>
                                 </div>
+
+                                <div class="line"></div>
                             @endforeach
                         </div>
                     </div>
                 </div>
             @endif
-
-
         </div>
     </main>
+
+    <div style="display: flex; justify-content: center; margin-bottom: 40px">
+        <div class="container-product-category">
+            <h2 style="width: 100%; margin-left:3px; font-size:26px">Quem comprou este produto tambem comprou</h2>
+            @foreach ( $produtosCategoria->take(5) as $produto )
+                <div class="card-product-category">
+                    <a href="{{route('exibir_produto.show', [Crypt::encrypt($produto->id)] )}}">
+
+                        <div class="img-product-category" style="position: relative">
+                            <div class="heart d-none">
+                                <i class="fa-regular fa-heart"></i>
+                            </div>
+                            <img src="{{ asset('files/produtos')}}/{{$produto->imagem_01}}">
+                        </div>
+
+                        <div class="description-product">
+                            <span class="previous-price d-none">R$ {{$produto->preco}}</span>
+                            <div style="">
+                                <div>
+                                    <span style="font-size: 22px">R$ {{ number_format(($produto->preco_desconto),0,',','.')}}</span>
+                                    <span class="color-green" style="font-size:14px; font-weight: 500;">{{$produto->desconto}}% OFF</span>
+                                </div>
+                                <span class="color-green" style="font-size:14px; font-weight: 500;">10x R$ {{ number_format(($produto->preco_desconto/10),2,',','.')}} sem juros</span>
+                            </div>
+
+                            <span class="color-green" style="font-size:14px; font-weight: 600;">
+                                Frete grátis  <span style="font-size:12px; font-weight: 900; font-style:italic"><i class="fa-solid fa-bolt-lightning"></i> FULL</span>
+                            </span>
+
+                            <p style="font-size: 14px">{{$produto->descricao}}</p>
+                        </div>
+                    </a>
+                </div>
+            @endforeach
+        </div>
+    </div>
 @endsection
 
 

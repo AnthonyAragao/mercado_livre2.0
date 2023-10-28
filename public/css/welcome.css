@@ -73,10 +73,11 @@ main{
 
 /* Card dos produtos */
 .container-card{
+    max-width: 1196px;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 24px;
+    gap: 22px;
     margin: 50px ;
     border-radius: 6px;
 }
