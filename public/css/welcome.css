@@ -95,6 +95,10 @@ main{
     transition: all 0.3s ease;
     box-shadow: 1px 0 10px rgba(0, 0, 0, 0.2);
     cursor: pointer;
+    transition: all 0.3s ease;
+    border-left: 0;
+    border-right: 0;
+    border-radius: 4px;
 }
 
 .card-product:hover .previous-price,
@@ -105,6 +109,8 @@ main{
 .card-product:hover .description-product{
     position: absolute;
     height: 168px;
+    border-radius: 0 0 4px 4px;
+    box-shadow: 1px 5px 10px rgba(0, 0, 0, 0.2);
 }
 
 .card-product a{

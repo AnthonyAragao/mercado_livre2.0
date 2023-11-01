@@ -265,12 +265,17 @@ a{
 }
 
 .call-action:hover{
+    color: white;
     background-color: #2968c8;
 }
 
 .add-cart{
     background-color:rgba(65,137,230,.15);
-    color: #3483fa;
+    color: #3483fa !important;
+}
+
+.add-cart:hover{
+    background-color: rgba(65,137,230,.2);
 }
 
 
@@ -393,12 +398,15 @@ a{
     border: 1px solid #f5f5f5;
     border-radius: 4px;
     width: 220px;
+
 }
 
 .card-product-category:hover{
-    transition: all 0.3s ease;
     box-shadow: 1px 0 10px rgba(0, 0, 0, 0.2);
     cursor: pointer;
+    border-left: 0;
+    border-right: 0;
+    border-radius: 4px;
 }
 
 .card-product-category:hover .previous-price,
@@ -408,7 +416,9 @@ a{
 
 .card-product-category:hover .description-product{
     height: 168px;
+    box-shadow: 1px 5px 10px rgba(0, 0, 0, 0.2);
     position: absolute;
+    border-radius: 0 0 4px 4px;
 }
 
 
@@ -438,6 +448,7 @@ a{
     padding: 8px 15px 8px 15px;
     height: 150px;
     background-color: rgb(255, 255, 255);
+
 }
 
 .previous-price{
