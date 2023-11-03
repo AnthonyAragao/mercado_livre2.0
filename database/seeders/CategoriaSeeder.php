@@ -13,6 +13,8 @@ class CategoriaSeeder extends Seeder
      */
     public function run(): void
     {
+        DB::table('categorias')->truncate();
+        
         DB::table('categorias')->insert([
             'nome' => 'Carros, Motos e Outros',
         ]);
@@ -45,6 +47,15 @@ class CategoriaSeeder extends Seeder
         ]);
         DB::table('categorias')->insert([
             'nome' => 'Ferramentas',
+        ]);
+        DB::table('categorias')->insert([
+            'nome' => 'Saúde',
+        ]);
+        DB::table('categorias')->insert([
+            'nome' => 'Câmeras e Acessórios',
+        ]);
+        DB::table('categorias')->insert([
+            'nome' => 'Livros, Revistas e Comics',
         ]);
     }
 }

@@ -171,3 +171,73 @@ main{
 .color-green{
     color: #00a650;
 }
+
+
+/* Categorias */
+section{
+    display: flex;
+    justify-content: center;
+}
+
+.container-category{
+    max-width: 1200px;
+    margin: 100px 0px;
+    display:flex;
+    /* justify-content: center; */
+    flex-wrap: wrap;
+    gap: 2px;
+    column-gap: 2px;
+}
+
+.container-category h2{
+    width: 100%;
+    margin-left:4px;
+    margin-bottom: 14px;
+    font-size:26px
+}
+
+.container-card-category{
+    width: 169px;
+    height: 169px;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.container-card-category:hover{
+    background-color: #3483fa;
+}
+
+.container-card-category:hover a span{
+    color: white;
+}
+
+.container-card-category:hover a i{
+    color: white;
+}
+
+.container-card-category a{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* justify-content: center; */
+    /* gap: 26px; */
+    text-decoration: none;
+}
+
+.container-card-category a span{
+    text-align: center;
+    color: #333;
+    padding: 5px;
+}
+
+.img-category{
+    height: 40px;
+    display: flex;
+    align-items: center;
+    margin-top: 40px;
+}

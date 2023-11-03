@@ -45,7 +45,7 @@
 
     <main>
         <div class="container-card">
-            @foreach ( $produtos as $produto )
+            @foreach ( $produtos->take(5) as $produto )
                 <div class="card-product">
                     <a href="{{route('exibir_produto.show', [Crypt::encrypt($produto->id)] )}}">
 
@@ -77,6 +77,141 @@
             @endforeach
         </div>
     </main>
+
+    <section>
+        <div class="container-category">
+            <h2>Categorias populares</h2>
+
+            <div class="container-card-category">
+                <a href="">
+                    <div class="img-category">
+                        <i class="fa-solid fa-car fa-2xl"></i>
+                    </div>
+                    <span>Carros, Motos e Outros</span>
+                </a>
+            </div>
+
+            <div class="container-card-category">
+                <a href="">
+                    <div class="img-category">
+                        <i class="fa-solid fa-wand-magic-sparkles fa-2xl"></i>
+                    </div>
+                    <span>Beleza e Cuidado Pessoal</span>
+                </a>
+            </div>
+
+            <div class="container-card-category">
+                <a href="">
+                    <div class="img-category">
+                        <i class="fa-solid fa-mobile-screen fa-2xl"></i>
+                    </div>
+                    <span>Celulares e Telefones</span>
+                </a>
+            </div>
+
+            <div class="container-card-category">
+                <a href="">
+                    <div class="img-category">
+                        <i class="fa-solid fa-shirt fa-2xl"></i>
+                    </div>
+                    <span>Calçados, Roupas e Bolsas</span>
+                </a>
+            </div>
+
+            <div class="container-card-category">
+                <a href="">
+                    <div class="img-category">
+                        <i class="fa-solid fa-desktop fa-2xl"></i>
+                    </div>
+                    <span>Informática</span>
+                </a>
+            </div>
+
+            <div class="container-card-category">
+                <a href="">
+                    <div class="img-category">
+                        <i class="fa-solid fa-gamepad fa-2xl"></i>
+                    </div>
+                    <span>Games</span>
+                </a>
+            </div>
+
+            <div class="container-card-category">
+                <a href="">
+                    <div class="img-category">
+                        <i class="fa-solid fa-spider fa-2xl"></i>
+                    </div>
+                    <span>Brinquedos e Hobbies</span>
+                </a>
+            </div>
+
+
+            <div class="container-card-category">
+                <a href="">
+                    <div class="img-category">
+                        <i class="fa-solid fa-blender-phone fa-2xl"></i>
+                    </div>
+                    <span>Eletrodomésticos</span>
+                </a>
+            </div>
+
+            <div class="container-card-category">
+                <a href="">
+                    <div class="img-category">
+                        <i class="fa-solid fa-house fa-2xl"></i>
+                    </div>
+                    <span>Imóveis</span>
+                </a>
+            </div>
+
+            <div class="container-card-category">
+                <a href="">
+                    <div class="img-category">
+                        <i class="fa-solid fa-music fa-2xl"></i>
+                    </div>
+                    <span>Instrumentos Musicais</span>
+                </a>
+            </div>
+
+            <div class="container-card-category">
+                <a href="">
+                    <div class="img-category">
+                        <i class="fa-solid fa-wrench fa-2xl"></i>
+                    </div>
+                    <span>Ferramentas</span>
+                </a>
+            </div>
+
+            <div class="container-card-category">
+                <a href="">
+                    <div class="img-category">
+                        <i class="fa-solid fa-notes-medical fa-2xl"></i>
+                    </div>
+                    <span>Saúde</span>
+                </a>
+            </div>
+
+            <div class="container-card-category">
+                <a href="">
+                    <div class="img-category">
+                        <i class="fa-solid fa-camera fa-2xl"></i>
+                    </div>
+                    <span>Câmeras e Acessórios</span>
+                </a>
+            </div>
+
+            <div class="container-card-category">
+                <a href="">
+                    <div class="img-category">
+                        <i class="fa-solid fa-book-open fa-2xl"></i>
+                    </div>
+                    <span>Livros, Revistas e Comics</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+
 @endsection
 
 @section('insert_script')
