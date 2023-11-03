@@ -25,6 +25,8 @@ Route::get('/', [ProdutoController::class, 'index'])->name('listagem_produtos');
 
 Route::get('/produto/show/{id}', [ProdutoController::class, 'show'])->name('exibir_produto.show');
 Route::get('/search', [ProdutoController::class, 'search'])->name('produto.search');
+Route::get('/categories/{id}', [ProdutoController::class, 'categories'])->name('produto.categories');
+
 
 
 Route::get('/dashboard', function () {

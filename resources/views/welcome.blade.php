@@ -83,7 +83,7 @@
             <h2>Categorias populares</h2>
 
             <div class="container-card-category">
-                <a href="">
+                <a href="{{route('produto.categories', '1')}}">
                     <div class="img-category">
                         <i class="fa-solid fa-car fa-2xl"></i>
                     </div>
@@ -92,7 +92,7 @@
             </div>
 
             <div class="container-card-category">
-                <a href="">
+                <a href="{{route('produto.categories', '2')}}">
                     <div class="img-category">
                         <i class="fa-solid fa-wand-magic-sparkles fa-2xl"></i>
                     </div>
@@ -101,7 +101,7 @@
             </div>
 
             <div class="container-card-category">
-                <a href="">
+                <a href="{{route('produto.categories', '3')}}">
                     <div class="img-category">
                         <i class="fa-solid fa-mobile-screen fa-2xl"></i>
                     </div>
@@ -110,7 +110,7 @@
             </div>
 
             <div class="container-card-category">
-                <a href="">
+                <a href="{{route('produto.categories', '4')}}">
                     <div class="img-category">
                         <i class="fa-solid fa-shirt fa-2xl"></i>
                     </div>
@@ -119,7 +119,7 @@
             </div>
 
             <div class="container-card-category">
-                <a href="">
+                <a href="{{route('produto.categories', '5')}}">
                     <div class="img-category">
                         <i class="fa-solid fa-desktop fa-2xl"></i>
                     </div>
@@ -128,7 +128,7 @@
             </div>
 
             <div class="container-card-category">
-                <a href="">
+                <a href="{{route('produto.categories', '6')}}">
                     <div class="img-category">
                         <i class="fa-solid fa-gamepad fa-2xl"></i>
                     </div>
@@ -137,7 +137,7 @@
             </div>
 
             <div class="container-card-category">
-                <a href="">
+                <a href="{{route('produto.categories', '7')}}">
                     <div class="img-category">
                         <i class="fa-solid fa-spider fa-2xl"></i>
                     </div>
@@ -147,7 +147,7 @@
 
 
             <div class="container-card-category">
-                <a href="">
+                <a href="{{route('produto.categories', '8')}}">
                     <div class="img-category">
                         <i class="fa-solid fa-blender-phone fa-2xl"></i>
                     </div>
@@ -156,7 +156,7 @@
             </div>
 
             <div class="container-card-category">
-                <a href="">
+                <a href="{{route('produto.categories', '9')}}">
                     <div class="img-category">
                         <i class="fa-solid fa-house fa-2xl"></i>
                     </div>
@@ -165,7 +165,7 @@
             </div>
 
             <div class="container-card-category">
-                <a href="">
+                <a href="{{route('produto.categories', '10')}}">
                     <div class="img-category">
                         <i class="fa-solid fa-music fa-2xl"></i>
                     </div>
@@ -174,7 +174,7 @@
             </div>
 
             <div class="container-card-category">
-                <a href="">
+                <a href="{{route('produto.categories', '11')}}">
                     <div class="img-category">
                         <i class="fa-solid fa-wrench fa-2xl"></i>
                     </div>
@@ -183,7 +183,7 @@
             </div>
 
             <div class="container-card-category">
-                <a href="">
+                <a href="{{route('produto.categories', '12')}}">
                     <div class="img-category">
                         <i class="fa-solid fa-notes-medical fa-2xl"></i>
                     </div>
@@ -192,7 +192,7 @@
             </div>
 
             <div class="container-card-category">
-                <a href="">
+                <a href="{{route('produto.categories', '13')}}">
                     <div class="img-category">
                         <i class="fa-solid fa-camera fa-2xl"></i>
                     </div>
@@ -201,7 +201,7 @@
             </div>
 
             <div class="container-card-category">
-                <a href="">
+                <a href="{{route('produto.categories', '14')}}">
                     <div class="img-category">
                         <i class="fa-solid fa-book-open fa-2xl"></i>
                     </div>

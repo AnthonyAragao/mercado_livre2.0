@@ -48,6 +48,15 @@ class ProdutoController extends Controller{
         return view('produtor.meus_produtos', compact('produtor', 'produtos'));
     }
 
+    public function categories($id){
+        $categorias = $this->categorias;
+        $categoriaProduto = $categorias[$id - 1];
+        $produtos = $categoriaProduto->produto;
+
+
+        return view('welcome', compact('produtos'));
+    }
+
     /**
      * Show the form for creating a new resource.
      */

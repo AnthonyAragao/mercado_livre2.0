@@ -187,6 +187,7 @@ section{
     flex-wrap: wrap;
     gap: 2px;
     column-gap: 2px;
+    box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
 }
 
 .container-category h2{
