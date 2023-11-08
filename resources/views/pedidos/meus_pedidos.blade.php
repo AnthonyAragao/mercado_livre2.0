@@ -49,9 +49,11 @@
                     <i class="fa-solid fa-star"></i> Alguns produtos esperam sua opinião
                 </span>
 
-                <button class="btn" style="color: #3483fa;">
-                    Opinar
-                </button>
+                <a href="{{route('reviews.index')}}">
+                    <button class="btn" style="color: #3483fa;">
+                        Opinar
+                    </button>
+                </a>
             </div>
 
             @foreach ($compras as $compra)

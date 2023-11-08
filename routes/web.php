@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AvaliacaoController;
 use App\Http\Controllers\CompraController;
 use App\Http\Controllers\ProdutoController;
 use App\Http\Controllers\ProdutorController;
@@ -51,6 +52,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/produto/destroy/{id}', [ProdutoController::class, 'destroy'])->name('produto.destroy');
 
     Route::resource('pedido', CompraController::class);
+    Route::resource('reviews', AvaliacaoController::class);
+
 });
 
 
