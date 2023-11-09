@@ -49,11 +49,11 @@
                     <i class="fa-solid fa-star"></i> Alguns produtos esperam sua opinião
                 </span>
 
-                <a href="{{route('reviews.index')}}">
+                {{-- <a href="{{route('reviews.index')}}">
                     <button class="btn" style="color: #3483fa;">
                         Opinar
                     </button>
-                </a>
+                </a> --}}
             </div>
 
             @foreach ($compras as $compra)
@@ -96,14 +96,16 @@
 
                         <div class="container-btns">
                             <a href="">
-                                <button class="btn" style="background-color: #3783f7; color: white;">
+                                <button class="btn" style="background-color: #3783f7; color: white; width: 100%;">
                                     Ver compra
                                 </button>
                             </a>
 
-                            <button class="btn" style="width: 100%; background-color:rgba(65,137,230,.15); color: #3483fa">
-                                Comprar novamente
-                            </button>
+                            @if (count($compra->avaliacao) === 0)
+                                <a href="{{route('reviews.edit', [Crypt::encrypt($compra->id)] )}}" class="btn" style="width: 100%; background-color:rgba(65,137,230,.15); color: #3483fa">
+                                    Opinar
+                                </a>
+                            @endif
                         </div>
                     </div>
                 </div>

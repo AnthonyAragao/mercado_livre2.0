@@ -30,7 +30,7 @@
                             <a href="{{ route('registration') }}">Crie a sua conta</a>
                             <a href="{{ route('login') }}">Entre</a>
                         @endauth
-                        <a href="">Compras</a>
+                        <a href="{{route('pedido.index')}}">Compras</a>
                         <a href=""><i class="fa-solid fa-cart-shopping"></i></a>
                     </nav>
                 </div>

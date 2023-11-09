@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
 
 class AvaliacaoController extends Controller
 {
@@ -12,9 +13,7 @@ class AvaliacaoController extends Controller
      */
     public function index()
     {
-        $compras = Auth::user()->usuario->first()->compra;
-
-        return view('avaliacao.my_reviews', compact('compras'));
+        //
     }
 
     /**
@@ -46,7 +45,10 @@ class AvaliacaoController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $id = Crypt::decrypt($id);
+        $compra = Auth::user()->usuario->first()->compra[$id - 1];
+
+        return view('avaliacao.reviews', compact('compra'));
     }
 
     /**
