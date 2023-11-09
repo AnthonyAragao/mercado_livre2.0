@@ -41,51 +41,56 @@
     </header>
 
     <main>
-        <div class="container">
-            <h2 >Dê sua opinião e ajude a mais pessoas</h2>
+        <form method="POST" action="{{route('reviews.store')}}">
+        @csrf
+            <div class="container">
+                <h2 >Dê sua opinião e ajude a mais pessoas</h2>
 
-            <div class="d-flex">
-                <div class="card-product">
-                    <div class="details-product">
+                <div class="d-flex">
+                    <div class="card-product">
+                        <div class="details-product">
 
-                        <div class="img-product">
-                            <img src="{{ asset('files/produtos')}}/{{$compra->exemplar[0]->pivo->produto->imagem_01}}">
+                            <div class="img-product">
+                                <img src="{{ asset('files/produtos')}}/{{$compra->exemplar[0]->pivo->produto->imagem_01}}">
 
-                            <h2>O que você achou desse produto?</h2>
+                                <h2>O que você achou desse produto?</h2>
 
-                            <p>{{$compra->exemplar->first()->pivo->produto->nome}}</p>
-                        </div>
-
-                        <div class="container-stars">
-                            <div class="star-avaliation">
-                                <a href="" onclick="opinar(1)"><i class="fa-regular fa-star fa-2xl star-list"></i></a>
-                                <span>Ruim</span>
+                                <p>{{$compra->exemplar->first()->pivo->produto->nome}}</p>
                             </div>
 
-                            <a href="" onclick="opinar(2)"><i class="fa-regular fa-star fa-2xl star-list"></i></a>
-                            <a href="" onclick="opinar(3)"><i class="fa-regular fa-star fa-2xl star-list"></i></a>
-                            <a href="" onclick="opinar(4)"><i class="fa-regular fa-star fa-2xl star-list"></i></a>
+                            <div class="container-stars">
+                                <div class="star-avaliation">
+                                    <a href="" onclick="opinar(1)"><i class="fa-regular fa-star fa-2xl star-list"></i></a>
+                                    <span>Ruim</span>
+                                </div>
 
-                            <div class="star-avaliation">
-                                <a href="" onclick="opinar(5)"><i class="fa-regular fa-star fa-2xl star-list"></i></a>
-                                <span>Excelente</span>
+                                <a href="" onclick="opinar(2)"><i class="fa-regular fa-star fa-2xl star-list"></i></a>
+                                <a href="" onclick="opinar(3)"><i class="fa-regular fa-star fa-2xl star-list"></i></a>
+                                <a href="" onclick="opinar(4)"><i class="fa-regular fa-star fa-2xl star-list"></i></a>
+
+                                <div class="star-avaliation">
+                                    <a href="" onclick="opinar(5)"><i class="fa-regular fa-star fa-2xl star-list"></i></a>
+                                    <span>Excelente</span>
+                                </div>
+                            </div>
+
+                            <input type="hidden" id="avaliacao" name="avaliacao" value="0">
+
+                        </div>
+
+                        <div class="container-comment">
+                            <h2>Dê mais detalhes sobre o seu produto</h2>
+                            <textarea name="opiniao" id="" rows="5" placeholder="Eu achei que o meu produto..."></textarea>
+
+                            <div class="btn">
+                                <button type="submit">Salvar</button>
                             </div>
                         </div>
 
                     </div>
-
-                    <div class="container-comment">
-                        <h2>Dê mais detalhes sobre o seu produto</h2>
-                        <textarea name="" id="" rows="5" placeholder="Eu achei que o meu produto..."></textarea>
-
-                        <div class="btn">
-                            <button type="submit">Salvar</button>
-                        </div>
-                    </div>
-                    
                 </div>
             </div>
-        </div>
+        </form>
     </main>
 @endsection
 
@@ -113,6 +118,8 @@
                 stars[i].classList.add('fa-solid');
                 stars[i].style.color = 'rgb(52, 131, 250)';
             }
+
+            document.getElementById('avaliacao').value = id;
         }
     </script>
 

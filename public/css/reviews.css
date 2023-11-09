@@ -184,6 +184,7 @@ main{
 }
 
 .btn button{
+    width: 80px;
     padding: 10px 15px;
     background-color: rgb(52, 131, 250);
     color: #fff;
