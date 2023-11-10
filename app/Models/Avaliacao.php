@@ -44,6 +44,10 @@ class Avaliacao extends Model{
         return $this->usuarioRelationship;
     }
 
+    public function getStatusAttribute(){
+        return $this->statusRelationship;
+    }
+
     public function setCompraAttribute($value){
         if(isset($value)){
             $this->attributes['compra_id'] = Avaliacao::where('id', $value)->first()->id;
@@ -62,6 +66,13 @@ class Avaliacao extends Model{
         }
     }
 
+
+    public function setStatusAttribute($value){
+        if(isset($value)){
+            $this->attributes['status_id'] = StatusAvaliacao::where('id', $value)->first()->id;
+        }
+    }
+
     // Relacionamentos
     public function compraRelationship(){
         return $this->belongsTo(Compra::class, 'compra_id');
@@ -73,6 +84,10 @@ class Avaliacao extends Model{
 
     public function usuarioRelationship(){
         return $this->belongsTo(Usuario::class, 'usuario_id');
+    }
+
+    public function statusRelationship(){
+        return $this->belongsTo(StatusAvaliacao::class, 'status_id');
     }
 
 }

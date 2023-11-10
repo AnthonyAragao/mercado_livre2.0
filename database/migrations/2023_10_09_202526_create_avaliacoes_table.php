@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignId('produto_id')->constrained('produtos');
             $table->foreignId('usuario_id')->constrained('usuarios');
             $table->foreignId('compra_id')->constrained('compras');
+            $table->foreignId('status_id')->constrained('status_avaliacoes');
             $table->timestamps();
         });
     }

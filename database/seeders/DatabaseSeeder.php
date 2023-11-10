@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder
             CidadeSeeder::class,
             MunicipioSeeder::class,
             CategoriaSeeder::class,
+            StatusSeeder::class,
         ]);
     }
 }
