@@ -75,7 +75,8 @@
                             </div>
 
                             <input type="hidden" id="avaliacao" name="avaliacao" value="0">
-
+                            <input type="hidden" id="avaliacao" name="compra" value="{{Crypt::encrypt($compra->id)}}">
+                            <input type="hidden" id="avaliacao" name="produto" value="{{Crypt::encrypt($compra->exemplar->first()->pivo->produto->id)}}">
                         </div>
 
                         <div class="container-comment">
@@ -99,7 +100,6 @@
     {{-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.5/dist/sweetalert2.all.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.5/dist/sweetalert2.min.css" rel="stylesheet"> --}}
 
-
     <script>
         function opinar(id){
             event.preventDefault();
@@ -122,5 +122,4 @@
             document.getElementById('avaliacao').value = id;
         }
     </script>
-
 @endsection

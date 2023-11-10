@@ -151,6 +151,8 @@
                             <h2 class="assessment-product">Opiniões do produto</h2>
 
                             @foreach ($avaliacoes->take(5) as $avaliacao)
+                                <div class="line"></div>
+
                                 <div style="display: flex; gap:8px; margin-bottom: 3px;">
                                     <div style="
                                         background-color: rgba(0,0,0,.55);
@@ -168,8 +170,18 @@
 
                                 <div class="container-stars">
                                     <div>
-                                        @for ($i = 0; $i<5; $i++)
-                                            <i class="fa-solid fa-star fa-xs" style="color: rgb(52, 131, 250);"></i>
+                                        @php
+                                            $numEstrelas = 5; // Número total de estrelas
+                                            $starsBlue = $avaliacao->status->id; // Número de estrelas azuis com base na avaliação
+                                        @endphp
+
+                                        @for ($i = 0; $i < $numEstrelas; $i++)
+                                            @if ($starsBlue > 0)
+                                                <i class="fa-solid fa-star fa-xs" style="color: rgb(52, 131, 250);"></i>
+                                                @php $starsBlue-- @endphp
+                                            @else
+                                                <i class="fa-regular fa-star fa-xs" style="color: rgba(0,0,0,.55);;"></i>
+                                            @endif
                                         @endfor
                                     </div>
 
@@ -189,8 +201,6 @@
                                         <i class="fa-regular fa-thumbs-up fa-flip-vertical"></i>
                                     </div>
                                 </div>
-
-                                <div class="line"></div>
                             @endforeach
                         </div>
                     </div>

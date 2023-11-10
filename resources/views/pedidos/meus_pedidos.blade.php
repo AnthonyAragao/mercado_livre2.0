@@ -119,4 +119,16 @@
 @section('insert_script')
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.5/dist/sweetalert2.all.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.5/dist/sweetalert2.min.css" rel="stylesheet">
+
+    @if (session('check'))
+        <script>
+            Swal.fire({
+                title: 'Avaliação feita',
+                text: "Agradeçemos pelo seu Feedback",
+                icon: "success",
+                showConfirmButton: false,
+                timer: 2000
+            })
+        </script>
+    @endif
 @endsection
