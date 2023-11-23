@@ -6,35 +6,31 @@ use App\Helpers\Helper;
 use App\Models\Categoria;
 use App\Models\Produto;
 use App\Models\Produtor_has_produto;
+use App\Repositories\ProdutoRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 
 class ProdutoController extends Controller{
-    private $produtos, $pivo;
-    public function __construct(Produto $produtos, Produtor_has_produto $pivo){
+    protected $produtos, $pivo, $repository, $categorias;
+
+    public function __construct(Produto $produtos, Produtor_has_produto $pivo, ProdutoRepository $repository){
         $this->produtos = $produtos;
         $this->pivo = $pivo;
-
+        $this->repository = $repository;
         $this->categorias = Categoria::all();
     }
     /**
      * Display a listing of the resource.
      */
     public function index(){
-        $produtos = $this->produtos->all();
-
+        $produtos = $this->repository->getAll();
 
         return view('welcome', compact('produtos'));
     }
 
     public function search(Request $request){
-        $search = $request->input('query');
-
-        $produtos = $this->produtos
-                ->where('nome', 'like' ,'%'.$search.'%')
-                ->orWhere('descricao', 'like', '%'. $search . '%')
-                ->get();
+        $produtos = $this->repository->query($request);
 
         return view('welcome', compact('produtos'));
     }
@@ -44,15 +40,12 @@ class ProdutoController extends Controller{
         $produtor = Auth::user()->produtor[0];
         $produtos = $produtor->produtor_has_produto;
 
-
         return view('produtor.meus_produtos', compact('produtor', 'produtos'));
     }
 
     public function categories($id){
-        $categorias = $this->categorias;
-        $categoriaProduto = $categorias[$id - 1];
+        $categoriaProduto = $this->categorias->find(Crypt::decrypt($id));;
         $produtos = $categoriaProduto->produto;
-
 
         return view('welcome', compact('produtos'));
     }
@@ -99,7 +92,7 @@ class ProdutoController extends Controller{
      * Display the specified resource.
      */
     public function show(string $id){
-        $produto = $this->produtos->find(Crypt::decrypt($id));
+        $produto = $this->repository->find($id);
         $categorias = $this->categorias->all();
         $categoriaProduto = $categorias[$produto->categoria->id - 1];
         $produtosCategoriaAll = $categoriaProduto->produto;
@@ -121,7 +114,7 @@ class ProdutoController extends Controller{
      */
     public function edit(string $id)
     {
-        $produto = $this->produtos->find(Crypt::decrypt($id));
+        $produto = $this->repository->find($id);
         $categorias = $this->categorias;
 
         return view('produto.form_produto', compact('categorias','produto'));
@@ -133,9 +126,9 @@ class ProdutoController extends Controller{
      */
     public function update(Request $request, string $id)
     {
-        $produto = $this->produtos->find(Crypt::decrypt($id));
+        $produto = $this->repository->find($id);
 
-        tap($this->produtos->find($produto->id))->update([
+        tap($produto)->update([
             'nome' => $request->nome,
             'preco' => $request->preco,
             'desconto' => $request->desconto,
@@ -156,7 +149,6 @@ class ProdutoController extends Controller{
 
         $checkAtt = 'Produto atualizado com sucesso!';
         return redirect()->route('listagem_produtos')->with('checkAtt', $checkAtt);
-
     }
 
     /**
@@ -164,7 +156,7 @@ class ProdutoController extends Controller{
      */
     public function destroy(string $id)
     {
-        $produto = $this->produtos->find(Crypt::decrypt($id));
+        $produto = $this->repository->find($id);
         $pivo = $produto->produtor_has_produto[0];
 
         $pivo->delete();
