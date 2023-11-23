@@ -27,9 +27,12 @@ class AvaliacaoController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(string $id)
     {
-        //
+        $id = Crypt::decrypt($id);
+        $compra = Auth::user()->usuario->first()->compra[$id - 1];
+
+        return view('avaliacao.reviews', compact('compra'));
     }
 
     /**
@@ -64,10 +67,7 @@ class AvaliacaoController extends Controller
      */
     public function edit(string $id)
     {
-        $id = Crypt::decrypt($id);
-        $compra = Auth::user()->usuario->first()->compra[$id - 1];
-
-        return view('avaliacao.reviews', compact('compra'));
+        //
     }
 
     /**

@@ -102,7 +102,7 @@
                             </a>
 
                             @if (count($compra->avaliacao) === 0)
-                                <a href="{{route('reviews.edit', [Crypt::encrypt($compra->id)] )}}" class="btn" style="width: 100%; background-color:rgba(65,137,230,.15); color: #3483fa">
+                                <a href="{{route('reviews.create', [Crypt::encrypt($compra->id)] )}}" class="btn" style="width: 100%; background-color:rgba(65,137,230,.15); color: #3483fa">
                                     Opinar
                                 </a>
                             @endif
