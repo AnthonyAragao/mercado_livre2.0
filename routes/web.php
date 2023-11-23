@@ -52,7 +52,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/produto/destroy/{id}', [ProdutoController::class, 'destroy'])->name('produto.destroy');
 
     Route::resource('pedido', CompraController::class);
-    Route::resource('reviews', AvaliacaoController::class);
+    Route::resource('reviews', AvaliacaoController::class)->except('create');
+    Route::get('/reviews/create/{id}', [AvaliacaoController::class, 'create'])->name('reviews.create');
 
 });
 
