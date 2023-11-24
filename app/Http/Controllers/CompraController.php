@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Compra;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -11,7 +12,16 @@ class CompraController extends Controller
      * Display a listing of the resource.
      */
     public function index(){
-        $compras = Auth::user()->usuario[0]->compra;
+        $usuario = Auth::user()->usuario[0];
+
+        $compras = Compra::where('usuario_id', $usuario->id)
+            ->with([
+                'exemplarRelationShip.pivoRelationShip.produtorRelationship.dadoEmpresaRelationship',
+                'exemplarRelationShip.pivoRelationShip.produtoRelationship',
+                'avaliacaoRelationShip'
+                ])
+            ->get();
+
         return view('pedidos.meus_pedidos', compact('compras'));
     }
 

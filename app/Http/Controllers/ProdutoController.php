@@ -38,7 +38,10 @@ class ProdutoController extends Controller{
 
     public function indexAuth(){
         $produtor = Auth::user()->produtor[0];
-        $produtos = $produtor->produtor_has_produto;
+
+        $produtos = Produtor_has_produto::where('produtor_id', $produtor->id)
+            ->with(['produtoRelationship'])
+            ->get();
 
         return view('produtor.meus_produtos', compact('produtor', 'produtos'));
     }
@@ -93,8 +96,7 @@ class ProdutoController extends Controller{
      */
     public function show(string $id){
         $produto = $this->repository->find($id);
-        $categorias = $this->categorias->all();
-        $categoriaProduto = $categorias[$produto->categoria->id - 1];
+        $categoriaProduto = $this->categorias->find($produto->categoria->id );
         $produtosCategoriaAll = $categoriaProduto->produto;
 
         // Filtrar os produtos para excluir o produto definido na primeira linha
