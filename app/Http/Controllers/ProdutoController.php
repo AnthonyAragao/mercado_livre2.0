@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\Helper;
+use App\Models\Avaliacao;
 use App\Models\Categoria;
 use App\Models\Produto;
 use App\Models\Produtor_has_produto;
@@ -12,11 +13,12 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 
 class ProdutoController extends Controller{
-    protected $produtos, $pivo, $repository, $categorias;
+    protected $produtos, $pivo, $repository, $categorias, $avaliacoes;
 
-    public function __construct(Produto $produtos, Produtor_has_produto $pivo, ProdutoRepository $repository){
+    public function __construct(Produto $produtos, Produtor_has_produto $pivo, ProdutoRepository $repository, Avaliacao $avaliacoes){
         $this->produtos = $produtos;
         $this->pivo = $pivo;
+        $this->avaliacoes = $avaliacoes;
         $this->repository = $repository;
         $this->categorias = Categoria::all();
     }
@@ -104,8 +106,11 @@ class ProdutoController extends Controller{
             return $item->id !== $produto->id;
         });
 
+        // $avaliacoes = $produto->avaliacao;
+        $avaliacoes = $this->avaliacoes->with(['produtoRelationship','compraRelationship', 'statusRelationship'])
+                ->where('produto_id', $produto->id)
+                ->get();
 
-        $avaliacoes = $produto->avaliacao;
         $produtor = $produto->produtor_has_produto[0]->produtor;
 
         return view('produto.show_produto', compact('produto', 'produtor', 'avaliacoes', 'produtosCategoria'));
