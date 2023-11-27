@@ -107,7 +107,11 @@ class ProdutoController extends Controller{
         });
 
         // $avaliacoes = $produto->avaliacao;
-        $avaliacoes = $this->avaliacoes->with(['produtoRelationship','compraRelationship', 'statusRelationship'])
+        $avaliacoes = $this->avaliacoes->with([
+                'produtoRelationship',
+                'compraRelationship.usuarioRelationShip',
+                'statusRelationship'
+                ])
                 ->where('produto_id', $produto->id)
                 ->get();
 
@@ -125,7 +129,6 @@ class ProdutoController extends Controller{
         $categorias = $this->categorias;
 
         return view('produto.form_produto', compact('categorias','produto'));
-
     }
 
     /**

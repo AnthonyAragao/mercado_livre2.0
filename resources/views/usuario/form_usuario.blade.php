@@ -15,7 +15,7 @@
     <main>
         <div class="container-card">
             <form method="POST" enctype="multipart/form-data"
-                action="{{ route('usuarios.update', $usuario->id) }}">
+                action="{{ route('usuarios.update', Crypt::encrypt($usuario->id)) }}">
                 @method('PUT')
                 @csrf
                 <label for="nome">Nome:</label>
@@ -107,7 +107,7 @@
                 </div>
 
                 @if (Route::currentRouteName() == 'usuarios.show')
-                    <a href="{{route('usuarios.edit', $usuario->id)}}">
+                    <a href="{{route('usuarios.edit', Crypt::encrypt($usuario->id))}}">
                         <button type="button">Modificar</button>
                     </a>
                 @else

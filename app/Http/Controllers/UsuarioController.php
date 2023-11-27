@@ -9,6 +9,7 @@ use App\Models\Mora;
 use App\Models\Municipio;
 use App\Models\Usuario;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
 
 class UsuarioController extends Controller {
      /**
@@ -80,7 +81,7 @@ class UsuarioController extends Controller {
      * Display the specified resource.
      */
     public function show(string $id){
-        $usuario = $this->usuarios->find($id);
+        $usuario = $this->usuarios->find(Crypt::decrypt($id));
         $municipios = $this->municipios;
         $cidades = $this->cidades;
         $enderecos = $this->enderecos;
@@ -98,7 +99,7 @@ class UsuarioController extends Controller {
      * Show the form for editing the specified resource.
      */
     public function edit(string $id){
-        $usuario = $this->usuarios->find($id);
+        $usuario = $this->usuarios->find(Crypt::decrypt($id));
         $municipios = $this->municipios;
         $cidades = $this->cidades;
         $enderecos = $this->enderecos;
@@ -114,7 +115,7 @@ class UsuarioController extends Controller {
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id){
-        $usuario = $this->usuarios->find($id);
+        $usuario = $this->usuarios->find(Crypt::decrypt($id));
         tap($this->usuarios->find($usuario->id))->update([
             'dados_acesso_id' => tap($this->dados_acesso->find($usuario->dados_acesso_id))->update([
                 'nome' => $request->nome,
@@ -136,7 +137,7 @@ class UsuarioController extends Controller {
             ])->id,
         ]);
 
-        return redirect()->route('usuarios.show', $usuario->id);
+        return redirect()->route('usuarios.show', Crypt::encrypt($usuario->id));
     }
 
     /**
