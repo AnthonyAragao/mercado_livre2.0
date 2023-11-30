@@ -3,7 +3,10 @@
 namespace App\Providers;
 
 // use Illuminate\Support\Facades\Gate;
+
+use App\Models\DadoAcesso;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Schema;
 
 class AuthServiceProvider extends ServiceProvider
@@ -22,6 +25,13 @@ class AuthServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+
+        Gate::define('isProducer', function (DadoAcesso $user) {
+            return !empty($user->produtor->first()) ;
+        });
+
+
+
         Schema::defaultStringLength(191);
     }
 }
