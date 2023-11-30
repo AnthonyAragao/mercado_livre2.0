@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Avaliacao;
+use App\Models\Compra;
 use App\Models\StatusAvaliacao;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Gate;
 
 class AvaliacaoController extends Controller
 {
@@ -29,8 +31,11 @@ class AvaliacaoController extends Controller
      */
     public function create(string $id)
     {
-        $id = Crypt::decrypt($id);
-        $compra = Auth::user()->usuario->first()->compra[$id - 1];
+        $compra = Compra::find(Crypt::decrypt($id));
+        
+        if(Gate::denies('opinarProduct', $compra)){
+            abort(403);
+        };
 
         return view('avaliacao.reviews', compact('compra'));
     }
