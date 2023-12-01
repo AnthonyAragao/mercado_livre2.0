@@ -5,6 +5,7 @@ use App\Http\Controllers\CompraController;
 use App\Http\Controllers\ProdutoController;
 use App\Http\Controllers\ProdutorController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\StripeController;
 use App\Http\Controllers\UsuarioController;
 use Illuminate\Support\Facades\Route;
 
@@ -49,6 +50,10 @@ Route::middleware('auth')->group(function () {
     Route::resource('pedido', CompraController::class);
     Route::resource('reviews', AvaliacaoController::class)->except('create');
     Route::get('/reviews/create/{id}', [AvaliacaoController::class, 'create'])->name('reviews.create');
+
+    Route::post('/session/{id}', [StripeController::class, 'session'])->name('session.post');
+
+
 });
 
 
