@@ -167,8 +167,12 @@ class ProdutoController extends Controller{
     public function destroy(string $id)
     {
         $produto = $this->repository->find($id);
-        $pivo = $produto->produtor_has_produto[0];
 
+        foreach ($produto->avaliacao as $avaliacao) {
+            $avaliacao->delete();
+        }
+        
+        $pivo = $produto->produtor_has_produto[0];
         $pivo->delete();
         $produto->delete();
 

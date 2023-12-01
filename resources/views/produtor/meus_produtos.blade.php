@@ -96,12 +96,18 @@
                         <span>{{$produtoDaLista->produto->vendas}} Vendas</span>
                     </div>
 
+
                     <div style="width: 240px; height:100%; display:flex; justify-content: center; align-items: center; flex-direction: column;">
                         <a href="{{route('produto.edit', [Crypt::encrypt($produtoDaLista->produto->id)])}}" style="text-decoration: none">Editar</a>
-                        <form action="{{ route('produto.destroy', [Crypt::encrypt($produtoDaLista->produto->id)]) }}" id="form" method="POST">
+
+                        <form action="{{ route('produto.destroy', [Crypt::encrypt($produtoDaLista->produto->id)] ) }}" id="form" method="POST">
                             @csrf
                             @method('DELETE')
-                            <a href="" onclick="excluirProduto(event)" style="text-decoration: none">Excluir</a>
+
+                            <button type="submit" style="display: flex; justify-content: center; color: #0d6efd;">
+                                Excluir
+                            </button>
+                            {{-- <a href="" onclick="excluirProduto(event)" style="text-decoration: none">Excluir</a> --}}
                         </form>
                     </div>
 
