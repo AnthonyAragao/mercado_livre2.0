@@ -211,7 +211,51 @@
         </div>
     </section>
 
+    <section style="display: flex; justify-content:center;  background-color: white; padding: 80px 0;">
+        <div style="display: flex; gap: 20px; max-width: 1200px;">
+            <div style="display: flex; align-items:center; flex-direction: column; width: 33.3333333333%; text-align: center; ">
+                <div style="height: 55px">
+                    <i class="fa-solid fa-credit-card fa-2xl"></i>
+                </div>
+                <h2 style="font-size: 1.5rem; color: #4b4b4b;">Escolha como pagar</h2>
+                <span style="
+                    width:90%;
+                    margin-bottom: 12px;
+                    color: #737373;
+                    font-size: 15px;">
+                    Com o Mercado Pago, você paga com cartão, boleto ou Pix. Você também pode pagar em até 12x no boleto com o Mercado Crédito.</span>
+                <a href="" style="text-decoration: none">Como pagar com Mercado Pago</a>
+            </div>
 
+
+            <div style="display: flex; align-items:center; flex-direction: column; width: 33.3333333333%;  text-align: center; border-left: 1px solid #dbd8d8;">
+                <div style="height: 55px">
+                    <i class="fa-solid fa-gift fa-2xl"></i>
+                </div>
+                <h2 style="font-size: 1.5rem; color: #4b4b4b;">Frete grátis a partir de R$ 79</h2>
+                <span style="
+                width:90%;
+                margin-bottom: 12px;
+                color: #737373;
+                font-size: 15px;">Ao se cadastrar no Mercado Livre, você tem frete grátis em milhares de produtos.</span>
+                <a href="" style="text-decoration: none">Consulte os Termos e Condições</a>
+            </div>
+
+
+            <div style="display: flex; align-items:center; flex-direction: column; width: 33.3333333333%; text-align: center; border-left: 1px solid #dbd8d8;">
+                <div style="height: 55px">
+                    <i class="fa-solid fa-shield-halved fa-2xl"></i>
+                </div>
+                <h2 style="font-size: 1.5rem; color: #4b4b4b;">Segurança, do início ao fim</h2>
+                <span style="
+                width: 90%;
+                margin-bottom: 12px;
+                color: #737373;
+                font-size: 15px;">Você não gostou do que comprou? Devolva! No Mercado Livre não há nada que você não possa fazer, porque você está sempre protegido.</span>
+                <a href="" style="text-decoration: none">Como te protegemos</a>
+            </div>
+        </div>
+    </section>
 @endsection
 
 @section('insert_script')
