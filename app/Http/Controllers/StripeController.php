@@ -2,15 +2,23 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Compra;
 use App\Models\Produto;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 
 class StripeController extends Controller{
+    protected $compras;
+    public function __construct(Compra $compras) {
+        $this->compras = $compras;
+    }
 
     public function session($id){
         $produto = Produto::find(Crypt::decrypt($id));
         \Stripe\Stripe::setApiKey(config('stripe.sk'));
+
+        // dd($stripe->paymentIntents)
 
         try {
            // Criar um produto no Stripe (associado ao produto no seu sistema)
@@ -41,36 +49,36 @@ class StripeController extends Controller{
             ]);
 
 
+            $this->salvarDadosNoBanco($produto, $session);
             return redirect()->away($session->url);
 
-        } catch (\Stripe\Exception\ApiErrorException $e) {
-            $api_error = $e->getMessage();
+        }catch (\Stripe\Exception\ApiErrorException $e) {
             return response()->json(['error' => $e->getMessage()], 500);
         }
 
 
-        if(empty($api_error) && $session){
-            $response = array(
-                'status' => 1,
-                'message' => 'Checkout Session created successfully!',
-                'sessionId' => $session->id
-            );
-            json_encode($response);
-        }else{
-            $response = array(
-                'status' => 0,
-                'error' => array(
-                    'message' => 'Checkout Session creation failed!'
-                )
-            );
-        }
+
+    }
 
 
 
+    public function salvarDadosNoBanco($produto, $session){
+        dd($produto->preco_desconto);
 
-
-
+        $dataAtual = Carbon::now()->toDateString();
+        $this->compras->create([
+            'session_id_stripe' => $session->id,
+            'data' => $dataAtual,
+            // 'preco_compra' =>
+            // 'usuario_id' =>
+        ]);
 
 
     }
+
+
+
+
+
+
 }
