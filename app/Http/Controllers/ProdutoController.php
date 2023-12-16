@@ -27,14 +27,16 @@ class ProdutoController extends Controller{
      */
     public function index(){
         $produtos = $this->repository->getAll();
+        $categorias =  $this->repository->categoriaComIcones();
 
-        return view('welcome', compact('produtos'));
+        return view('welcome', compact('produtos', 'categorias'));
     }
 
     public function search(Request $request){
         $produtos = $this->repository->query($request);
+        $categorias =  $this->repository->categoriaComIcones();
 
-        return view('welcome', compact('produtos'));
+        return view('welcome', compact('produtos', 'categorias'));
     }
 
 
@@ -51,8 +53,9 @@ class ProdutoController extends Controller{
     public function categories($id){
         $categoriaProduto = $this->categorias->find(Crypt::decrypt($id));;
         $produtos = $categoriaProduto->produto;
+        $categorias =  $this->repository->categoriaComIcones();
 
-        return view('welcome', compact('produtos'));
+        return view('welcome', compact('produtos','categorias'));
     }
 
     /**
@@ -107,13 +110,10 @@ class ProdutoController extends Controller{
         });
 
         // $avaliacoes = $produto->avaliacao;
-        $avaliacoes = $this->avaliacoes->with([
-                'produtoRelationship',
-                'compraRelationship.usuarioRelationShip',
-                'statusRelationship'
-                ])
-                ->where('produto_id', $produto->id)
-                ->get();
+        $avaliacoes = $this->avaliacoes
+            ->with(['produtoRelationship', 'compraRelationship.usuarioRelationShip','statusRelationship'])
+            ->where('produto_id', $produto->id)
+            ->get();
 
         $produtor = $produto->produtor_has_produto[0]->produtor;
 
