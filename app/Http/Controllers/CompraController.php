@@ -3,11 +3,23 @@
 namespace App\Http\Controllers;
 
 use App\Models\Compra;
+use App\Models\Exemplar;
+use Carbon\Carbon;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\DB;
 
 class CompraController extends Controller
 {
+    protected $compras, $exemplar;
+
+    public function __construct(Compra $compras, Exemplar $exemplar) {
+        $this->compras = $compras;
+        $this->exemplar = $exemplar;
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -36,9 +48,31 @@ class CompraController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
-    {
-        //
+    public function store(Request $request){
+        $productDetails = session('product_details');
+        DB::beginTransaction();
+
+        try{
+            $compra = $this->compras->create([
+                'preco_compra' => $productDetails['preco'],
+                'data' => Carbon::now()->toDateString(),
+                'usuario_id' => Auth::user()->usuario[0]->id,
+            ]);
+
+            $this->exemplar->create([
+                'compra_id' => $compra->id,
+                'pivo_id' => $productDetails['pivo_id'],
+                'preco' => $productDetails['preco'],
+            ]);
+
+            DB::commit();
+            session()->forget('product_details');
+
+            return redirect()->route('pedido.show', Crypt::encrypt($compra->id));
+        }catch(Exception $e){
+            DB::rollBack();
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
     }
 
     /**
@@ -46,7 +80,9 @@ class CompraController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $compra = $this->compras->find(Crypt::decrypt($id));
+        
+        return view('pedidos.detalhes_compra', compact('compra'));
     }
 
     /**

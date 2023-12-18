@@ -2,24 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Compra;
 use App\Models\Produto;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 
 class StripeController extends Controller{
-    protected $compras;
-    public function __construct(Compra $compras) {
-        $this->compras = $compras;
-    }
-
     public function session($id){
-        $produto = Produto::find(Crypt::decrypt($id));
         \Stripe\Stripe::setApiKey(config('stripe.sk'));
 
-        // dd($stripe->paymentIntents)
-
+        $produto = Produto::find(Crypt::decrypt($id));
+        $pivo = $produto->produtor_has_produto->first();
         try {
            // Criar um produto no Stripe (associado ao produto no seu sistema)
             $product = \Stripe\Product::create([
@@ -34,6 +27,12 @@ class StripeController extends Controller{
                 'currency' => 'BRL',
             ]);
 
+            session(['product_details' =>[
+                'preco' => $produto->preco_desconto,
+                'pivo_id' => $pivo->id
+            ]]);
+
+
             // Criar uma sessão de checkout e vincular ao preço criado
             $session = \Stripe\Checkout\Session::create([
                 'payment_method_types' => ['card'],
@@ -45,40 +44,13 @@ class StripeController extends Controller{
                 ],
                 'mode' => 'payment',
 
-                'success_url' => route('produto.index'),
+                'success_url' => route('success'),
+                // 'cancel_url'  => route('checkout'),
             ]);
 
-
-            $this->salvarDadosNoBanco($produto, $session);
             return redirect()->away($session->url);
-
         }catch (\Stripe\Exception\ApiErrorException $e) {
             return response()->json(['error' => $e->getMessage()], 500);
         }
-
-
-
     }
-
-
-
-    public function salvarDadosNoBanco($produto, $session){
-        dd($produto->preco_desconto);
-
-        $dataAtual = Carbon::now()->toDateString();
-        $this->compras->create([
-            'session_id_stripe' => $session->id,
-            'data' => $dataAtual,
-            // 'preco_compra' =>
-            // 'usuario_id' =>
-        ]);
-
-
-    }
-
-
-
-
-
-
 }

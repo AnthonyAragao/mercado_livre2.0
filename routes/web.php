@@ -47,7 +47,12 @@ Route::middleware('auth')->group(function () {
     // Route::put('/produto/update/{id}', [ProdutoController::class, 'update'])->name('produto.update');
     // Route::delete('/produto/destroy/{id}', [ProdutoController::class, 'destroy'])->name('produto.destroy');
 
-    Route::resource('pedido', CompraController::class);
+
+
+    Route::resource('pedido', CompraController::class)->except('store');
+    Route::get('/success', [CompraController::class, 'store'])->name('success');
+
+
     Route::resource('reviews', AvaliacaoController::class)->except('create');
     Route::get('/reviews/create/{id}', [AvaliacaoController::class, 'create'])->name('reviews.create');
 
