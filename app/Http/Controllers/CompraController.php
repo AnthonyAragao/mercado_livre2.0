@@ -50,8 +50,9 @@ class CompraController extends Controller
      */
     public function store(Request $request){
         $productDetails = session('product_details');
-        DB::beginTransaction();
+        $produto = $productDetails['produto'];
 
+        DB::beginTransaction();
         try{
             $compra = $this->compras->create([
                 'preco_compra' => $productDetails['preco'],
@@ -63,6 +64,11 @@ class CompraController extends Controller
                 'compra_id' => $compra->id,
                 'pivo_id' => $productDetails['pivo_id'],
                 'preco' => $productDetails['preco'],
+            ]);
+
+
+            tap($produto)->update([
+                'estoque' => $produto->estoque - 1,
             ]);
 
             DB::commit();
@@ -81,7 +87,7 @@ class CompraController extends Controller
     public function show(string $id)
     {
         $compra = $this->compras->find(Crypt::decrypt($id));
-        
+
         return view('pedidos.detalhes_compra', compact('compra'));
     }
 

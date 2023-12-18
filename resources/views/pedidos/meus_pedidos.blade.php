@@ -95,7 +95,7 @@
                         </div>
 
                         <div class="container-btns">
-                            <a href="">
+                            <a href="{{route('pedido.show', [Crypt::encrypt($compra->id)]) }}">
                                 <button class="btn" style="background-color: #3783f7; color: white; width: 100%;">
                                     Ver compra
                                 </button>

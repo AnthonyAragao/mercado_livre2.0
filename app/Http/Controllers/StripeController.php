@@ -13,6 +13,11 @@ class StripeController extends Controller{
 
         $produto = Produto::find(Crypt::decrypt($id));
         $pivo = $produto->produtor_has_produto->first();
+
+        if ($produto->estoque < 1) {
+            return response()->json(['error' => 'Produto indisponível'], 404);
+        }
+
         try {
            // Criar um produto no Stripe (associado ao produto no seu sistema)
             $product = \Stripe\Product::create([
@@ -29,7 +34,8 @@ class StripeController extends Controller{
 
             session(['product_details' =>[
                 'preco' => $produto->preco_desconto,
-                'pivo_id' => $pivo->id
+                'pivo_id' => $pivo->id,
+                'produto' => $produto
             ]]);
 
 
