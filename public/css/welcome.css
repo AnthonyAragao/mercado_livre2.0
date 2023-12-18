@@ -181,7 +181,7 @@ section{
 
 .container-category{
     max-width: 1200px;
-    margin: 100px 0px;
+    margin-bottom: 100px;
     display:flex;
     /* justify-content: center; */
     flex-wrap: wrap;
