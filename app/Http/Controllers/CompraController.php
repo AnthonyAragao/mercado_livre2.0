@@ -74,7 +74,7 @@ class CompraController extends Controller
             DB::commit();
             session()->forget('product_details');
 
-            return redirect()->route('pedido.show', Crypt::encrypt($compra->id));
+            return view('pedidos.compra_realizada', compact('compra'));
         }catch(Exception $e){
             DB::rollBack();
             return response()->json(['error' => $e->getMessage()], 500);
