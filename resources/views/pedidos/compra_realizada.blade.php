@@ -30,7 +30,7 @@
                             <a href="{{ route('registration') }}">Crie a sua conta</a>
                             <a href="{{ route('login') }}">Entre</a>
                         @endauth
-                        <a href="">Compras</a>
+                        <a href="{{route('pedido.index')}}">Compras</a>
                         <a href=""><i class="fa-solid fa-cart-shopping"></i></a>
                     </nav>
                 </div>
@@ -53,15 +53,6 @@
             <h2 style="margin-bottom: 4rem; font-size: 2rem; color: #333">Obrigado pela sua compra!</h2>
 
             <p style="font-size: 1.1rem; margin-bottom:40px">O seu pedido foi aceito e está sendo processado. Você irá receber uma notificação com os detalhes do pedido no seu e-mail.</p>
-
-            <a href="{{route('pedido.show', [Crypt::encrypt($compra->id)])}}">
-                <button class="btn" style="
-                    background-color: #3783f7;
-                    color: white; width: 100%;
-                    width:120px">
-                    Ver compra
-                </button>
-            </a>
         </div>
     </main>
 

@@ -20,6 +20,10 @@ class CompraController extends Controller
         $this->exemplar = $exemplar;
     }
 
+    public function congratulations(){
+        return view('pedidos.compra_realizada');
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -74,7 +78,7 @@ class CompraController extends Controller
             DB::commit();
             session()->forget('product_details');
 
-            return view('pedidos.compra_realizada', compact('compra'));
+            return redirect()->route('congratulations');
         }catch(Exception $e){
             DB::rollBack();
             return response()->json(['error' => $e->getMessage()], 500);

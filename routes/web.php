@@ -52,7 +52,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('pedido', CompraController::class)->except('store');
     Route::get('/success', [CompraController::class, 'store'])->name('success');
 
-
+    Route::get('/congratulations', [CompraController::class, 'congratulations'])->name('congratulations');
     Route::resource('reviews', AvaliacaoController::class)->except('create');
     Route::get('/reviews/create/{id}', [AvaliacaoController::class, 'create'])->name('reviews.create');
 
