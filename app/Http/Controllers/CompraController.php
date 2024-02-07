@@ -20,6 +20,7 @@ class CompraController extends Controller
         $this->exemplar = $exemplar;
     }
 
+
     public function congratulations(){
         return view('pedidos.compra_realizada');
     }
@@ -42,25 +43,25 @@ class CompraController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request){
+        \Stripe\Stripe::setApiKey(config('stripe.sk'));
+
         $productDetails = session('product_details');
         $produto = $productDetails['produto'];
+
+        $checkoutSession = \Stripe\Checkout\Session::retrieve($productDetails['session_id']);
 
         DB::beginTransaction();
         try{
             $compra = $this->compras->create([
                 'preco_compra' => $productDetails['preco'],
                 'data' => Carbon::now()->toDateString(),
+                'email_comprador' => $checkoutSession->customer_details->email,
+                'transaction_id' => $checkoutSession->payment_intent,
+                'payment_status' => $checkoutSession->payment_status,
+                'payment_method' => $checkoutSession->payment_method_types[0],
                 'usuario_id' => Auth::user()->usuario[0]->id,
             ]);
 
@@ -70,9 +71,9 @@ class CompraController extends Controller
                 'preco' => $productDetails['preco'],
             ]);
 
-
             tap($produto)->update([
                 'estoque' => $produto->estoque - 1,
+                'vendas' => $produto->vendas + 1,
             ]);
 
             DB::commit();
@@ -95,27 +96,4 @@ class CompraController extends Controller
         return view('pedidos.detalhes_compra', compact('compra'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
-    }
 }

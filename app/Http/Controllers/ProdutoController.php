@@ -69,8 +69,7 @@ class ProdutoController extends Controller{
      */
     public function store(Request $request)
     {
-        // dd($request->all());
-        $pivo = $this->pivo->create([
+        $this->pivo->create([
             'produtor_id' => Auth::user()->produtor->first()->id,
             'produto_id' => $this->produtos->create([
                 'imagem_01' => Helper::armazenarArquivo($request->imagens[0], 'files/produtos'),
@@ -98,7 +97,7 @@ class ProdutoController extends Controller{
      */
     public function show(string $id){
         $produto = $this->repository->find($id);
-        $categoriaProduto = $this->categorias->find($produto->categoria->id );
+        $categoriaProduto = $this->categorias->find($produto->categoria->id);
         $produtosCategoriaAll = $categoriaProduto->produto;
 
         // Filtrar os produtos para excluir o produto definido na primeira linha
@@ -106,14 +105,13 @@ class ProdutoController extends Controller{
             return $item->id !== $produto->id;
         });
 
-        // $avaliacoes = $produto->avaliacao;
         $avaliacoes = $this->avaliacoes->with([
                 'produtoRelationship',
                 'compraRelationship.usuarioRelationShip',
                 'statusRelationship'
-                ])
-                ->where('produto_id', $produto->id)
-                ->get();
+            ])
+            ->where('produto_id', $produto->id)
+            ->get();
 
         $produtor = $produto->produtor_has_produto[0]->produtor;
 
@@ -153,7 +151,6 @@ class ProdutoController extends Controller{
             // 'imagem_03' => isset($request->imagens[2]) ? Helper::armazenarArquivo($request->imagens[2], 'files/produtos') : null,
             // 'imagem_04' => isset($request->imagens[3]) ? Helper::armazenarArquivo($request->imagens[3], 'files/produtos') : null,
             // 'imagem_05' => isset($request->imagens[4]) ? Helper::armazenarArquivo($request->imagens[4], 'files/produtos') : null,
-
         ]);
 
 
@@ -171,7 +168,7 @@ class ProdutoController extends Controller{
         foreach ($produto->avaliacao as $avaliacao) {
             $avaliacao->delete();
         }
-        
+
         $pivo = $produto->produtor_has_produto[0];
         $pivo->delete();
         $produto->delete();

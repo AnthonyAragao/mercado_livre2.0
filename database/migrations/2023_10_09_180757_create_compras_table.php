@@ -13,8 +13,12 @@ return new class extends Migration
     {
         Schema::create('compras', function (Blueprint $table) {
             $table->id();
-            $table->float('preco_compra');
+            $table->string('transaction_id');
+            $table->string('payment_status');
+            $table->string('payment_method');
             $table->date('data');
+            $table->float('preco_compra');
+            $table->string('email_comprador');
             $table->foreignId('usuario_id')->constrained('usuarios');
             $table->timestamps();
         });

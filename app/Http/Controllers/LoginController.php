@@ -26,7 +26,7 @@ class LoginController extends Controller{
 
         // Verifica se existe usuario
         if(!$usuario){
-            return redirect()->back()->with('erro', 'Usuário não encontrado na nossa base de dados');
+            return redirect()->back()->with('erro', 'Usuário ou senha invalido');
         }
 
         // Verifica se a senha do usuario esta correta
@@ -51,7 +51,5 @@ class LoginController extends Controller{
 
         return redirect('/');
     }
-
-
 
 }

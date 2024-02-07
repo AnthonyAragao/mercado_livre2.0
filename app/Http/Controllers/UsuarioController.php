@@ -8,6 +8,7 @@ use App\Models\Endereco;
 use App\Models\Mora;
 use App\Models\Municipio;
 use App\Models\Usuario;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 
@@ -17,7 +18,7 @@ class UsuarioController extends Controller {
      *
      * @return void
      */
-    private $dados_acesso, $usuarios, $enderecos, $mora;
+    private $dados_acesso, $usuarios, $enderecos, $mora, $cidades, $municipios;
     public function __construct(DadoAcesso $dados_acesso, Usuario $usuarios, Endereco $enderecos, Mora $mora ){
         $this->dados_acesso = $dados_acesso;
         $this->usuarios = $usuarios;
@@ -50,7 +51,7 @@ class UsuarioController extends Controller {
      */
     public function store(Request $request){
         try{
-            $usuario = $this->usuarios->create([
+            $this->usuarios->create([
                 'dados_acesso_id' => $this->dados_acesso->create([
                     'nome' => $request->nome,
                     'email' => $request->email,
@@ -73,7 +74,7 @@ class UsuarioController extends Controller {
 
             return redirect()->route('login');
         }catch(Exception $e){
-
+            return redirect()->route('usuarios.create');
         }
     }
 

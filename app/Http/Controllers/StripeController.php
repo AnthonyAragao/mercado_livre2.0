@@ -3,11 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Produto;
-use Carbon\Carbon;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 
 class StripeController extends Controller{
+
     public function session($id){
         \Stripe\Stripe::setApiKey(config('stripe.sk'));
 
@@ -19,27 +18,18 @@ class StripeController extends Controller{
         }
 
         try {
-           // Criar um produto no Stripe (associado ao produto no seu sistema)
+            // Criar um produto no Stripe (associado ao produto no seu sistema)
             $product = \Stripe\Product::create([
                 'name' => $produto->nome,
                 'description' => $produto->descricao,
             ]);
 
-            // Criar um preço associado ao produto
             $price = \Stripe\Price::create([
                 'product' => $product->id,
                 'unit_amount' => ($produto->preco_desconto) * 100,
                 'currency' => 'BRL',
             ]);
 
-            session(['product_details' =>[
-                'preco' => $produto->preco_desconto,
-                'pivo_id' => $pivo->id,
-                'produto' => $produto
-            ]]);
-
-
-            // Criar uma sessão de checkout e vincular ao preço criado
             $session = \Stripe\Checkout\Session::create([
                 'payment_method_types' => ['card'],
                 'line_items' => [
@@ -54,9 +44,17 @@ class StripeController extends Controller{
                 // 'cancel_url'  => route('checkout'),
             ]);
 
+            session(['product_details' =>[
+                'preco' => $produto->preco_desconto,
+                'pivo_id' => $pivo->id,
+                'produto' => $produto,
+                'session_id' => $session->id,
+            ]]);
+
             return redirect()->away($session->url);
         }catch (\Stripe\Exception\ApiErrorException $e) {
             return response()->json(['error' => $e->getMessage()], 500);
         }
     }
+
 }

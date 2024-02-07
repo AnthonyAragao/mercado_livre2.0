@@ -9,6 +9,7 @@ use App\Models\Endereco;
 use App\Models\Mora;
 use App\Models\Municipio;
 use App\Models\Produtor;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 
@@ -18,7 +19,7 @@ class ProdutorController extends Controller{
      *
      * @return void
      */
-    private $dados_acesso, $produtores, $enderecos, $dados_empresa, $mora;
+    private $dados_acesso, $produtores, $enderecos, $dados_empresa, $mora, $cidades, $municipios;
     public function __construct(DadoAcesso $dados_acesso, DadoEmpresa $dados_empresa, Produtor $produtores, Endereco $enderecos, Mora $mora){
         $this->dados_acesso = $dados_acesso;
         $this->dados_empresa = $dados_empresa;
@@ -30,14 +31,6 @@ class ProdutorController extends Controller{
         $this->municipios = Municipio::all();
     }
 
-
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
-    }
 
     /**
      * Show the form for creating a new resource.
@@ -54,7 +47,7 @@ class ProdutorController extends Controller{
      */
     public function store(Request $request){
         try{
-            $produtor = $this->produtores->create([
+            $this->produtores->create([
                 'dados_acesso_id' => $this->dados_acesso->create([
                     'nome' => $request->nome,
                     'email' => $request->email,
@@ -81,11 +74,11 @@ class ProdutorController extends Controller{
                     'cnpj' => $request->cnpj,
                     'telefone' => $request->telefone_empresa,
                 ])->id,
-
             ]);
 
             return redirect()->route('login');
         }catch(Exception $e){
+            return redirect()->route('produtor.create');
         }
     }
 

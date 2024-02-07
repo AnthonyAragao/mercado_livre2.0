@@ -40,9 +40,7 @@
 
 
     <main>
-        <h2>
-            Thanks for your order! You have just completed your payment. The seller will reach out to you as soon as possible.
-        </h2>
+        {{dd($compra)}}
     </main>
 
 @endsection
