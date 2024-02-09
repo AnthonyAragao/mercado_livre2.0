@@ -6,6 +6,7 @@ use App\Http\Controllers\ProdutoController;
 use App\Http\Controllers\ProdutorController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StripeController;
+use App\Http\Controllers\StripeWebhookController;
 use App\Http\Controllers\UsuarioController;
 use Illuminate\Support\Facades\Route;
 
@@ -19,7 +20,6 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
 
 
 Route::get('/', [ProdutoController::class, 'index'])->name('listagem_produtos');
@@ -36,31 +36,23 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    Route::resource('usuarios', UsuarioController::class);
 
+    Route::resource('usuarios', UsuarioController::class);
     Route::resource('produtor', ProdutorController::class)->middleware('can:isProducer');
+
     Route::get('/meus-produtos', [ProdutoController::class, 'indexAuth'])->name('produto.indexAuth')->middleware('can:isProducer');
     Route::resource('produto', ProdutoController::class)->except('show')->middleware('can:isProducer');
-    // Route::get('/produto/create', [ProdutoController::class, 'create'])->name('produto.create');
-    // Route::post('/produto/store', [ProdutoController::class, 'store'])->name('produto.store');
-    // Route::get('/produto/edit/{id}', [ProdutoController::class, 'edit'])->name('produto.edit');
-    // Route::put('/produto/update/{id}', [ProdutoController::class, 'update'])->name('produto.update');
-    // Route::delete('/produto/destroy/{id}', [ProdutoController::class, 'destroy'])->name('produto.destroy');
-
-
 
     Route::resource('pedido', CompraController::class)->except('store');
-    Route::get('/success', [CompraController::class, 'store'])->name('success');
 
     Route::get('/congratulations', [CompraController::class, 'congratulations'])->name('congratulations');
     Route::resource('reviews', AvaliacaoController::class)->except('create');
     Route::get('/reviews/create/{id}', [AvaliacaoController::class, 'create'])->name('reviews.create');
 
     Route::post('/session/{id}', [StripeController::class, 'session'])->name('session.post');
-
-
 });
 
+Route::post('/stripe/webhook', [StripeWebhookController::class, 'handleWebhook']);
 
 
 Route::get('/usuarios/create', [UsuarioController::class, 'create'])->name('usuarios.create');
@@ -70,10 +62,7 @@ Route::get('/produtor/create', [ProdutorController::class, 'create'])->name('pro
 Route::post('/produtor', [ProdutorController::class, 'store'])->name('produtor.store');
 
 
-
-Route::get('/registration', function () {
-    return view('login.registration');
-})->name('registration');
+Route::get('/registration', function () { return view('login.registration'); })->name('registration');
 
 
 require __DIR__.'/auth.php';

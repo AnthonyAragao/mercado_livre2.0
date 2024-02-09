@@ -31,25 +31,23 @@ class StripeController extends Controller{
             ]);
 
             $session = \Stripe\Checkout\Session::create([
-                'payment_method_types' => ['card'],
+                'payment_method_types' => ['card', 'boleto'], //Substituir por variavel $metodoPagamento
                 'line_items' => [
                     [
                         'price' => $price->id,
                         'quantity' => 1,
                     ],
                 ],
+                'metadata' => [
+                    'produto' => $produto->id,
+                    'preco' => $produto->preco_desconto,
+                    'pivo_id' => $pivo->id,
+                    'usuario_id' => auth()->user()->id,
+                ],
                 'mode' => 'payment',
-
-                'success_url' => route('success'),
+                'success_url' => route('congratulations'),
                 // 'cancel_url'  => route('checkout'),
             ]);
-
-            session(['product_details' =>[
-                'preco' => $produto->preco_desconto,
-                'pivo_id' => $pivo->id,
-                'produto' => $produto,
-                'session_id' => $session->id,
-            ]]);
 
             return redirect()->away($session->url);
         }catch (\Stripe\Exception\ApiErrorException $e) {

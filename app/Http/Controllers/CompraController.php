@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Compra;
 use App\Models\Exemplar;
+use App\Models\Produto;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
@@ -13,13 +14,12 @@ use Illuminate\Support\Facades\DB;
 
 class CompraController extends Controller
 {
-    protected $compras, $exemplar;
+    // protected $compras, $exemplar;
 
-    public function __construct(Compra $compras, Exemplar $exemplar) {
-        $this->compras = $compras;
-        $this->exemplar = $exemplar;
-    }
-
+    // public function __construct(Compra $compras, Exemplar $exemplar) {
+    //     $this->compras = $compras;
+    //     $this->exemplar = $exemplar;
+    // }
 
     public function congratulations(){
         return view('pedidos.compra_realizada');
@@ -42,57 +42,64 @@ class CompraController extends Controller
         return view('pedidos.meus_pedidos', compact('compras'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request){
+
+    public function processaCompra($session)
+    {
         \Stripe\Stripe::setApiKey(config('stripe.sk'));
 
-        $productDetails = session('product_details');
-        $produto = $productDetails['produto'];
+        $checkoutSession = \Stripe\Checkout\Session::retrieve($session->id);
+        $produto = Produto::find($checkoutSession->metadata->produto);
 
-        $checkoutSession = \Stripe\Checkout\Session::retrieve($productDetails['session_id']);
+        $compra = Compra::create([
+            'preco_compra' => $checkoutSession->metadata->preco,
+            'data' => Carbon::now()->toDateString(),
+            'email_comprador' => $checkoutSession->customer_details->email,
+            'transaction_id' => $checkoutSession->payment_intent,
+            'payment_status' => $checkoutSession->payment_status,
+            'payment_method' => $checkoutSession->payment_method_types[0],
+            'usuario_id' =>  $checkoutSession->metadata->usuario_id,
+        ]);
 
-        DB::beginTransaction();
-        try{
-            $compra = $this->compras->create([
-                'preco_compra' => $productDetails['preco'],
-                'data' => Carbon::now()->toDateString(),
-                'email_comprador' => $checkoutSession->customer_details->email,
-                'transaction_id' => $checkoutSession->payment_intent,
-                'payment_status' => $checkoutSession->payment_status,
-                'payment_method' => $checkoutSession->payment_method_types[0],
-                'usuario_id' => Auth::user()->usuario[0]->id,
-            ]);
+        Exemplar::create([
+            'compra_id' => $compra->id,
+            'pivo_id' => $checkoutSession->metadata->pivo_id,
+            'preco' => $checkoutSession->metadata->preco,
+        ]);
 
-            $this->exemplar->create([
-                'compra_id' => $compra->id,
-                'pivo_id' => $productDetails['pivo_id'],
-                'preco' => $productDetails['preco'],
-            ]);
+        $this->atualizarEstoque($produto, $checkoutSession->payment_status);
+    }
 
+    public function atualizarCompra($session)
+    {
+        \Stripe\Stripe::setApiKey(config('stripe.sk'));
+
+        $checkoutSession = \Stripe\Checkout\Session::retrieve($session->id);
+        $compra = Compra::where('transaction_id', $checkoutSession->payment_intent)->first();
+
+        $compra->update([
+            'payment_status' => $checkoutSession->payment_status,
+        ]);
+
+        $produto = Produto::find($checkoutSession->metadata->produto);
+
+        $this->atualizarEstoque($produto, $checkoutSession->payment_status);
+    }
+
+
+    private function atualizarEstoque($produto, $statusPagamento)
+    {
+        if($statusPagamento == 'paid'){
             tap($produto)->update([
                 'estoque' => $produto->estoque - 1,
                 'vendas' => $produto->vendas + 1,
             ]);
-
-            DB::commit();
-            session()->forget('product_details');
-
-            return redirect()->route('congratulations');
-        }catch(Exception $e){
-            DB::rollBack();
-            return response()->json(['error' => $e->getMessage()], 500);
         }
     }
 
-    /**
-     * Display the specified resource.
-     */
+
     public function show(string $id)
     {
-        $compra = $this->compras->find(Crypt::decrypt($id));
-
+        $compra = Compra::find(Crypt::decrypt($id));
         return view('pedidos.detalhes_compra', compact('compra'));
     }
 

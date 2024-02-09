@@ -19,9 +19,9 @@ class EloquentProdutoRepository implements ProdutoRepository{
         $search = $request->input('query');
 
         $produtos = $this->model
-                ->where('nome', 'like' ,'%'.$search.'%')
-                ->orWhere('descricao', 'like', '%'. $search . '%')
-                ->get();
+            ->where('nome', 'like' ,'%'.$search.'%')
+            ->orWhere('descricao', 'like', '%'. $search . '%')
+            ->get();
 
         return $produtos;
     }
