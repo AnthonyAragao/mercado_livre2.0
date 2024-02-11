@@ -12,46 +12,150 @@
                 <img src="{{ asset('images/mercado-libre.png') }}" alt="">
             </a>
 
-            <form action="{{route('produto.search')}}" method="GET">
-                <div style="display: flex">
-                    <input type="text" class="search" name="query" placeholder="Buscar produtos, marcas e muito mais...">
-                    <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
-                </div>
-            </form>
-
-            @if (Route::has('login'))
-                <div>
-                    <nav style="">
-                        @auth
-                            <a href="{{ url('/dashboard') }}">Dashboard</a>
-
-                            <a href="{{route('produto.indexAuth')}}">Meus produtos</a>
-                        @else
-                            <a href="{{ route('registration') }}">Crie a sua conta</a>
-                            <a href="{{ route('login') }}">Entre</a>
-                        @endauth
-                        <a href="{{route('pedido.index')}}">Compras</a>
-                        <a href=""><i class="fa-solid fa-cart-shopping"></i></a>
-                    </nav>
-                </div>
-            @endif
+            <a href="">Contato</a>
         </div>
     </header>
 
 
-    <main style="padding: 80px">
-       <h2>Selecione o metodo de pagamento</h2>
+    <main>
+        <div class="container">
+            <div style="margin-top: 30px; width: 800px; display:flex; flex-direction: column;">
+                <h2 style="font-size: 18px; margin-bottom:30px">Como você prefere pagar?</h2>
 
-       <form method="POST" action="{{ route('session.post', [Crypt::encrypt($produto->id), 'card']) }}">
-            @csrf
-            <button type="submit" class="btn call-action">Comprar com Cartão</button>
-        </form>
+                <a href="{{ route('session', [Crypt::encrypt($produto->id), 'card']) }}"
+                    style="
+                        width: 100%;
+                        height:80px;
+                        background-color: #fff;
+                        cursor:pointer;
+                        text-decoration:none;
+                        display: flex;
+                        align-items: center;
+                        border: 1px solid #e0e0e0;
+                        padding: 0 30px;
+                        gap: 20px;"
+                    >
+
+                    <div style="height: 50px;  width:50px; background-color:#e0e0e0; border-radius:50%; display:flex;  justify-content: center; align-items: center">
+                        <i class="fa-solid fa-credit-card" style="font-size: 24px;"></i>
+                    </div>
+
+                    <div>
+                        <p style="font-size:14px; color:black">Comprar com Cartão</p>
+                    </div>
+                </a>
+
+                <a href="{{ route('session', [Crypt::encrypt($produto->id), 'card']) }}"
+                    style="
+                        width: 100%;
+                        height:80px;
+                        background-color: #fff;
+                        cursor:pointer;
+                        text-decoration:none;
+                        display: flex;
+                        align-items: center;
+                        border: 1px solid #e0e0e0;
+                        padding: 0 30px;
+                        gap: 20px;"
+                    >
+
+                    <div style="height: 50px;  width:50px; background-color:#e0e0e0; border-radius:50%; display:flex;  justify-content: center; align-items: center">
+                        <i class="fa-solid fa-credit-card" style="font-size: 24px;"></i>
+                    </div>
+
+                    <div>
+                        <p style="font-size:14px; color:black">Comprar com Cartão</p>
+                    </div>
+                </a>
+
+                <a href="{{ route('session', [Crypt::encrypt($produto->id), 'card']) }}"
+                    style="
+                        width: 100%;
+                        height:80px;
+                        background-color: #fff;
+                        cursor:pointer;
+                        text-decoration:none;
+                        display: flex;
+                        align-items: center;
+                        border: 1px solid #e0e0e0;
+                        padding: 0 30px;
+                        gap: 20px;"
+                    >
+
+                    <div style="height: 50px;  width:50px; background-color:#e0e0e0; border-radius:50%; display:flex;  justify-content: center; align-items: center">
+                        <i class="fa-solid fa-credit-card" style="font-size: 24px;"></i>
+                    </div>
+
+                    <div>
+                        <p style="font-size:14px; color:black">Comprar com Cartão</p>
+                    </div>
+                </a>
+
+                <span style="margin-top: 20px; font-size:12px">Com outros meios de pagamento</span>
 
 
-        <form method="POST" action="{{ route('session.post', [Crypt::encrypt($produto->id), 'boleto']) }}">
-            @csrf
-            <button type="submit" class="btn call-action">Boleto</button>
-        </form>
+                <a href="{{ route('session', [Crypt::encrypt($produto->id), 'boleto']) }}"
+                    style="
+                        width: 100%;
+                        height:80px;
+                        background-color: #fff;
+                        cursor:pointer;
+                        text-decoration:none;
+                        display: flex;
+                        align-items: center;
+                        border: 1px solid #e0e0e0;
+                        margin-top: 20px;
+                        padding: 0 30px;
+                        gap: 20px;"
+                    >
+
+                    <div style="height: 50px;  width:50px; background-color:#e0e0e0; border-radius:50%; display:flex;  justify-content: center; align-items: center">
+                        <i class="fa-brands fa-cc-stripe" style="font-size: 24px;"></i>
+                    </div>
+
+                    <div>
+                        <p style="font-size:14px; color:black">Boleto</p>
+                        <span style="font-size:12px; color:#aaa">Será aprovado em 1 a 2 dias</span>
+                    </div>
+                </a>
+            </div>
+
+            <div style="
+                background-color: #f7f7f7;
+                width:350px; display:flex;
+                justify-content: center;
+                flex-direction: column;
+                padding: 60px 30px;
+                gap: 12px; "
+                >
+                <p style="font-size: 14px; font-weight: 600;">Resumo da compra</p>
+
+                <hr>
+
+                <div>
+                    <div style="display: flex; justify-content: space-between;">
+                        <span style="font-size: 14px;">Produto</span>
+                        <span style="font-size: 14px;">R$ 259,00</span>
+                    </div>
+
+                    <div style="display: flex; justify-content: space-between;">
+                        <span style="font-size: 14px;">Frete</span>
+                        <span style="font-size: 14px;">Grátis</span>
+                    </div>
+                </div>
+
+                <hr>
+
+                <div style="display: flex; justify-content: space-between;">
+                    <span style="font-size: 14px;">Você pagará</span>
+                    <span style="font-size: 14px; font-weight: 600">R$ 259,00</span>
+                </div>
+
+
+            </div>
+
+
+        </div>
     </main>
 
 @endsection

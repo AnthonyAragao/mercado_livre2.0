@@ -1,7 +1,7 @@
 @extends('templates.template_view')
 
 @section('insert_head')
-    <link rel="stylesheet" href="{{ asset('css/meu_pedidos.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/meus_pedidos.css') }}">
     <title>Mercado libre</title>
 @endsection
 
