@@ -108,12 +108,10 @@
                         @endauth
 
                         <div>
-                            <a href="">
-                                <form method="POST" action="{{route('session.post' , [Crypt::encrypt($produto->id)])}}">
-                                    @csrf
-
-                                    <button type="submit" class="btn call-action">Comprar</button>
-                                </form>
+                            <a href="{{route('metodo-pagamento', [Crypt::encrypt($produto->id)])}}">
+                                <button type="submit" class="btn call-action">
+                                    Comprar
+                                </button>
                             </a>
 
                             <button class="btn add-cart">

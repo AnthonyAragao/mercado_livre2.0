@@ -49,7 +49,9 @@ Route::middleware('auth')->group(function () {
     Route::resource('reviews', AvaliacaoController::class)->except('create');
     Route::get('/reviews/create/{id}', [AvaliacaoController::class, 'create'])->name('reviews.create');
 
-    Route::post('/session/{id}', [StripeController::class, 'session'])->name('session.post');
+    Route::post('/session/{id}/{payment_method}', [StripeController::class, 'session'])->name('session.post');
+    Route::get('/metodo-pagamento/{id}', [CompraController::class, 'metodoPagamento'])->name('metodo-pagamento');
+
 });
 
 Route::post('/stripe/webhook', [StripeWebhookController::class, 'handleWebhook']);

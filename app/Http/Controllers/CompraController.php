@@ -14,20 +14,16 @@ use Illuminate\Support\Facades\DB;
 
 class CompraController extends Controller
 {
-    // protected $compras, $exemplar;
-
-    // public function __construct(Compra $compras, Exemplar $exemplar) {
-    //     $this->compras = $compras;
-    //     $this->exemplar = $exemplar;
-    // }
-
     public function congratulations(){
         return view('pedidos.compra_realizada');
     }
 
-    /**
-     * Display a listing of the resource.
-     */
+    public function metodoPagamento(){
+        $produto = Produto::find(Crypt::decrypt(request('id')));
+        
+        return view('pedidos.metodo_pagamento', compact('produto'));
+    }
+
     public function index(){
         $usuario = Auth::user()->usuario[0];
 
@@ -42,6 +38,11 @@ class CompraController extends Controller
         return view('pedidos.meus_pedidos', compact('compras'));
     }
 
+    public function show(string $id)
+    {
+        $compra = Compra::find(Crypt::decrypt($id));
+        return view('pedidos.detalhes_compra', compact('compra'));
+    }
 
     public function processaCompra($session)
     {
@@ -69,23 +70,6 @@ class CompraController extends Controller
         $this->atualizarEstoque($produto, $checkoutSession->payment_status);
     }
 
-    public function atualizarCompra($session)
-    {
-        \Stripe\Stripe::setApiKey(config('stripe.sk'));
-
-        $checkoutSession = \Stripe\Checkout\Session::retrieve($session->id);
-        $compra = Compra::where('transaction_id', $checkoutSession->payment_intent)->first();
-
-        $compra->update([
-            'payment_status' => $checkoutSession->payment_status,
-        ]);
-
-        $produto = Produto::find($checkoutSession->metadata->produto);
-
-        $this->atualizarEstoque($produto, $checkoutSession->payment_status);
-    }
-
-
     private function atualizarEstoque($produto, $statusPagamento)
     {
         if($statusPagamento == 'paid'){
@@ -94,13 +78,6 @@ class CompraController extends Controller
                 'vendas' => $produto->vendas + 1,
             ]);
         }
-    }
-
-
-    public function show(string $id)
-    {
-        $compra = Compra::find(Crypt::decrypt($id));
-        return view('pedidos.detalhes_compra', compact('compra'));
     }
 
 }
