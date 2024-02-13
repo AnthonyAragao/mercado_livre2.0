@@ -52,10 +52,97 @@ button{
     cursor: pointer;
 }
 
-
+/* Container geral */
 .container{
     max-width: 1222px;
     width: 100%;
     display: flex;
     justify-content: space-between;
+}
+
+/* Card Meio de pagamento */
+.methods-payments{
+    margin-top: 30px;
+    width: 800px;
+    display:flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+
+.methods-payments h2{
+    font-size: 18px;
+    margin-bottom:30px;
+}
+
+.methods-payments span{
+    font-size:12px;
+}
+
+.card-payment{
+    width: 100%;
+    height:80px;
+    background-color: #fff;
+    cursor:pointer;
+    text-decoration:none;
+    display: flex;
+    align-items: center;
+    border: 1px solid #e0e0e0;
+    padding: 0 30px;
+    gap: 20px;
+}
+
+.img-method-payment{
+    height: 50px;
+    width:50px;
+    background-color:#e0e0e0;
+    border-radius:50%;
+    display:flex;
+    justify-content: center;
+    align-items: center
+}
+
+.img-method-payment i{
+    font-size: 24px;
+}
+
+.card-payment p{
+    font-size:14px;
+    color:black;
+}
+
+.description-method-payment p{
+    font-size:14px;
+    color:black;
+}
+
+.description-method-payment span{
+    font-size:12px;
+    color:#aaa;
+}
+
+
+/* Card detalhes da compra */
+.purchase-details{
+    background-color: #f7f7f7;
+    width:350px; display:flex;
+    justify-content: center;
+    flex-direction: column;
+    padding: 60px 30px;
+    gap: 12px;
+}
+
+.purchase-details p{
+    font-size: 14px;
+    font-weight: 600;
+}
+
+
+.section-info{
+    display: flex;
+    justify-content: space-between;
+}
+
+.section-info span{
+    font-size: 14px;
 }
