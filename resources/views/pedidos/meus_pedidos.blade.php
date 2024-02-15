@@ -10,12 +10,12 @@
 @section('insert_body')
     <header>
         <div class="logo">
-            <a href="{{route("listagem_produtos")}}" style="height: 100%">
+            <a href="{{route("listagem_produtos")}}">
                 <img src="{{ asset('images/mercado-libre.png') }}" alt="">
             </a>
 
             <form action="{{route('produto.search')}}" method="GET">
-                <div style="display: flex">
+                <div class="d-flex">
                     <input type="text" class="search" name="query" placeholder="Buscar produtos, marcas e muito mais...">
                     <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
                 </div>
@@ -23,10 +23,9 @@
 
             @if (Route::has('login'))
                 <div>
-                    <nav style="">
+                    <nav>
                         @auth
                             <a href="{{ url('/dashboard') }}">Dashboard</a>
-
                             <a href="{{route('produto.indexAuth')}}">Meus produtos</a>
                         @else
                             <a href="{{ route('registration') }}">Crie a sua conta</a>
@@ -41,19 +40,13 @@
     </header>
 
     <main>
-        <div class="container">
+        <div class="container-requests">
             <h2>Compras</h2>
 
             <div class="comment-block">
                 <span>
                     <i class="fa-solid fa-star"></i> Alguns produtos esperam sua opinião
                 </span>
-
-                {{-- <a href="{{route('reviews.index')}}">
-                    <button class="btn" style="color: #3483fa;">
-                        Opinar
-                    </button>
-                </a> --}}
             </div>
 
             @foreach ($compras as $compra)
@@ -61,16 +54,16 @@
                     <div class="date">
                         <p>
                             <?php
-                            $meses = array(
-                                'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
-                                'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'
-                            );
+                                $meses = array(
+                                    'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
+                                    'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'
+                                );
 
-                            $timestamp = strtotime($compra->data);
-                            $dia = date("j", $timestamp);
-                            $mes = $meses[date("n", $timestamp) - 1];
+                                $timestamp = strtotime($compra->data);
+                                $dia = date("j", $timestamp);
+                                $mes = $meses[date("n", $timestamp) - 1];
 
-                            echo $dia . " de " . $mes;
+                                echo $dia . " de " . $mes;
                             ?>
                         </p>
                     </div>

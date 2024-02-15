@@ -38,6 +38,10 @@ header{
     font-weight: 500;
 }
 
+.logo a:first-child{
+    height: 100%;
+}
+
 /* main */
 body{
     background-color: #ededed;
@@ -72,7 +76,7 @@ button{
 
 .methods-payments h2{
     font-size: 18px;
-    margin-bottom:30px;
+    margin:20px 0;
 }
 
 .methods-payments span{
@@ -130,6 +134,7 @@ button{
     flex-direction: column;
     padding: 60px 30px;
     gap: 12px;
+    border: 1px solid #e0e0e0;
 }
 
 .purchase-details p{

@@ -8,7 +8,7 @@
 @section('insert_body')
     <header>
         <div class="logo">
-            <a href="{{route("listagem_produtos")}}" style="height: 100%">
+            <a href="{{route("listagem_produtos")}}" >
                 <img src="{{ asset('images/mercado-libre.png') }}" alt="">
             </a>
 
