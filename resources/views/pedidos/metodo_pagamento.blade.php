@@ -45,9 +45,8 @@
             </div>
 
             <div class="purchase-details">
-                <p>Resumo da compra</p>
+                <p>Resumo da compra</p><hr>
 
-                <hr>
                 <div>
                     <div class="section-info">
                         <span>Produto</span>
@@ -66,8 +65,6 @@
                     <span style="font-weight: 600">R$ {{ number_format($produto->preco_desconto, 2, ',', '.') }}</span>
                 </div>
             </div>
-
         </div>
     </main>
-
 @endsection

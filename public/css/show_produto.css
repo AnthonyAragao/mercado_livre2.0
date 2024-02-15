@@ -19,6 +19,10 @@
     gap: 50px;
 }
 
+.logo a{
+    height: 100%;
+}
+
 .logo img{
     height: 100%;
     padding: 10px;
@@ -221,6 +225,10 @@ main{
     margin-top: 10px
 }
 
+.card-information-buy div i{
+    color: rgba(0,0,0,.55);
+}
+
 .information-about{
     display: flex;
     flex-direction:column
@@ -304,10 +312,44 @@ a{
     margin: 24px 0
 }
 
+
+.container-icon-user{
+    display: flex;
+    gap:8px;
+    margin-bottom: 3px;
+}
+
+.container-icon-user span{
+    margin-top: 3px;
+}
+
+.icon-user{
+    background-color: rgba(0,0,0,.55);
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.icon-user i{
+    color: #bbb;
+}
+
+
 .container-stars{
     display: flex;
     justify-content: space-between ;
     margin-bottom:10px
+}
+
+.color-stars-blue{
+    color: rgb(52, 131, 250);;
+}
+
+.color-stars-black{
+    color: rgba(0,0,0,.55);
 }
 
 .formatted-date{
@@ -345,7 +387,6 @@ a{
     color: #494949;
 }
 
-
 .feedback-dislike{
     border: 1px solid #c4c4c4;
     width: 30px;
@@ -381,6 +422,12 @@ a{
 
 
 /* Card dos produtos */
+.centralize-container-product{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 40px;
+}
+
 .container-product-category{
     max-width: 1196px;
     display: flex;
@@ -391,6 +438,11 @@ a{
     border-radius: 6px;
 }
 
+.container-product-category h2{
+    width: 100%;
+    margin-left:3px;
+    font-size:26px;
+}
 
 .card-product-category{
     background-color: rgb(255, 255, 255);
@@ -425,6 +477,10 @@ a{
 .card-product-category a{
     text-decoration: none;
     color: inherit;
+}
+
+.img-product-category{
+    position: relative;
 }
 
 .img-product-category img{
@@ -466,6 +522,23 @@ a{
     overflow: hidden;
     text-overflow: ellipsis;
     word-break: break-word;
+    font-size: 14px;
+}
+
+.font-weight-500{
+    font-size:14px;
+    font-weight: 500;
+}
+
+.font-weight-600{
+    font-size:14px;
+    font-weight: 600;
+}
+
+.discount-full{
+    font-size:12px;
+    font-weight: 900;
+    font-style:italic;
 }
 
 .price-product span:first-child{

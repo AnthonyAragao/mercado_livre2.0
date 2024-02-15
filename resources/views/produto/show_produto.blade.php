@@ -8,39 +8,36 @@
 @section('insert_body')
     <header>
         <div class="logo">
-            <a href="{{route('listagem_produtos')}}" style="height: 100%">
+            <a href="{{route('listagem_produtos')}}">
                 <img src="{{ asset('images/mercado-libre.png') }}" alt="">
             </a>
 
             <form action="{{route('produto.search')}}" method="GET">
-                <div style="display: flex">
+                <div class="d-flex">
                     <input type="text" class="search" name="query" placeholder="Buscar produtos, marcas e muito mais...">
                     <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
                 </div>
             </form>
 
             @if (Route::has('login'))
-                <div>
-                    <nav style="">
-                        @auth
-                            <a href="{{ url('/dashboard') }}">Dashboard</a>
-
-                            <a href="{{route('produto.indexAuth')}}">Meus produtos</a>
-                        @else
-                            <a href="{{ route('registration') }}">Crie a sua conta</a>
-                            <a href="{{ route('login') }}">Entre</a>
-                        @endauth
-                        <a href="{{route('pedido.index')}}">Compras</a>
-                        <a href=""><i class="fa-solid fa-cart-shopping"></i></a>
-                    </nav>
-                </div>
+                <nav>
+                    @auth
+                        <a href="{{ url('/dashboard') }}">Dashboard</a>
+                        <a href="{{route('produto.indexAuth')}}">Meus produtos</a>
+                    @else
+                        <a href="{{ route('registration') }}">Crie a sua conta</a>
+                        <a href="{{ route('login') }}">Entre</a>
+                    @endauth
+                    <a href="{{route('pedido.index')}}">Compras</a>
+                    <a href=""><i class="fa-solid fa-cart-shopping"></i></a>
+                </nav>
             @endif
         </div>
     </header>
 
     <main>
         <div class="container-product">
-            <div style="display: flex">
+            <div class="d-flex">
                 <div class="card-img-product">
                     <div class="container-imgs-small">
                         @for ($i = 1; $i <= 5; $i++)
@@ -98,31 +95,21 @@
                             <a href="" style="color:#013b93">
                                 <div class="send">
                                     <i class="fa-solid fa-location-dot"></i>
-                                    <span>
-                                        Enviar para {{ explode(' ', Auth::user()->nome)[0] }} -
-                                        {{Auth::user()->mora->endereco->municipio->nome}} -
-                                        {{Auth::user()->mora->endereco->cep}}
-                                    </span>
+                                    <span>Enviar para {{Auth::user()->printEndereco()}}</span>
                                 </div>
                             </a>
                         @endauth
 
                         <div>
                             <a href="{{route('metodo-pagamento', [Crypt::encrypt($produto->id)])}}">
-                                <button type="submit" class="btn call-action">
-                                    Comprar
-                                </button>
+                                <button type="submit" class="btn call-action">Comprar</button>
                             </a>
 
-                            <button class="btn add-cart">
-                                Adicionar ao carrinho
-                            </button>
+                            <button class="btn add-cart">Adicionar ao carrinho</button>
                         </div>
 
                         <div class="card-information-buy">
-                            <div>
-                                <i class="fa-solid fa-share fa-rotate-180" style="color: rgba(0,0,0,.55);"></i>
-                            </div>
+                            <div><i class="fa-solid fa-share fa-rotate-180"></i></div>
 
                             <div class="information-about">
                                 <a href="">Devolução grátis.</a>
@@ -131,9 +118,7 @@
                         </div>
 
                         <div class="card-information-buy">
-                            <div>
-                            <i class="fa-solid fa-shield-halved" style="color: rgba(0,0,0,.55);"></i>
-                            </div>
+                            <div><i class="fa-solid fa-shield-halved"></i></div>
 
                             <div class="information-about">
                                 <a href="">Compra Garantida.</a>
@@ -155,19 +140,12 @@
                             @foreach ($avaliacoes->take(5) as $avaliacao)
                                 <div class="line"></div>
 
-                                <div style="display: flex; gap:8px; margin-bottom: 3px;">
-                                    <div style="
-                                        background-color: rgba(0,0,0,.55);
-                                        padding: 6px;
-                                        border-radius: 50%;
-                                        display: flex;
-                                        justify-content: center;">
+                                <div class="container-icon-user">
+                                    <div class="icon-user">
                                         <i class="fa-regular fa-user"></i>
                                     </div>
 
-                                    <span style="margin-top: 3px">
-                                        {{ $avaliacao->compra->usuario->dado_acesso->nome }}
-                                    </span>
+                                    <span> {{ $avaliacao->compra->usuario->dado_acesso->nome }} </span>
                                 </div>
 
                                 <div class="container-stars">
@@ -179,10 +157,10 @@
 
                                         @for ($i = 0; $i < $numEstrelas; $i++)
                                             @if ($starsBlue > 0)
-                                                <i class="fa-solid fa-star fa-xs" style="color: rgb(52, 131, 250);"></i>
+                                                <i class="fa-solid fa-star fa-xs color-stars-blue"></i>
                                                 @php $starsBlue-- @endphp
                                             @else
-                                                <i class="fa-regular fa-star fa-xs" style="color: rgba(0,0,0,.55);;"></i>
+                                                <i class="fa-regular fa-star fa-xs color-stars-black"></i>
                                             @endif
                                         @endfor
                                     </div>
@@ -211,35 +189,36 @@
         </div>
     </main>
 
-    <div style="display: flex; justify-content: center; margin-bottom: 40px">
+    <div class="centralize-container-product">
         <div class="container-product-category">
-            <h2 style="width: 100%; margin-left:3px; font-size:26px">Quem comprou este produto tambem comprou</h2>
+            <h2>Quem comprou este produto tambem comprou</h2>
+
             @foreach ( $produtosCategoria->take(5) as $produto )
                 <div class="card-product-category">
                     <a href="{{route('exibir_produto.show', [Crypt::encrypt($produto->id)] )}}">
-
-                        <div class="img-product-category" style="position: relative">
+                        <div class="img-product-category">
                             <div class="heart d-none">
                                 <i class="fa-regular fa-heart"></i>
                             </div>
+
                             <img src="{{ asset('files/produtos')}}/{{$produto->imagem_01}}">
                         </div>
 
                         <div class="description-product">
                             <span class="previous-price d-none">R$ {{$produto->preco}}</span>
-                            <div style="">
-                                <div>
-                                    <span style="font-size: 22px">R$ {{ number_format(($produto->preco_desconto),0,',','.')}}</span>
-                                    <span class="color-green" style="font-size:14px; font-weight: 500;">{{$produto->desconto}}% OFF</span>
-                                </div>
-                                <span class="color-green" style="font-size:14px; font-weight: 500;">10x R$ {{ number_format(($produto->preco_desconto/10),2,',','.')}} sem juros</span>
+
+                            <div>
+                                <span style="font-size: 22px">R$ {{ number_format(($produto->preco_desconto),0,',','.')}}</span>
+                                <span class="color-green font-weight-500">{{$produto->desconto}}% OFF</span>
                             </div>
 
-                            <span class="color-green" style="font-size:14px; font-weight: 600;">
-                                Frete grátis  <span style="font-size:12px; font-weight: 900; font-style:italic"><i class="fa-solid fa-bolt-lightning"></i> FULL</span>
+                            <span class="color-green font-weight-500">10x R$ {{ number_format(($produto->preco_desconto/10),2,',','.')}} sem juros</span>
+
+                            <span class="color-green font-weight-600">
+                                Frete grátis  <span class="discount-full"><i class="fa-solid fa-bolt-lightning"></i> FULL</span>
                             </span>
 
-                            <p style="font-size: 14px">{{$produto->descricao}}</p>
+                            <p>{{$produto->descricao}}</p>
                         </div>
                     </a>
                 </div>

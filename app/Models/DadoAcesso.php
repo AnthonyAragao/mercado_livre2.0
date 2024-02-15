@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\Auth;
 
 class DadoAcesso extends Authenticatable{
     /**
@@ -25,20 +26,13 @@ class DadoAcesso extends Authenticatable{
      * The attributes that  should be hidden for arrays
     * @var array
     */
-    protected $hidden = [
-
-
-    ];
-
+    protected $hidden = [];
 
     /**
      * The accessors to append to the model's arrays form
     * @var array
     */
-    protected $appends = [
-
-
-    ];
+    protected $appends = [];
 
     // Getters e Setters
     // public function getEnderecoAttribute(){
@@ -80,6 +74,12 @@ class DadoAcesso extends Authenticatable{
 
     public function setEnderecoAttribute($value){
         $this->attributes['mora_id'] = Mora::where('id', $value)->first()->id;
+    }
+
+
+    // String de endereço formatada
+    public function printEndereco(){
+        return explode(' ', Auth::user()->nome)[0] . ' - ' . Auth::user()->mora->endereco->municipio->nome . ' - ' . Auth::user()->mora->endereco->cep;
     }
 
     // Relacionamentos
