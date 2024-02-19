@@ -1,7 +1,7 @@
 @extends('templates.template_view')
 
 @section('insert_head')
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/meus_pedidos.css') }}">
     <title>Mercado libre</title>
 @endsection
@@ -21,19 +21,17 @@
             </form>
 
             @if (Route::has('login'))
-                <div>
-                    <nav>
-                        @auth
-                            <a href="{{ url('/dashboard') }}">Dashboard</a>
-                            <a href="{{route('produto.indexAuth')}}">Meus produtos</a>
-                        @else
-                            <a href="{{ route('registration') }}">Crie a sua conta</a>
-                            <a href="{{ route('login') }}">Entre</a>
-                        @endauth
-                        <a href="">Compras</a>
-                        <a href=""><i class="fa-solid fa-cart-shopping"></i></a>
-                    </nav>
-                </div>
+                <nav>
+                    @auth
+                        <a href="{{ url('/dashboard') }}">Dashboard</a>
+                        <a href="{{route('produto.indexAuth')}}">Meus produtos</a>
+                    @else
+                        <a href="{{ route('registration') }}">Crie a sua conta</a>
+                        <a href="{{ route('login') }}">Entre</a>
+                    @endauth
+                    <a href="{{route('pedido.index')}}">Compras</a>
+                    <a href=""><i class="fa-solid fa-cart-shopping"></i></a>
+                </nav>
             @endif
         </div>
     </header>
@@ -73,15 +71,11 @@
                                 <img src="{{ asset('files/produtos')}}/{{$compra->exemplar[0]->pivo->produto->imagem_01}}">
                             </div>
 
-                            <span>
-                                {{$compra->exemplar[0]->pivo->produto->nome}}
-                            </span>
+                            <span>{{$compra->exemplar[0]->pivo->produto->nome}}</span>
                         </div>
 
                         <div class="details-producer">
-                            <span>
-                                <?= strtoupper($compra->exemplar[0]->pivo->produtor->dados_empresa->nome); ?>
-                            </span>
+                            <span><?= strtoupper($compra->exemplar[0]->pivo->produtor->dados_empresa->nome); ?></span>
 
                             <a href="">Enviar mensagem</a>
                         </div>
@@ -107,17 +101,21 @@
     </main>
 @endsection
 
-
 @section('insert_script')
     @if (session('check'))
         <script>
             Swal.fire({
-                title: 'Avaliação feita',
-                text: "Agradeçemos pelo seu Feedback",
+                title:  "{{ session('check')['title'] }}",
+                text:  "{{ session('check')['mensagem'] }}",
                 icon: "success",
                 showConfirmButton: false,
-                timer: 2000
-            })
+                timer: 2000,
+                onClose: () => {
+                    setTimeout(() => {
+                        @php session()->forget('check'); @endphp
+                    }, 1000); // Atraso de 1 segundo para garantir que o modal seja fechado antes de remover a sessão
+                }
+            });
         </script>
     @endif
 @endsection

@@ -7,8 +7,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
-class LoginController extends Controller{
-    public function auth(Request $request){
+class LoginController extends Controller
+{
+    public function auth(Request $request)
+    {
         // validação
         $request->validate([
             'email' => ['required','email'],
@@ -42,7 +44,8 @@ class LoginController extends Controller{
         }
     }
 
-    public function destroy(Request $request){
+    public function destroy(Request $request)
+    {
         Auth::guard('usuario')->logout();
 
         $request->session()->invalidate();

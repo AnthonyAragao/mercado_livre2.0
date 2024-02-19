@@ -6,25 +6,18 @@ use App\Models\Compra;
 use App\Models\Exemplar;
 use App\Models\Produto;
 use Carbon\Carbon;
-use Exception;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
-use Illuminate\Support\Facades\DB;
-
 class CompraController extends Controller
 {
-    public function congratulations(){
-        return view('pedidos.compra_realizada');
-    }
-
-    public function metodoPagamento(){
+    public function metodoPagamento()
+    {
         $produto = Produto::find(Crypt::decrypt(request('id')));
-        
         return view('pedidos.metodo_pagamento', compact('produto'));
     }
 
-    public function index(){
+    public function index()
+    {
         $usuario = Auth::user()->usuario[0];
 
         $compras = Compra::where('usuario_id', $usuario->id)
@@ -41,7 +34,9 @@ class CompraController extends Controller
     public function show(string $id)
     {
         $compra = Compra::find(Crypt::decrypt($id));
-        return view('pedidos.detalhes_compra', compact('compra'));
+        $produto = $compra->exemplar[0]->pivo->produto;
+
+        return view('pedidos.detalhes_compra', compact('compra', 'produto'));
     }
 
     public function processaCompra($session)
@@ -79,5 +74,4 @@ class CompraController extends Controller
             ]);
         }
     }
-
 }

@@ -6,7 +6,8 @@ use App\Models\Produto;
 use Illuminate\Support\Facades\Crypt;
 
 class StripeController extends Controller{
-    public function session($id, $payment_method){
+    public function session($id, $payment_method)
+    {
         \Stripe\Stripe::setApiKey(config('stripe.sk'));
 
         $produto = Produto::find(Crypt::decrypt($id));
@@ -30,7 +31,7 @@ class StripeController extends Controller{
             ]);
 
             $session = \Stripe\Checkout\Session::create([
-                'payment_method_types' => [$payment_method], 
+                'payment_method_types' => [$payment_method],
                 'line_items' => [
                     [
                         'price' => $price->id,
@@ -44,8 +45,13 @@ class StripeController extends Controller{
                     'usuario_id' => auth()->user()->usuario[0]->id,
                 ],
                 'mode' => 'payment',
-                'success_url' => route('congratulations'),
+                'success_url' => route('pedido.index'),
                 // 'cancel_url'  => route('checkout'),
+            ]);
+
+            session()->put('check', [
+                'title' => 'Parabéns!',
+                'mensagem' => "Compra processada com sucesso!",
             ]);
 
             return redirect()->away($session->url);

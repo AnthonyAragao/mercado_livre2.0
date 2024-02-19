@@ -1,0 +1,174 @@
+@import url('https://fonts.googleapis.com/css2?family=Courgette&family=Indie+Flower&family=Inter&family=Patrick+Hand&family=Poppins&family=Ubuntu&display=swap');
+/* configuracoes gerais */
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+/* header */
+.logo{
+    display: flex;
+    width: 100%;
+    height: 56px;
+    background-color: #fcd709;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 50px;
+}
+
+.logo a{
+    height: 100%;
+}
+
+.logo img{
+    height: 100%;
+    padding: 10px;
+}
+
+.search{
+    border: none;
+    height:38px;
+    width:520px;
+    border-radius: 2px 0px 0px 2px;
+    padding:10px;
+    border-right: 1px solid rgba(0, 0, 0, 0.1);
+    font-size: 16px;
+}
+
+.search:focus {
+    outline: none;
+}
+
+form button{
+    width: 40px;
+    background-color: #fff;
+    border: none;
+    color: #666;
+    border-radius: 0px 2px 2px 0px;
+}
+
+nav {
+    margin-right: 20px;
+    display: flex;
+    gap: 25px
+}
+
+nav a {
+    text-decoration: none;
+    color: #333;
+}
+
+nav a:hover {
+    color: #333;
+}
+
+body{
+    background-color: #ededed;
+}
+
+main{
+    display: flex;
+    justify-content: center;
+}
+
+/* Container geral */
+.container{
+    max-width: 1222px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+/* Container Compras */
+.purchase-details-container{
+    width: 100%;
+    height:78px;
+    margin-top:65px;
+}
+
+.purchase-details-item{
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+    margin:10px 0;
+    background-color:#e2e2e2;
+    padding: 10px 20px;
+    border-radius: 4px;
+    box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
+}
+
+a{
+    text-decoration: none;
+}
+
+.product-img{
+    height:58px;
+    width:58px;
+    padding:10px;
+    border-radius:50%;
+    background-color:white;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.product-img img{
+    height: 100%;
+    width: 100%;
+}
+
+.section-info-delivery{
+    margin-top: 24px!important;
+    display:flex;
+    flex-direction: column;
+    width: 90%;
+    margin:10px 0;
+    background-color:#fff;
+    padding: 20px;
+    border-radius: 4px;
+    box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
+}
+
+.btn-purchase{
+    background-color: rgba(65,137,230,.15);
+    color: #3483fa !important;
+    width: 220px;
+    height: 38px;
+    cursor: pointer;
+    border: none;
+    transition: .5s;
+    color: white;
+    font-size: 1rem;
+    margin-top: 10px;
+    border-radius: 8px;
+}
+
+/* Card detalhes da compra */
+.purchase-details{
+    background-color: #f7f7f7;
+    width:350px;
+    display:flex;
+    justify-content: center;
+    flex-direction: column;
+    padding: 60px 30px;
+    gap: 12px;
+    border: 1px solid #e0e0e0;
+}
+
+.purchase-details p{
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.section-info{
+    display: flex;
+    justify-content: space-between;
+}
+
+.section-info span{
+    font-size: 14px;
+}

@@ -44,18 +44,15 @@ Route::middleware('auth')->group(function () {
     Route::resource('produto', ProdutoController::class)->except('show')->middleware('can:isProducer');
 
     Route::resource('pedido', CompraController::class)->except('store');
-
-    Route::get('/congratulations', [CompraController::class, 'congratulations'])->name('congratulations');
     Route::resource('reviews', AvaliacaoController::class)->except('create');
     Route::get('/reviews/create/{id}', [AvaliacaoController::class, 'create'])->name('reviews.create');
 
     Route::get('/session/{id}/{payment_method}', [StripeController::class, 'session'])->name('session');
+    
     Route::get('/metodo-pagamento/{id}', [CompraController::class, 'metodoPagamento'])->name('metodo-pagamento');
-
 });
 
 Route::post('/stripe/webhook', [StripeWebhookController::class, 'handleWebhook']);
-
 
 Route::get('/usuarios/create', [UsuarioController::class, 'create'])->name('usuarios.create');
 Route::post('/usuarios', [UsuarioController::class, 'store'])->name('usuarios.store');
@@ -64,7 +61,7 @@ Route::get('/produtor/create', [ProdutorController::class, 'create'])->name('pro
 Route::post('/produtor', [ProdutorController::class, 'store'])->name('produtor.store');
 
 
-Route::get('/registration', function () { return view('login.registration'); })->name('registration');
+Route::get('/registration', fn() => view('login.registration'))->name('registration');
 
 
 require __DIR__.'/auth.php';

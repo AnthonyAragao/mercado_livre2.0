@@ -13,9 +13,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 
 class ProdutoController extends Controller{
-    protected $produtos, $pivo, $repository, $categorias, $avaliacoes;
-
-    public function __construct(Produto $produtos, Produtor_has_produto $pivo, ProdutoRepository $repository, Avaliacao $avaliacoes){
+    private $produtos, $pivo, $repository, $categorias, $avaliacoes;
+    public function __construct(Produto $produtos, Produtor_has_produto $pivo, ProdutoRepository $repository, Avaliacao $avaliacoes)
+    {
         $this->produtos = $produtos;
         $this->pivo = $pivo;
         $this->avaliacoes = $avaliacoes;
@@ -25,20 +25,21 @@ class ProdutoController extends Controller{
     /**
      * Display a listing of the resource.
      */
-    public function index(){
+    public function index()
+    {
         $produtos = $this->repository->getAll();
-
         return view('welcome', compact('produtos'));
     }
 
-    public function search(Request $request){
+    public function search(Request $request)
+    {
         $produtos = $this->repository->query($request);
-
         return view('welcome', compact('produtos'));
     }
 
 
-    public function indexAuth(){
+    public function indexAuth()
+    {
         $produtor = Auth::user()->produtor[0];
 
         $produtos = Produtor_has_produto::where('produtor_id', $produtor->id)
@@ -48,7 +49,8 @@ class ProdutoController extends Controller{
         return view('produtor.meus_produtos', compact('produtor', 'produtos'));
     }
 
-    public function categories($id){
+    public function categories($id)
+    {
         $categoriaProduto = $this->categorias->find(Crypt::decrypt($id));;
         $produtos = $categoriaProduto->produto;
 
@@ -58,9 +60,9 @@ class ProdutoController extends Controller{
     /**
      * Show the form for creating a new resource.
      */
-    public function create(){
+    public function create()
+    {
         $categorias = $this->categorias;
-
         return view('produto.form_produto', compact('categorias'));
     }
 
@@ -88,14 +90,18 @@ class ProdutoController extends Controller{
             ])->id,
         ]);
 
-        $check = 'Produto cadastro com sucesso!';
+        $check = [
+            'title' => 'Parabéns!',
+            'mensagem' => "Produto cadastrado com sucesso!",
+        ];
         return redirect()->route('listagem_produtos')->with('check',$check);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id){
+    public function show(string $id)
+    {
         $produto = $this->repository->find($id);
         $categoriaProduto = $this->categorias->find($produto->categoria->id);
         $produtosCategoriaAll = $categoriaProduto->produto;
@@ -153,9 +159,11 @@ class ProdutoController extends Controller{
             // 'imagem_05' => isset($request->imagens[4]) ? Helper::armazenarArquivo($request->imagens[4], 'files/produtos') : null,
         ]);
 
-
-        $checkAtt = 'Produto atualizado com sucesso!';
-        return redirect()->route('listagem_produtos')->with('checkAtt', $checkAtt);
+        $check = [
+            'title' => 'Parabéns!',
+            'mensagem' => "Produto atualizado com sucesso!",
+        ];
+        return redirect()->route('listagem_produtos')->with('check', $check);
     }
 
     /**

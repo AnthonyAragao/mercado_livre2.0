@@ -259,30 +259,20 @@
 @endsection
 
 @section('insert_script')
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.27/dist/sweetalert2.all.min.js"></script>
     @if (session('check'))
         <script>
             Swal.fire({
-                position: 'center',
-                icon: 'success',
-                title: 'Parabéns!!!',
-                text: 'Produto cadastro com sucesso.',
+                title:  "{{ session('check')['title'] }}",
+                text:  "{{ session('check')['mensagem'] }}",
+                icon: "success",
                 showConfirmButton: false,
-                timer: 2000
-            })
-        </script>
-    @endif
-
-    @if (session('checkAtt'))
-        <script>
-            Swal.fire({
-                position: 'center',
-                icon: 'success',
-                title: 'Produto atualizado.',
-                text: 'Produto atualizado com sucesso.',
-                showConfirmButton: false,
-                timer: 2000
-            })
+                timer: 2000,
+                onClose: () => {
+                    setTimeout(() => {
+                        @php session()->forget('check'); @endphp
+                    }, 1000); // Atraso de 1 segundo para garantir que o modal seja fechado antes de remover a sessão
+                }
+            });
         </script>
     @endif
 @endsection

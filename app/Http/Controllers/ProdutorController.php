@@ -13,14 +13,16 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 
-class ProdutorController extends Controller{
+class ProdutorController extends Controller
+{
     /**
      * Instantiate a new controller instance.
      *
      * @return void
      */
     private $dados_acesso, $produtores, $enderecos, $dados_empresa, $mora, $cidades, $municipios;
-    public function __construct(DadoAcesso $dados_acesso, DadoEmpresa $dados_empresa, Produtor $produtores, Endereco $enderecos, Mora $mora){
+    public function __construct(DadoAcesso $dados_acesso, DadoEmpresa $dados_empresa, Produtor $produtores, Endereco $enderecos, Mora $mora)
+    {
         $this->dados_acesso = $dados_acesso;
         $this->dados_empresa = $dados_empresa;
         $this->produtores = $produtores;
@@ -45,7 +47,8 @@ class ProdutorController extends Controller{
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request){
+    public function store(Request $request)
+    {
         try{
             $this->produtores->create([
                 'dados_acesso_id' => $this->dados_acesso->create([
@@ -85,7 +88,8 @@ class ProdutorController extends Controller{
     /**
      * Display the specified resource.
      */
-    public function show(string $id){
+    public function show(string $id)
+    {
         $produtor = $this->produtores->find(Crypt::decrypt($id));
         $municipios = $this->municipios;
         $cidades = $this->cidades;
@@ -103,7 +107,8 @@ class ProdutorController extends Controller{
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id){
+    public function edit(string $id)
+    {
         $produtor = $this->produtores->find(Crypt::decrypt($id));
         $municipios = $this->municipios;
         $cidades = $this->cidades;
@@ -119,7 +124,8 @@ class ProdutorController extends Controller{
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id){
+    public function update(Request $request, string $id)
+    {
         $produtor = $this->produtores->find(Crypt::decrypt($id));
         tap($this->produtores->find($produtor->id))->update([
             'dados_acesso_id' => tap($this->dados_acesso->find($produtor->dados_acesso_id))->update([

@@ -14,8 +14,8 @@ use Illuminate\Support\Facades\Gate;
 class AvaliacaoController extends Controller
 {
     private $avaliacoes;
-
-    public function __construct(Avaliacao $avaliacoes){
+    public function __construct(Avaliacao $avaliacoes)
+    {
         $this->avaliacoes = $avaliacoes;
     }
 
@@ -47,7 +47,10 @@ class AvaliacaoController extends Controller
             'data' => Carbon::now()->toDateString()
         ]);
 
-        $check = 'Agradeçemos pelo seu Feedback';
-        return redirect()->route('pedido.index')->with('check',$check);
+        $check = [
+            'title' => 'Avaliação feita',
+            'mensagem' => 'Agradeçemos pelo seu Feedback'
+        ];
+        return redirect()->route('pedido.index')->with('check', $check);
     }
 }

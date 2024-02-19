@@ -12,14 +12,16 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 
-class UsuarioController extends Controller {
+class UsuarioController extends Controller
+{
      /**
      * Instantiate a new controller instance.
      *
      * @return void
      */
     private $dados_acesso, $usuarios, $enderecos, $mora, $cidades, $municipios;
-    public function __construct(DadoAcesso $dados_acesso, Usuario $usuarios, Endereco $enderecos, Mora $mora ){
+    public function __construct(DadoAcesso $dados_acesso, Usuario $usuarios, Endereco $enderecos, Mora $mora )
+    {
         $this->dados_acesso = $dados_acesso;
         $this->usuarios = $usuarios;
         $this->enderecos = $enderecos;
@@ -32,7 +34,8 @@ class UsuarioController extends Controller {
     /**
      * Display a listing of the resource.
      */
-    public function index(){
+    public function index()
+    {
         $usuarios = $this->usuarios::all();
         return view('welcome', compact('usuarios'));
     }
@@ -40,7 +43,8 @@ class UsuarioController extends Controller {
     /**
      * Show the form for creating a new resource.
      */
-    public function create(){
+    public function create()
+    {
         $cidades = $this->cidades;
         $municipios = $this->municipios;
         return view('usuario.cadastro_usuario', compact('cidades', 'municipios'));
@@ -49,7 +53,8 @@ class UsuarioController extends Controller {
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request){
+    public function store(Request $request)
+    {
         try{
             $this->usuarios->create([
                 'dados_acesso_id' => $this->dados_acesso->create([
@@ -81,7 +86,8 @@ class UsuarioController extends Controller {
     /**
      * Display the specified resource.
      */
-    public function show(string $id){
+    public function show(string $id)
+    {
         $usuario = $this->usuarios->find(Crypt::decrypt($id));
         $municipios = $this->municipios;
         $cidades = $this->cidades;
@@ -99,7 +105,8 @@ class UsuarioController extends Controller {
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id){
+    public function edit(string $id)
+    {
         $usuario = $this->usuarios->find(Crypt::decrypt($id));
         $municipios = $this->municipios;
         $cidades = $this->cidades;
@@ -115,7 +122,8 @@ class UsuarioController extends Controller {
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id){
+    public function update(Request $request, string $id)
+    {
         $usuario = $this->usuarios->find(Crypt::decrypt($id));
         tap($this->usuarios->find($usuario->id))->update([
             'dados_acesso_id' => tap($this->dados_acesso->find($usuario->dados_acesso_id))->update([
