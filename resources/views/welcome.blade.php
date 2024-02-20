@@ -3,6 +3,9 @@
 @section('insert_head')
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.27/dist/sweetalert2.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+
     <link rel="stylesheet" href="{{ asset('css/welcome.css') }}">
     <title>Mercado libre</title>
 @endsection
@@ -23,20 +26,17 @@
             </form>
 
             @if (Route::has('login'))
-                <div>
-                    <nav style="">
-                        @auth
-                            <a href="{{ url('/dashboard') }}">Dashboard</a>
-
-                            <a href="{{route('produto.indexAuth')}}">Meus produtos</a>
-                        @else
-                            <a href="{{ route('registration') }}">Crie a sua conta</a>
-                            <a href="{{ route('login') }}">Entre</a>
-                        @endauth
-                        <a href="{{route('pedido.index')}}">Compras</a>
-                        <a href=""><i class="fa-solid fa-cart-shopping"></i></a>
-                    </nav>
-                </div>
+                <nav>
+                    @auth
+                        <a href="{{ url('/dashboard') }}">Dashboard</a>
+                        <a href="{{route('produto.indexAuth')}}">Meus produtos</a>
+                    @else
+                        <a href="{{ route('registration') }}">Crie a sua conta</a>
+                        <a href="{{ route('login') }}">Entre</a>
+                    @endauth
+                    <a href="{{route('pedido.index')}}">Compras</a>
+                    <a href=""><i class="fa-solid fa-cart-shopping"></i></a>
+                </nav>
             @endif
         </div>
     </header>
@@ -44,6 +44,24 @@
     {{-- {{dd($produtos)}} --}}
 
     <main>
+        <div class="swiper">
+            <div class="swiper-wrapper">
+                <!-- Slides -->
+                @for ($i = 1; $i <= 7; $i++)
+                    <div class="swiper-slide" ><img src="{{asset("images/slide0". $i .".webp")}}" alt=""></div>
+                @endfor
+            </div>
+
+            <div class="swiper-pagination"></div>
+
+            <div class="swiper-button-prev btn-background-white d-none"></div>
+            <div class="swiper-button-next btn-background-white d-none"></div>
+
+            <div class="gradient"></div>
+        </div>
+
+
+
         <div class="container-card">
             @foreach ( $produtos->take(5) as $produto )
                 <div class="card-product">
@@ -275,4 +293,40 @@
             });
         </script>
     @endif
+
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script>
+        const swiper = new Swiper('.swiper', {
+            slidesPerView: 1,
+            spaceBetween: 0,
+            loop: true,
+            autoplay: {
+                delay: 2500,
+            },
+
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+
+            pagination: {
+                el: '.swiper-pagination',
+            },
+        });
+
+        const slides = document.querySelector('.swiper');
+        const btnPrev = document.querySelector('.swiper-button-prev');
+        const btnNext = document.querySelector('.swiper-button-next');
+
+        slides.addEventListener('mouseover', () => {
+            btnPrev.classList.remove('d-none');
+            btnNext.classList.remove('d-none');
+        });
+
+        slides.addEventListener('mouseout', () => {
+            btnPrev.classList.add('d-none');
+            btnNext.classList.add('d-none');
+        });
+    </script>
 @endsection

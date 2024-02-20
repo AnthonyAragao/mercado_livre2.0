@@ -17,6 +17,7 @@
     align-items: center;
     justify-content: center;
     gap: 50px;
+    box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
 }
 
 .logo img{
@@ -68,8 +69,44 @@ nav a:hover {
 main{
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
 }
 
+/* Slides */
+.swiper-wrapper{
+    max-width: 1600px;
+}
+
+.swiper-slide{
+    display: flex;
+    justify-content:center;
+    cursor:pointer;
+}
+
+.swiper-slide img{
+    width: 100%;
+}
+
+.btn-background-white{
+    background-color: white;
+    width: 65px;
+    height: 65px;
+    border-radius:50%;
+}
+
+.swiper-button-prev:hover, .swiper-button-next:hover{
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,.1);
+}
+
+.gradient{
+    background: linear-gradient(180deg,transparent,#ebebeb);
+    bottom: 0;
+    height: 30%;
+    left: 0;
+    position: absolute;
+    width: 100%;
+    z-index: 3;
+}
 
 /* Card dos produtos */
 .container-card{
@@ -81,7 +118,6 @@ main{
     margin: 50px ;
     border-radius: 6px;
 }
-
 
 .card-product{
     position: relative;
