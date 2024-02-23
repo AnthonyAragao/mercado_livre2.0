@@ -7,4 +7,5 @@ interface ProdutoRepository{
     public function query(Request $request);
     public function getAll();
     public function find($id);
+    public function categoriaComIcones();
 }

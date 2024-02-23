@@ -28,13 +28,17 @@ class ProdutoController extends Controller{
     public function index()
     {
         $produtos = $this->repository->getAll();
-        return view('welcome', compact('produtos'));
+        $categorias =  $this->repository->categoriaComIcones();
+
+        return view('welcome', compact('produtos', 'categorias'));
     }
 
     public function search(Request $request)
     {
         $produtos = $this->repository->query($request);
-        return view('welcome', compact('produtos'));
+        $categorias =  $this->repository->categoriaComIcones();
+
+        return view('welcome', compact('produtos', 'categorias'));
     }
 
 
@@ -53,8 +57,9 @@ class ProdutoController extends Controller{
     {
         $categoriaProduto = $this->categorias->find(Crypt::decrypt($id));;
         $produtos = $categoriaProduto->produto;
+        $categorias =  $this->repository->categoriaComIcones();
 
-        return view('welcome', compact('produtos'));
+        return view('welcome', compact('produtos','categorias'));
     }
 
     /**
