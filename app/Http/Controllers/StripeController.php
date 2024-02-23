@@ -49,11 +49,6 @@ class StripeController extends Controller{
                 // 'cancel_url'  => route('checkout'),
             ]);
 
-            session()->put('check', [
-                'title' => 'Parabéns!',
-                'mensagem' => "Compra processada com sucesso!",
-            ]);
-
             return redirect()->away($session->url);
         }catch (\Stripe\Exception\ApiErrorException $e) {
             return response()->json(['error' => $e->getMessage()], 500);

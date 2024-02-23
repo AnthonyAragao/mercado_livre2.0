@@ -19,7 +19,7 @@
             </a>
 
             <form action="{{route('produto.search')}}" method="GET">
-                <div style="display: flex">
+                <div class="d-flex">
                     <input type="text" class="search" name="query" placeholder="Buscar produtos, marcas e muito mais...">
                     <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
                 </div>
@@ -59,8 +59,6 @@
 
             <div class="gradient"></div>
         </div>
-
-
 
         <div class="container-card">
             @foreach ( $produtos->take(5) as $produto )
