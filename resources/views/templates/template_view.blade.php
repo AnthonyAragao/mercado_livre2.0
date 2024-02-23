@@ -14,7 +14,7 @@
 
     <body>
         @yield('insert_body')
+        @yield('insert_script')
     </body>
 
-    @yield('insert_script')
 </html>

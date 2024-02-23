@@ -60,38 +60,41 @@
             <div class="gradient"></div>
         </div>
 
-        <div class="container-card">
-            @foreach ( $produtos->take(5) as $produto )
-                <div class="card-product">
-                    <a href="{{route('exibir_produto.show', [Crypt::encrypt($produto->id)] )}}">
+        <div class="container">
+            <div class="container-card">
+                @foreach ( $produtos->take(5) as $produto )
+                    <div class="card-product">
+                        <a href="{{route('exibir_produto.show', [Crypt::encrypt($produto->id)] )}}">
 
-                        <div class="img-product" style="position: relative">
-                            <div class="heart d-none">
-                                <i class="fa-regular fa-heart"></i>
-                            </div>
-                            <img src="{{ asset('files/produtos')}}/{{$produto->imagem_01}}">
-                        </div>
-
-                        <div class="description-product">
-                            <span class="previous-price d-none">R$ {{$produto->preco}}</span>
-                            <div class="price-product" style="">
-                                <div>
-                                    <span style="font-size: 22px">R$ {{ number_format(($produto->preco_desconto),0,',','.')}}</span>
-                                    <span class="color-green" style="font-size:14px; font-weight: 500;">{{$produto->desconto}}% OFF</span>
+                            <div class="img-product" style="position: relative">
+                                <div class="heart d-none">
+                                    <i class="fa-regular fa-heart"></i>
                                 </div>
-                                <span class="color-green" style="font-size:14px; font-weight: 500;">10x R$ {{ number_format(($produto->preco_desconto/10),2,',','.')}} sem juros</span>
+                                <img src="{{ asset('files/produtos')}}/{{$produto->imagem_01}}">
                             </div>
 
-                            <span class="color-green" style="font-size:14px; font-weight: 600;">
-                                Frete grátis  <span style="font-size:12px; font-weight: 900; font-style:italic"><i class="fa-solid fa-bolt-lightning"></i> FULL</span>
-                            </span>
+                            <div class="description-product">
+                                <span class="previous-price d-none">R$ {{$produto->preco}}</span>
+                                <div class="price-product" style="">
+                                    <div>
+                                        <span style="font-size: 22px">R$ {{ number_format(($produto->preco_desconto),0,',','.')}}</span>
+                                        <span class="color-green" style="font-size:14px; font-weight: 500;">{{$produto->desconto}}% OFF</span>
+                                    </div>
+                                    <span class="color-green" style="font-size:14px; font-weight: 500;">10x R$ {{ number_format(($produto->preco_desconto/10),2,',','.')}} sem juros</span>
+                                </div>
 
-                            <p style="font-size: 14px">{{$produto->descricao}}</p>
-                        </div>
-                    </a>
-                </div>
-            @endforeach
+                                <span class="color-green" style="font-size:14px; font-weight: 600;">
+                                    Frete grátis  <span style="font-size:12px; font-weight: 900; font-style:italic"><i class="fa-solid fa-bolt-lightning"></i> FULL</span>
+                                </span>
+
+                                <p style="font-size: 14px">{{$produto->descricao}}</p>
+                            </div>
+                        </a>
+                    </div>
+                @endforeach
+            </div>
         </div>
+
     </main>
 
     <section>

@@ -70,6 +70,7 @@ main{
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
+    flex-direction: column;
 }
 
 /* Slides */
@@ -113,6 +114,12 @@ main{
 }
 
 /* Card dos produtos */
+.container{
+    display: flex;
+    justify-content: center;
+    height: 475px;
+}
+
 .container-card{
     max-width: 1196px;
     display: flex;

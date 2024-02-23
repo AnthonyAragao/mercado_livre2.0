@@ -22,20 +22,17 @@
             </form>
 
             @if (Route::has('login'))
-                <div>
-                    <nav style="">
-                        @auth
-                            <a href="{{ url('/dashboard') }}">Dashboard</a>
-
-                            <a href="{{route('produto.indexAuth')}}">Meus produtos</a>
-                        @else
-                            <a href="{{ route('registration') }}">Crie a sua conta</a>
-                            <a href="{{ route('login') }}">Entre</a>
-                        @endauth
-                        <a href="{{route('pedido.index')}}">Compras</a>
-                        <a href=""><i class="fa-solid fa-cart-shopping"></i></a>
-                    </nav>
-                </div>
+                <nav>
+                    @auth
+                        <a href="{{ url('/dashboard') }}">Dashboard</a>
+                        <a href="{{route('produto.indexAuth')}}">Meus produtos</a>
+                    @else
+                        <a href="{{ route('registration') }}">Crie a sua conta</a>
+                        <a href="{{ route('login') }}">Entre</a>
+                    @endauth
+                    <a href="{{route('pedido.index')}}">Compras</a>
+                    <a href=""><i class="fa-solid fa-cart-shopping"></i></a>
+                </nav>
             @endif
         </div>
     </header>

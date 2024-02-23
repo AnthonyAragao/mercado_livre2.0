@@ -3,6 +3,7 @@
 @section('insert_head')
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/meus_pedidos.css') }}">
+    <script src="https://cdn.tailwindcss.com"></script>
     <title>Mercado libre</title>
 @endsection
 
@@ -41,62 +42,10 @@
             <h2>Compras</h2>
 
             <div class="comment-block">
-                <span>
-                    <i class="fa-solid fa-star"></i> Alguns produtos esperam sua opinião
-                </span>
+                <span><i class="fa-solid fa-star"></i> Alguns produtos esperam sua opinião</span>
             </div>
 
-            @foreach ($compras as $compra)
-                <div class="shopping">
-                    <div class="date">
-                        <p>
-                            <?php
-                                $meses = array(
-                                    'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
-                                    'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'
-                                );
-
-                                $timestamp = strtotime($compra->data);
-                                $dia = date("j", $timestamp);
-                                $mes = $meses[date("n", $timestamp) - 1];
-
-                                echo $dia . " de " . $mes;
-                            ?>
-                        </p>
-                    </div>
-
-                    <div class="details">
-                        <div class="details-img">
-                            <div>
-                                <img src="{{ asset('files/produtos')}}/{{$compra->exemplar[0]->pivo->produto->imagem_01}}">
-                            </div>
-
-                            <span>{{$compra->exemplar[0]->pivo->produto->nome}}</span>
-                        </div>
-
-                        <div class="details-producer">
-                            <span><?= strtoupper($compra->exemplar[0]->pivo->produtor->dados_empresa->nome); ?></span>
-
-                            <a href="">Enviar mensagem</a>
-                        </div>
-
-                        <div class="container-btns">
-                            <a href="{{route('pedido.show', [Crypt::encrypt($compra->id)]) }}">
-                                <button class="btn" style="background-color: #3783f7; color: white; width: 100%;">
-                                    Ver compra
-                                </button>
-                            </a>
-
-                            @if (count($compra->avaliacao) === 0)
-                                <a href="{{route('reviews.create', [Crypt::encrypt($compra->id)] )}}" class="btn" style="width: 100%; background-color:rgba(65,137,230,.15); color: #3483fa">
-                                    Opinar
-                                </a>
-                            @endif
-                        </div>
-                    </div>
-                </div>
-            @endforeach
-
+            <livewire:listagemcompras />
         </div>
     </main>
 @endsection
