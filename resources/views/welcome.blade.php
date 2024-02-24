@@ -94,6 +94,41 @@
             </div>
         </div>
 
+        <div class="content-benefits">
+            <h2>Benefícios em conteúdo</h2>
+
+            <div class="benefits-container">
+                <div class="benefit-card">
+                    <img src="{{asset("images/disney.jpg")}}" alt="">
+
+                    <div class="benefit-info">
+                        <div class="benefit-logo"><img src="{{asset("images/disney-logo.jpg")}}" alt=""></div>
+
+                        <div class="benefit-details">
+                            <span class="benefit-name">Sem custo com Meli+</span>
+                            <span class="benefit-description">Disney+ e Star+</span>
+                        </div>
+                    </div>
+
+                    <div class="gradient-gray"></div>
+                </div>
+
+                <div class="benefit-card">
+                    <img src="{{asset("images/HBOMax.jpg")}}" alt="">
+
+                    <div class="benefit-info">
+                        <div class="benefit-logo"><img src="{{asset("images/HBO-logo.png")}}" alt=""></div>
+
+                        <div class="benefit-details">
+                            <span class="benefit-name">Até 30% OFF</span>
+                            <span class="benefit-description">HBO Max</span>
+                        </div>
+                    </div>
+
+                    <div class="gradient-blue"></div>
+                </div>
+            </div>
+        </div>
     </main>
 
     <section>
